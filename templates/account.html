@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login & Sign Up</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body class="bg-gray-200 min-h-screen flex items-center justify-center">
+
+    <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+        <div class="flex mb-6">
+            <button id="loginTab" class="flex-1 py-2 px-4 bg-blue-500 text-white font-semibold rounded-t-lg " onclick="showLogin()">
+                Login
+            </button>
+            <button id="signupTab" class="flex-1 py-2 px-4 bg-gray-200 text-gray-700 font-semibold rounded-t-lg " onclick="showSignup()">
+                Sign Up
+            </button>
+        </div>
+
+        <div id="loginForm">
+            <h2 class="text-2xl font-bold mb-6 text-center">Welcome Back</h2>
+            <form>
+                <div class="mb-4">
+                    <label for="loginEmail" class="block text-gray-700 text-sm font-bold mb-2">Email</label>
+                    <input type="email" id="loginEmail" class="w-full px-3 py-2 border border-gray-300 rounded-md" placeholder="Enter your email" required>
+                </div>
+                <div class="mb-6">
+                    <label for="loginPassword" class="block text-gray-700 text-sm font-bold mb-2">Password</label>
+                    <input type="password" id="loginPassword" class="w-full px-3 py-2 border border-gray-300 rounded-md" placeholder="Enter your password" required>
+                </div>
+                <button type="submit" class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    Login
+                </button>
+            </form>
+        </div>
+
+        <!-- Sign Up Form -->
+        <div id="signupForm" class="hidden">
+            <h2 class="text-2xl font-bold mb-6 text-center">Create Account</h2>
+            <form>
+                <div class="mb-4">
+                    <label for="signupName" class="block text-gray-700 text-sm font-bold mb-2">Full Name</label>
+                    <input type="text" id="signupName" class="w-full px-3 py-2 border border-gray-300 rounded-md" placeholder="Enter your full name" required>
+                </div>
+                <div class="mb-4">
+                    <label for="signupEmail" class="block text-gray-700 text-sm font-bold mb-2">Email</label>
+                    <input type="email" id="signupEmail" class="w-full px-3 py-2 border border-gray-300 rounded-md" placeholder="Enter your email" required>
+                </div>
+                <div class="mb-4">
+                    <label for="signupPassword" class="block text-gray-700 text-sm font-bold mb-2">Password</label>
+                    <input type="password" id="signupPassword" class="w-full px-3 py-2 border border-gray-300 rounded-md" placeholder="Create a password" required>
+                </div>
+                <div class="mb-6">
+                    <label for="signupConfirmPassword" class="block text-gray-700 text-sm font-bold mb-2">Confirm Password</label>
+                    <input type="password" id="signupConfirmPassword" class="w-full px-3 py-2 border border-gray-300 rounded-md" placeholder="Confirm your password" required>
+                </div>
+                <button type="submit" class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    Sign Up
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const loginForm = document.getElementById('loginForm');
+        const signupForm = document.getElementById('signupForm');
+        const loginTab = document.getElementById('loginTab');
+        const signupTab = document.getElementById('signupTab');
+
+        function showLogin() {
+            loginForm.classList.remove('hidden');
+            signupForm.classList.add('hidden');
+            loginTab.classList.add('bg-blue-500', 'text-white');
+            loginTab.classList.remove('bg-gray-200', 'text-gray-700');
+            signupTab.classList.remove('bg-blue-500', 'text-white');
+            signupTab.classList.add('bg-gray-200', 'text-gray-700');
+        }
+
+        function showSignup() {
+            signupForm.classList.remove('hidden');
+            loginForm.classList.add('hidden');
+            signupTab.classList.add('bg-blue-500', 'text-white');
+            signupTab.classList.remove('bg-gray-200', 'text-gray-700');
+            loginTab.classList.remove('bg-blue-500', 'text-white');
+            loginTab.classList.add('bg-gray-200', 'text-gray-700');
+        }
+    </script>
+
+</body>
+</html>

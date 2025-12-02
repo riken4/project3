@@ -1,0 +1,152 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Flex advancing{% endblock %}
+{% block extra_css %}
+<style>
+
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="py-8 sm:py-10 md:py-12 lg:py-14 px-3 sm:px-4 md:px-6 bg-gradient-to-br from-blue-50 to-white">
+    <div class="max-w-7xl mx-auto">
+        <div class="grid md:grid-cols-2 gap-6 sm:gap-8 md:gap-10 lg:gap-12 items-center">
+
+            <div>
+                <h1
+                    class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-900  mb-4 sm:mb-5 md:mb-6">
+                    Refund Advance </h1>
+                <p
+                    class="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 mb-6 sm:mb-7 md:mb-8 ">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum nobis ut voluptate, esse suscipit
+                    saepe itaque cum totam possimus ab neque nemo praesentium corrupti non unde quia quo rerum quas.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-3 md:gap-3.5 lg:gap-4">
+                    <button
+                        class="bg-gray-800 hover:bg-gray-500 text-white font-semibold py-2 sm:py-2.5 md:py-2.5 lg:py-3 px-4 sm:px-5 md:px-5 lg:px-6 rounded-lg text-sm">
+                        Start your business
+                    </button>
+                    <button
+                        class="border-2 border-gray-800 py-2 sm:py-2.5 md:py-2.5 lg:py-3 px-4 sm:px-5 md:px-5 lg:px-6 rounded-lg text-sm  font-semibold text-gray-900 hover:bg-gray-800 hover:text-white">
+                        Learn More
+                    </button>
+                </div>
+            </div>
+
+            <div class="flex justify-center md:justify-end mt-6 ">
+                <img src="{% static 'image/bg1.jpg' %}"
+                    class="w-full sm:w-5/6 md:w-full max-w-sm sm:max-w-md md:max-w-lg h-64 sm:h-80 md:h-96 lg:h-[448 px] object-cover rounded-lg  shadow-xl "
+                    alt="Registered Agent Service">
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="bg-green-100 py-16">
+    <div class="max-w-6xl mx-auto px-4">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-gray-900 mb-4">Don't pay a cent for Refund Advance</h2>
+            <p class="text-lg text-gray-600">Simple, transparent process to get your taxes done right</p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="text-center p-4 shadow-md bg-white rounded-md border-1 border-gray-300">
+                <div
+                    class="bg-blue-600 text-white w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">
+                    1
+                </div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-3">Apply without credit score impact</h3>
+                <p class="text-gray-600">Reach out to us or book a consultation. We'll discuss your needs and
+                    requirements.</p>
+            </div>
+            <div class="text-center p-4 shadow-md bg-white rounded-md border-1 border-gray-300">
+                <div
+                    class="bg-blue-600 text-white w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">
+                    1
+                </div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-3">Quick online application</h3>
+                <p class="text-gray-600">Reach out to us or book a consultation. We'll discuss your needs and
+                    requirements.</p>
+            </div>
+            <div class="text-center p-4 shadow-md bg-white rounded-md border-1 border-gray-300">
+                <div
+                    class="bg-blue-600 text-white w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">
+                    1
+                </div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-3">Money straight to your bank</h3>
+                <p class="text-gray-600">Reach out to us or book a consultation. We'll discuss your needs and
+                    requirements.</p>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="py-16">
+    <div class="max-w-6xl mx-auto px-4">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-gray-900 mb-4">How Flex Advance Works</h2>
+            <p class="text-lg text-gray-600">Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-2">
+            {% for i in "123456"|make_list %}
+
+            <div class="text-center p-4 shadow-md bg-white rounded-md border-1 border-gray-300">
+                <div
+                    class="bg-blue-600 text-white w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">
+                    1
+                </div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-3">lorem</h3>
+                <p class="text-gray-600">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iusto, rerum
+                    voluptas! Nemo dicta asperiores sapiente possimus ipsum.</p>
+            </div>
+            {% endfor %}
+
+        </div>
+    </div>
+</section>
+<section class="bg-green-100 py-8 sm:py-10 md:py-12 lg:py-16">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 md:gap-12 lg:gap-16 max-w-6xl mx-auto px-3 sm:px-4 md:px-6 items-center">
+
+        <div class="mb-8 lg:mb-0">
+            <h1 class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4 sm:mb-5 md:mb-6 leading-tight">
+                Loan details
+            </h1>
+
+            <div class="space-y-5 sm:space-y-6 md:space-y-7 lg:space-y-8">
+                <div class="flex items-start gap-2 sm:gap-3">
+                    <i class="bi bi-check-lg text-lg sm:text-xl text-green-600 mt-0.5 flex-shrink-0"></i>
+                    <div>
+                        <h3 class="font-bold text-gray-900 text-sm sm:text-base md:text-lg mb-1 leading-snug">Annual Percentage Rates (APR) from 15%-33%</h3>
+                        <p class="text-xs sm:text-sm md:text-base text-gray-600 ">
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="flex items-start gap-2 sm:gap-3">
+                    <i class="bi bi-check-lg text-lg sm:text-xl text-green-600 mt-0.5 flex-shrink-0"></i>
+                    <div>
+                        <h3 class="font-bold text-gray-900 text-sm sm:text-base md:text-lg mb-1 leading-snug">Borrow between Rs 2,00,000</h3>
+                        <p class="text-xs sm:text-sm md:text-base text-gray-600 ">
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <button class="bg-gray-800 hover:bg-gray-500 text-white font-semibold py-2 sm:py-2.5  px-4 sm:px-5 md:px-6 mt-6 sm:mt-8  rounded-lg text-sm sm:text-base">
+                Get Started
+            </button>
+        </div>
+
+        <div class="flex justify-center lg:justify-end">
+            <img src="{% static 'image/bg3.jpg' %}" 
+                class="w-full sm:w-4/5 md:w-3/4 lg:w-full max-w-xs sm:max-w-sm lg:max-w-lg h-64 sm:h-80 lg:h-[448 px8] object-cover rounded-lg  shadow-xl"
+                alt="Loan details">
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+{% endblock %}

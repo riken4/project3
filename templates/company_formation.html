@@ -1,0 +1,461 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Home{% endblock %}
+{% block extra_css %}
+<style>
+
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="py-8 sm:py-10 md:py-12 lg:py-14 px-3 sm:px-4 md:px-6 bg-gradient-to-br from-blue-50 to-white">
+    <div class="max-w-7xl mx-auto">
+        <div class="grid md:grid-cols-2 gap-6 sm:gap-8 md:gap-10 lg:gap-12 items-center">
+
+            <div>
+                <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-900  mb-4 sm:mb-5 md:mb-6">
+                    Company formation
+                </h1>
+                <p class="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 mb-6 sm:mb-7 md:mb-8 ">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum nobis ut voluptate, esse suscipit
+                    saepe itaque cum totam possimus ab neque nemo praesentium corrupti non unde quia quo rerum quas.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-3 md:gap-3.5 lg:gap-4">
+                    <button class="bg-gray-800 hover:bg-gray-500 text-white font-semibold py-2 sm:py-2.5 md:py-2.5 lg:py-3 px-4 sm:px-5 md:px-5 lg:px-6 rounded-lg text-sm">
+                        Book Now
+                    </button>
+                    <button
+                        class="border-2 border-gray-800 py-2 sm:py-2.5 md:py-2.5 lg:py-3 px-4 sm:px-5 md:px-5 lg:px-6 rounded-lg text-sm  font-semibold text-gray-900 hover:bg-gray-800 hover:text-white">
+                        Learn More
+                    </button>
+                </div>
+            </div>
+
+            <div class="flex justify-center md:justify-end mt-6 ">
+                <img src="{% static 'image/bg1.jpg' %}" 
+                    class="w-full sm:w-5/6 md:w-full max-w-sm sm:max-w-md md:max-w-lg h-64 sm:h-80 md:h-96 lg:h-[448 px] object-cover rounded-lg  shadow-xl "
+                    alt="Registered Agent Service">
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class=" bg-green-100 py-8">
+    <div class="max-w-7xl mx-auto my-10">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Basic Plan -->
+            <div class="bg-white rounded-lg border border-gray-200 p-8 shadow-sm">
+                <h2 class="text-2xl font-bold text-gray-900 mb-3">Basic</h2>
+                <p class="text-gray-600 text-sm mb-6">Solo founders, consultants, and new LLCs.</p>
+
+                <div class="mb-6">
+                    <span class="text-5xl font-bold text-gray-900">Rs149</span>
+                    <span class="text-gray-600 ml-2">per month</span>
+                </div>
+
+                <button class="w-full bg-gray-800 hover:bg-gray-500 text-white font-semibold py-3 px-6 rounded-lg mb-6">
+                    Get started now
+                </button>
+
+                <div class="space-y-3 mb-6">
+                    <div class="flex items-center text-green-600">
+                        <i class="bi bi-check-circle-fill"></i>&nbsp;
+                        <span class="text-sm font-medium">30-days money-back guarantee</span>
+                    </div>
+                    <div class="flex items-center text-green-600">
+                        <i class="bi bi-check-circle-fill"></i>&nbsp;
+                        <span class="text-sm font-medium">Monthly Expenses: Under Rs10K</span>
+                    </div>
+                </div>
+
+                <div class="border-t border-gray-200 pt-6">
+                    <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-4">SERVICES:</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start text-gray-700">
+                            <i class="bi bi-check-lg"></i>
+                            <span class="text-sm">Automated Bookkeeping Software</span>
+                        </li>
+                        <li class="flex items-start text-gray-700">
+                            <i class="bi bi-check-lg"></i>
+                            <span class="text-sm">Transaction Categorization</span>
+                        </li>
+                        <li class="flex items-start text-gray-700">
+                            <i class="bi bi-check-lg"></i>
+                            <span class="text-sm">Bank Account Syncing</span>
+                        </li>
+                        <li class="flex items-start text-gray-700">
+                            <i class="bi bi-check-lg"></i>
+                            <span class="text-sm">Monthly P&L,Balance Sheet</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Pro Plan (Popular) -->
+            <div class="bg-white rounded-lg border-2 border-blue-600 p-8 shadow-lg relative">
+                <div class="absolute top-0 right-6 transform -translate-y-1/2">
+                    <span class="bg-blue-600 text-white text-xs font-bold px-4 py-1 rounded-full">Popular</span>
+                </div>
+
+                <h2 class="text-2xl font-bold text-gray-900 mb-3">Pro</h2>
+                <p class="text-gray-600 text-sm mb-6">Small Biz & Startups: Ecommerce, Agencies, Remote Teams</p>
+
+                <div class="mb-6">
+                    <span class="text-5xl font-bold text-gray-900">Rs249</span>
+                    <span class="text-gray-600 ml-2">per month</span>
+                </div>
+
+                <button class="w-full bg-gray-800 hover:bg-gray-500 text-white font-semibold py-3 px-6 rounded-lg mb-6">
+                    Get started now
+                </button>
+
+                <div class="space-y-3 mb-6">
+                    <div class="flex items-center text-green-600">
+                        <i class="bi bi-check-circle-fill"></i>&nbsp;
+                        <span class="text-sm font-medium">30-days money-back guarantee</span>
+                    </div>
+                    <div class="flex items-center text-green-600">
+                        <i class="bi bi-check-circle-fill"></i>&nbsp;
+                        <span class="text-sm font-medium">Monthly Expenses: Rs10K-Rs30k</span>
+                    </div>
+                </div>
+
+                <div class="border-t border-gray-200 pt-6">
+                    <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-4">SERVICES:</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start text-gray-700">
+                            <i class="bi bi-check-lg"></i>
+                            <span class="text-sm">Everything in Basic Plan</span>
+                        </li>
+                        <li class="flex items-start text-gray-700">
+                            <i class="bi bi-check-lg"></i>
+                            <span class="text-sm">Dedicated Bookkeeper</span>
+                        </li>
+                        <li class="flex items-start text-gray-700">
+                            <i class="bi bi-check-lg"></i>
+                            <span class="text-sm">Monthly Book Reconciliation</span>
+                        </li>
+                        <li class="flex items-start text-gray-700">
+                            <i class="bi bi-check-lg"></i>
+                            <span class="text-sm">Tax-ready Reports</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Premium Plan -->
+            <div class="bg-white rounded-lg border border-gray-200 p-8 shadow-sm">
+                <h2 class="text-2xl font-bold text-gray-900 mb-3">Premium</h2>
+                <p class="text-gray-600 text-sm mb-6">Growing businesses manage complex operations, inventory, and
+                    payroll.</p>
+
+                <div class="mb-6">
+                    <span class="text-5xl font-bold text-gray-900">Custom Price</span>
+                </div>
+
+                <button class="w-full bg-gray-800 hover:bg-gray-500 text-white font-semibold py-3 px-6 rounded-lg mb-6">
+                    Request Quote   
+                </button>
+
+                <div class="space-y-3 mb-6">
+                    <div class="flex items-center text-green-600">
+                        <i class="bi bi-check-circle-fill"></i>&nbsp;
+                        <span class="text-sm font-medium">30-days money-back guarantee</span>
+                    </div>
+                    <div class="flex items-center text-green-600">
+                        <i class="bi bi-check-circle-fill"></i>&nbsp;
+                        <span class="text-sm font-medium">Monthly expenses: Rs30k+</span>
+                    </div>
+                </div>
+
+                <div class="border-t border-gray-200 pt-6">
+                    <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-4">SERVICES:</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start text-gray-700">
+                            <i class="bi bi-check-lg"></i>
+                            <span class="text-sm">Everything in Standard Plan</span>
+                        </li>
+                        <li class="flex items-start text-gray-700">
+                            <i class="bi bi-check-lg"></i>
+                            <span class="text-sm">Custom Chart of Accounts</span>
+                        </li>
+                        <li class="flex items-start text-gray-700">
+                            <i class="bi bi-check-lg"></i>
+                            <span class="text-sm">COGS & Inventory Tracking</span>
+                        </li>
+                        <li class="flex items-start text-gray-700">
+                            <i class="bi bi-check-lg"></i>
+                            <span class="text-sm">A/R & A/P Management</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="py-8">
+    <div class="max-w-7xl mx-auto my-10 p-4 md:p-8 bg-white rounded-xl shadow-xl">
+        <h2 class="text-2xl font-bold text-gray-900 mb-6 text-center">Comprehensive Feature Comparison</h2>
+
+        <div class="overflow-x-auto border border-gray-200 rounded-lg">
+            <table class="min-w-full divide-y divide-gray-200">
+                <!-- Table Header -->
+                <thead class="bg-gray-50 sticky top-0 ">
+                    <tr>
+                        <th scope="col"
+                            class="py-3 px-3 text-left text-sm font-semibold text-gray-700 w-1/4 min-w-[200px]">
+                            What's Included
+                        </th>
+                        <th scope="col" class="py-3 px-3 text-center text-sm font-semibold text-gray-700 w-1/4">
+                            Basic
+                        </th>
+                        <th scope="col" class="py-3 px-3 text-center text-sm font-semibold text-gray-700 w-1/4">
+                            Starter
+                        </th>
+                        <th scope="col" class="py-3 px-3 text-center text-sm font-semibold text-gray-700 w-1/4">
+                            Premium
+                        </th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-200 bg-white">
+
+                    <!-- Section: Formation -->
+                    <tr>
+                        <td colspan="4" class="py-3 px-3 text-xs font-bold text-gray-600 bg-gray-100 uppercase ">
+                            Formation</td>
+                    </tr>
+
+                    <!-- Row: Standard Company Incorporation -->
+                    <tr class="hover:bg-gray-50">
+                        <td class="py-4 px-3 text-sm font-medium text-gray-900">Standard Company Incorporation</td>
+                        <td class="py-4 px-3 text-center" x-html="checkMarkSvg">
+                            <i class="bi bi-check-lg"></i>
+                        </td>
+                        <td class="py-4 px-3 text-center">
+                            <i class="bi bi-check-lg"></i>
+                        </td>
+                        <td class="py-4 px-3 text-center">
+                            <i class="bi bi-check-lg"></i>
+                        </td>
+                    </tr>
+
+                    <!-- Row: Employee Identity Number (EIN) -->
+                    <tr class="hover:bg-gray-50">
+                        <td class="py-4 px-3 text-sm font-medium text-gray-900">Employee Identity Number (EIN)</td>
+                        <td class="py-4 px-3 text-center text-sm text-red-600 font-medium">+ Rs150</td>
+                        <td class="py-4 px-3 text-center">
+                            <i class="bi bi-check-lg"></i>
+                        </td>
+                        <td class="py-4 px-3 text-center">
+                            <i class="bi bi-check-lg"></i>
+                        </td>
+                    </tr>
+
+                    <!-- Row: BOI Filing -->
+                    <tr class="hover:bg-gray-50">
+                        <td class="py-4 px-3 text-sm font-medium text-gray-900">BOI Filing</td>
+                        <td class="py-4 px-3 text-center text-sm text-red-600 font-medium">+ Rs50</td>
+                        <td class="py-4 px-3 text-center text-sm text-red-600 font-medium">+ Rs50</td>
+                        <td class="py-4 px-3 text-center">
+                            <i class="bi bi-check-lg"></i>
+                        </td>
+                    </tr>
+
+                    <!-- Section: Compliance -->
+                    <tr>
+                        <td colspan="4"
+                            class="py-3 px-3 text-xs font-bold text-gray-600 bg-gray-100 uppercase tracking-widest">
+                            Compliance</td>
+                    </tr>
+
+                    <!-- Row: Registered Agent -->
+                    <tr class="hover:bg-gray-50">
+                        <td class="py-4 px-3 text-sm font-medium text-gray-900">Registered Agent</td>
+                        <td class="py-4 px-3 text-center text-sm text-red-600 font-medium">+ Rs75/year</td>
+                        <td class="py-4 px-3 text-center">
+                            <i class="bi bi-check-lg"></i>
+                        </td>
+                        <td class="py-4 px-3 text-center">
+                            <i class="bi bi-check-lg"></i>
+                        </td>
+                    </tr>
+
+                    <!-- Row: Operating Agreement (LLCs only) -->
+                    <tr class="hover:bg-gray-50">
+                        <td class="py-4 px-3 text-sm font-medium text-gray-900">Operating Agreement (LLCs only)</td>
+                        <td class="py-4 px-3 text-center">
+                            <i class="bi bi-check-lg"></i>
+                        </td>
+                        <td class="py-4 px-3 text-center">
+                            <i class="bi bi-check-lg"></i>
+                        </td>
+                        <td class="py-4 px-3 text-center">
+                            <i class="bi bi-check-lg"></i>
+                        </td>
+                    </tr>
+
+                    <!-- Row: Annual State Filing -->
+                    <tr class="hover:bg-gray-50">
+                        <td class="py-4 px-3 text-sm font-medium text-gray-900">Annual State Filing</td>
+                        <td class="py-4 px-3 text-center text-sm text-red-600 font-medium">+ Rs100/year</td>
+                        <td class="py-4 px-3 text-center text-sm text-red-600 font-medium">+ Rs100/year</td>
+                        <td class="py-4 px-3 text-center text-sm text-red-600 font-medium">+ Rs100/year</td>
+                    </tr>
+
+                    <!-- Section: Tax Support -->
+                    <tr>
+                        <td colspan="4"
+                            class="py-3 px-3 text-xs font-bold text-gray-600 bg-gray-100 uppercase tracking-widest">Tax
+                            Support</td>
+                    </tr>
+
+                    <!-- Row: CPA Consultation -->
+                    <tr class="hover:bg-gray-50">
+                        <td class="py-4 px-3 text-sm font-medium text-gray-900">CPA Consultation</td>
+                        <td class="py-4 px-3 text-center text-sm text-red-600 font-medium">+ Rs100/Hour</td>
+                        <td class="py-4 px-3 text-center text-sm text-red-600 font-medium">+ Rs100/Hour</td>
+                        <td class="py-4 px-3 text-center text-sm text-red-600 font-medium">+ Rs100/Hour</td>
+                    </tr>
+
+                    <!-- Row: IRS Tax Filings -->
+                    <tr class="hover:bg-gray-50">
+                        <td class="py-4 px-3 text-sm font-medium text-gray-900">IRS Tax Filings</td>
+                        <td class="py-4 px-3 text-center text-sm text-red-600 font-medium">+ Rs250–Rs500/year</td>
+                        <td class="py-4 px-3 text-center text-sm text-red-600 font-medium">+ Rs250–Rs500/year</td>
+                        <td class="py-4 px-3 text-center text-sm text-red-600 font-medium">+ Rs250–Rs500/year</td>
+                    </tr>
+
+                    <!-- Section: Financial Management -->
+                    <tr>
+                        <td colspan="4"
+                            class="py-3 px-3 text-xs font-bold text-gray-600 bg-gray-100 uppercase tracking-widest">
+                            Financial Management</td>
+                    </tr>
+
+                    <!-- Row: Bookkeeping Software -->
+                    <tr class="hover:bg-gray-50">
+                        <td class="py-4 px-3 text-sm font-medium text-gray-900">Bookkeeping Software</td>
+                        <td class="py-4 px-3 text-center text-sm text-red-600 font-medium">+ Rs300/year</td>
+                        <td class="py-4 px-3 text-center text-sm text-red-600 font-medium">+ Rs300/year</td>
+                        <td class="py-4 px-3 text-center text-sm text-red-600 font-medium">+ Rs300/year</td>
+                    </tr>
+
+                    <!-- Section: Customer Service -->
+                    <tr>
+                        <td colspan="4"
+                            class="py-3 px-3 text-xs font-bold text-gray-600 bg-gray-100 uppercase tracking-widest">
+                            Customer Service</td>
+                    </tr>
+
+                    <!-- Row: Dedicated Account Manager -->
+                    <tr class="hover:bg-gray-50">
+                        <td class="py-4 px-3 text-sm font-medium text-gray-900">Dedicated Account Manager</td>
+                        <td class="py-4 px-3 text-center text-sm text-red-600 font-medium">+ Rs600/year</td>
+                        <td class="py-4 px-3 text-center text-sm text-red-600 font-medium">+ Rs600/year</td>
+                        <td class="py-4 px-3 text-center text-sm text-red-600 font-medium">+ Rs600/year</td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+        <p class="mt-4 text-xs text-gray-500 text-center"> Prices for tax filings are estimated and subject to change
+            based on complexity.</p>
+    </div>
+</section>
+
+<section class="bg-green-100 py-8">
+    <section class="max-w-6xl mx-auto px-4 py-12">
+        <h1 class="text-4xl font-bold text-gray-900 mb-4 text-center">3 Simple Steps To Launch Your Company</h1>
+        <p class="text-gray-600 text-center mb-12 max-w-3xl mx-auto">
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+        </p>
+
+        <div
+            class="grid md:grid-cols-3 gap-8 items-center mb-16 bg-gradient-to-r from-green-400 to-green-100 rounded-lg">
+            <div class="md:col-span-1">
+                <div class="bg-gray-200 rounded-lg overflow-hidden shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=600&h=400&fit=crop"
+                        alt="Business owner" class="w-full h-80 object-cover">
+                </div>
+            </div>
+
+            <div class="md:col-span-2">
+                <h2 class="text-3xl font-bold text-gray-900 mb-6">
+                    Choose a place and filing option
+                </h2>
+                <p class="text-gray-600  mb-6">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda ut repudiandae obcaecati hic. Est
+                    soluta placeat nam tempora, maxime ea magni aliquam. Voluptates ipsam doloremque ratione! Hic
+                    deleniti aut assumenda! </p>
+                <div class="bg-gray-100 border-l-4 border-yellow-400 p-4 rounded">
+                    <p class="text-gray-700 italic">
+                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                        labore
+                        et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation."
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div
+            class="grid md:grid-cols-3 gap-8 items-center mb-16 bg-gradient-to-r from-green-400 to-green-100 rounded-lg">
+
+            <div class="md:col-span-2 px-3">
+                <h2 class="text-3xl font-bold text-gray-900 mb-6">
+                    EIN number & documentation
+                </h2>
+                <p class="text-gray-600  mb-6">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio quis, delectus, inventore
+                    necessitatibus perferendis sit nam placeat enim consequatur ab maxime aliquid tenetur vero totam
+                    repellendus dolorum veritatis. Assumenda, itaque! </p>
+                <div class="bg-gray-100 border-l-4 border-yellow-400 p-4 rounded">
+                    <p class="text-gray-700 italic">
+                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                        labore
+                        et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation."
+                    </p>
+                </div>
+            </div>
+
+            <div class="md:col-span-1">
+                <div class="bg-gray-200 rounded-lg overflow-hidden shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=600&h=400&fit=crop"
+                        alt="Business owner" class="w-full h-80 object-cover">
+                </div>
+            </div>
+        </div>
+        <div
+            class="grid md:grid-cols-3 gap-8 items-center mb-16 bg-gradient-to-r from-green-400 to-green-100 rounded-lg">
+            <div class="md:col-span-1">
+                <div class="bg-gray-200 rounded-lg overflow-hidden shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=600&h=400&fit=crop"
+                        alt="Business owner" class="w-full h-80 object-cover">
+                </div>
+            </div>
+
+            <div class="md:col-span-2">
+                <h2 class="text-3xl font-bold text-gray-900 mb-6">
+                    You’re good to go!
+                </h2>
+                <p class="text-gray-600  mb-6">
+                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ea minima quae ducimus corrupti voluptas?
+                    Illo perspiciatis fuga quam officiis! Vel, magnam. Nihil earum non esse, a doloremque maiores
+                    accusantium quia. </p>
+                <div class="bg-gray-100 border-l-4 border-yellow-400 p-4 rounded">
+                    <p class="text-gray-700 italic">
+                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                        labore
+                        et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation."
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>
+
+
+{% endblock %}
+
+{% block extra_js %}
+{% endblock %}

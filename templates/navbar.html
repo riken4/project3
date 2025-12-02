@@ -1,0 +1,229 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Navigation</title>
+</head>
+
+<body class="bg-gray-100">
+    <nav class="bg-gray-800 shadow-lg fixed top-0 w-full z-10 mb-3">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div class="flex h-16 justify-between items-center">
+                <!-- Mobile menu button -->
+                <div class="sm:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gray-400 hover:text-white hover:bg-gray-700 p-2 rounded-md"
+                        aria-label="Toggle menu" aria-expanded="false">
+                        <i id="menu-icon" class="bi bi-list text-3xl"></i>
+                        <i id="close-icon" class="bi bi-x hidden text-3xl"></i>
+                    </button>
+                </div>
+
+                <!-- Logo -->
+                <div class="text-white font-bold text-lg sm:text-xl">
+                    <a href="{% url 'main:home' %}" class="hover:text-gray-300 transition-colors">LOGO</a>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden sm:flex sm:items-center sm:space-x-4">
+                    <!-- File your taxes dropdown -->
+                    <div class="relative group">
+                        <button class="px-4 py-2 text-gray-300 hover:text-white font-medium flex items-center space-x-1"
+                            aria-expanded="false" aria-haspopup="true">
+                            <span>Service</span>
+                            <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+
+                        <div
+                            class="absolute left-0 mt-2 w-100 bg-white shadow-lg rounded-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                            <div class="p-6">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                    <!-- Column 1 -->
+                                    <div>
+                                        <h3 class="text-sm font-bold text-gray-900 mb-3">Start Your Business</h3>
+                                        <a href="{% url 'main:register_agent' %}"
+                                            class="block py-2 text-gray-800 hover:text-blue-600 transition-colors">
+                                            Register Agent
+                                        </a>
+                                        <a href="{% url 'main:company_formation' %}"
+                                            class="block py-2 text-gray-800 hover:text-blue-600 transition-colors">
+                                            Company Formation
+                                        </a>
+                                        <a href="{% url 'main:ein_registration' %}"
+                                            class="block py-2 text-gray-800 hover:text-blue-600 transition-colors">
+                                            EIN Registration
+                                        </a>
+                                    </div>
+
+                                    <!-- Column 2 -->
+                                    <div>
+                                        <h3 class="text-sm font-bold text-gray-900 mb-3">Manage Your Business</h3>
+                                        <a href="{% url 'main:annual_report_filing' %}"
+                                            class="block py-2 text-gray-800 hover:text-blue-600 transition-colors">
+                                            Annual Report Filing
+                                        </a>
+                                        <a href="{% url 'main:expert_taxes' %}"
+                                            class="block py-2 text-gray-800 hover:text-blue-600 transition-colors">
+                                            Expert Taxes
+                                        </a>
+                                        <a href="{% url 'main:file_your_own_taxes' %}"
+                                            class="block py-2 text-gray-800 hover:text-blue-600 transition-colors">
+                                            File Your Own Taxes
+                                        </a>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <!-- Refunds & loans dropdown -->
+                    <div class="relative group">
+                        <button class="px-4 py-2 text-gray-300 hover:text-white font-medium flex items-center space-x-1"
+                            aria-expanded="false" aria-haspopup="true">
+                            <span>Refunds & loans</span>
+                            <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+
+                        <div
+                            class="absolute left-0 mt-2 w-64 bg-white shadow-lg rounded-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                            <div class="p-6">
+                                <a href="{% url 'main:refund_advance' %}"
+                                    class="block py-2 text-gray-800 hover:text-blue-600 transition-colors">Refund
+                                    Advance</a>
+                                <a href="{% url 'main:flex_advance' %}"
+                                    class="block py-2 text-gray-800 hover:text-blue-600 transition-colors">Tax
+                                    Flex Advance</a>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- Regular links -->
+                    <a href="{% url 'main:price' %}"
+                        class="px-4 py-2 text-gray-300 hover:text-white font-medium transition-colors">Pricing</a>
+                    <a href="{% url 'main:account' %}" class="px-4 py-2 text-gray-300 hover:text-white font-medium transition-colors">Login</a>
+
+                    <!-- Shop button -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="sm:hidden hidden bg-gray-800 px-4 pb-4">
+            <div class="px-4 py-3 space-y-3">
+                <!-- Service mobile dropdown -->
+                <div>
+                    <button
+                        class="w-full text-left py-2 text-gray-300 font-medium flex items-center justify-between mobile-dropdown-btn"
+                        aria-expanded="false">
+                        <span>Service</span>
+                        <svg class="w-4 h-4 transform transition-transform dropdown-arrow" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                    <div class="hidden pl-4 mt-2 space-y-2 mobile-dropdown-content">
+                        <div class="pb-2">
+                            <p class="text-xs font-bold text-gray-400 uppercase mb-2">Start Your Business</p>
+                            <a href="{% url 'main:register_agent' %}" class="block py-1 text-gray-400 hover:text-white transition-colors">Register Agent</a>
+                            <a href="{% url 'main:company_formation' %}" class="block py-1 text-gray-400 hover:text-white transition-colors">Company Formation</a>
+                            <a href="{% url 'main:ein_registration' %}" class="block py-1 text-gray-400 hover:text-white transition-colors">EIN Registration</a>
+                        </div>
+                        <div class="pt-2 border-t border-gray-700">
+                            <p class="text-xs font-bold text-gray-400 uppercase mb-2">Manage Your Business</p>
+                            <a href="{% url 'main:annual_report_filing' %}" class="block py-1 text-gray-400 hover:text-white transition-colors">Annual Report Filing</a>
+                            <a href="{% url 'main:expert_taxes' %}" class="block py-1 text-gray-400 hover:text-white transition-colors">Expert Taxes</a>
+                            <a href="{% url 'main:file_your_own_taxes' %}" class="block py-1 text-gray-400 hover:text-white transition-colors">File Your Own Taxes</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Refunds & loans mobile dropdown -->
+                <div>
+                    <button
+                        class="w-full text-left py-2 text-gray-300 font-medium flex items-center justify-between mobile-dropdown-btn"
+                        aria-expanded="false">
+                        <span>Refunds & loans</span>
+                        <svg class="w-4 h-4 transform transition-transform dropdown-arrow" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                    <div class="hidden pl-4 mt-2 space-y-2 mobile-dropdown-content">
+                        <a href="{% url 'main:refund_advance' %}" class="block py-1 text-gray-400 hover:text-white transition-colors">Refund Advance</a>
+                        <a href="{% url 'main:flex_advance' %}" class="block py-1 text-gray-400 hover:text-white transition-colors">Tax Flex Advance</a>
+                    </div>
+                </div>
+
+                <!-- Regular links -->
+                <a href="{% url 'main:price' %}"
+                    class="block py-2 text-gray-300 hover:text-white font-medium transition-colors">Pricing</a>
+                <a href="{% url 'main:account' %}" class="block py-2 text-gray-300 hover:text-white font-medium transition-colors">Login</a>
+            </div>
+        </div>
+    </nav>
+
+    <script>
+          const btn = document.getElementById("mobile-menu-btn");
+        const menu = document.getElementById("mobile-menu");
+        const menuIcon = document.getElementById("menu-icon");
+        const closeIcon = document.getElementById("close-icon");
+
+        // Toggle main mobile menu
+        btn.addEventListener("click", () => {
+            menu.classList.toggle("hidden");
+            menuIcon.classList.toggle("hidden");
+            closeIcon.classList.toggle("hidden");
+        });
+
+        // Mobile dropdown functionality
+        const dropdownBtns = document.querySelectorAll(".mobile-dropdown-btn");
+        
+        dropdownBtns.forEach((btn) => {
+            btn.addEventListener("click", () => {
+                const content = btn.nextElementSibling;
+                const arrow = btn.querySelector(".dropdown-arrow");
+                
+                content.classList.toggle("hidden");
+                arrow.classList.toggle("rotate-180");
+                
+                const isExpanded = !content.classList.contains("hidden");
+                btn.setAttribute("aria-expanded", isExpanded);
+            });
+        });
+
+        document.addEventListener("click", (e) => {
+            if (!btn.contains(e.target) && !menu.contains(e.target)) {
+                menu.classList.add("hidden");
+                menuIcon.classList.remove("hidden");
+                closeIcon.classList.add("hidden");
+            }
+        });
+
+        window.addEventListener("resize", () => {
+            if (window.innerWidth >= 640) {
+                menu.classList.add("hidden");
+                menuIcon.classList.remove("hidden");
+                closeIcon.classList.add("hidden");
+            }
+        });
+
+    </script>
+</body>
+
+</html>

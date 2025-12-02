@@ -1,0 +1,263 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Home{% endblock %}
+{% block extra_css %}
+<style>
+    .flip-card-wrapper {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 4 / 5;
+    }
+
+    .perspective-1000 {
+        perspective: 1000px;
+    }
+
+    .flip-card-inner {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        transition: transform 0.8s;
+        transform-style: preserve-3d;
+    }
+
+    .flip-card-wrapper:hover .flip-card-inner {
+        transform: rotateY(180deg);
+    }
+
+    .flip-card-front,
+    .flip-card-back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+    }
+
+    .backface-hidden {
+        backface-visibility: hidden;
+    }
+
+    .flip-card-back {
+        transform: rotateY(180deg);
+    }
+
+    .team-card,
+    .detail-container {
+        height: 100%;
+        width: 100%;
+        box-sizing: border-box;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<section
+    class="py-6 sm:py-8 md:py-10 lg:py-12 px-3 sm:px-4 md:px-6 hero-banner relative flex items-center justify-center bg-[url('{% static 'image/bg6.jpg' %}')] bg-cover bg-center bg-fixed h-[250px] sm:h-[250px] md:h-[400px] lg:h-[500px]">
+    <div class="max-w-7xl mx-auto w-full text-center">
+        <h1
+            class="text-white sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-3 sm:mb-4 lg:mb-6">
+            Lorem <br />
+            All in One Platform
+        </h1>
+        <p
+            class="text-white text-sm sm:text-base md:text-lg lg:text-xl mb-4 sm:mb-5 lg:mb-8">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum nobis ut voluptate, esse
+            suscipitsaepe itaque cum totam possimus ab neque nemo praesentium corrupti non unde quia quo rerum quas.
+        </p>
+    </div>
+</section>
+<section class="py-4 lg:py-8 bg-green-100">
+    <div class="max-w-7xl mx-auto px-3 sm:px-4 md:px-6">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 md:gap-4 lg:gap-8 text-center">
+            <div class="p-4 sm:p-5">
+                <div class="text-2xl sm:text-3xl lg:text-5xl font-bold text-green-600 mb-1 sm:mb-2">15+</div>
+                <div class="text-xs sm:text-sm text-gray-600">Years of Excellence</div>
+            </div>
+            <div class="p-4 sm:p-5">
+                <div class="text-2xl sm:text-3xl lg:text-5xl font-bold text-green-600 mb-1 sm:mb-2">10M+</div>
+                <div class="text-xs sm:text-sm text-gray-600">Customers Served</div>
+            </div>
+            <div class="p-4 sm:p-5">
+                <div class="text-2xl sm:text-3xl lg:text-5xl font-bold text-green-600 mb-1 sm:mb-2">50+</div>
+                <div class="text-xs sm:text-sm text-gray-600">Countries Worldwide</div>
+            </div>
+            <div class="p-4 sm:p-5">
+                <div class="text-2xl sm:text-3xl lg:text-5xl font-bold text-green-600 mb-1 sm:mb-2">98%</div>
+                <div class="text-xs sm:text-sm text-gray-600">Customer Satisfaction</div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Our Values -->
+<section class="py-12 px-4 sm:px-6 lg:px-8 ">
+    <div class="max-w-7xl mx-auto">
+
+        <div class="text-center mb-12 ">
+            <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-gray-900">
+                Our Core Value
+            </h1>
+            <p class="mt-4 max-w-2xl mx-auto text-lg text-gray-500">
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 ">
+            {% for i in "123"|make_list %}
+            <div class="text-center p-4 shadow-md bg-white rounded-md border-1 border-gray-300">
+                <div class="items-center m-4">
+                    <div class="text-5xl text-green-600">
+                        <i class="bi bi-clipboard-check-fill"></i>
+                    </div>
+                </div>
+
+                <h2 class="text-xl font-bold text-gray-900 mb-2">
+                    Ensures Conformity
+                </h2>
+                <p class="text-base text-gray-600">
+                    Fulfill the legal mandate of establishing a permanent physical address to keep your business
+                    in good standing with the state and prevent any penalties or fines.
+                </p>
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
+</section>
+        <!-- Team Member -->
+<section class="bg-green-100 py-12 px-4">
+    <div class="max-w-7xl mx-auto">
+        <h1 class="text-5xl font-extrabold text-gray-900 text-center mb-4">Team Member</h1>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+
+            {% for i in 123|make_list %}
+            <div class="flip-card-wrapper perspective-1000">
+                <div class="flip-card-inner">
+                    <div class="team-card flip-card-front backface-hidden">
+                        <div
+                            class="relative rounded-2xl overflow-hidden shadow-lg hover:shadow-xl cursor-pointer h-full">
+                            <img src="{% static 'image/team member1.jpg' %}" alt="Team Member"
+                                class="absolute inset-0 w-full h-full object-cover z-0   " />
+                            <div class=" relative z-10 flex items-end h-full p-6">
+                                <div class="bg-white rounded-xl p-4 w-full flex items-center justify-center shadow-lg">
+                                    <div>
+                                        <h3 class="font-bold text-lg text-gray-900">Marcus Mango</h3>
+                                        <p class="text-sm text-gray-600">Head of Marketing</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="detail-container flip-card-back backface-hidden">
+                        <div class="bg-white rounded-2xl shadow-2xl p-6 h-full flex flex-col justify-center">
+                            <h3 class="font-bold text-3xl text-gray-900 mb-1">Sarah Stevens</h3>
+                            <p class="text-blue-600 font-semibold text-sm mb-2">Chief Technology Officer</p>
+                            <p class="text-gray-600 mb-2 ">Driving innovation and technical excellence with
+                                15 years in fintech. Expert in scalable architecture and AI integration.</p>
+                            <div class="space-y-1">
+                                <p class="text-sm"><span class="font-semibold text-gray-900">Email:</span> <span
+                                        class="text-gray-600">sarah.stevens@financer.com</span></p>
+                                <p class="text-sm"><span class="font-semibold text-gray-900">Location:</span> <span
+                                        class="text-gray-600">San Francisco, USA</span></p>
+                                <p class="text-sm"><span class="font-semibold text-gray-900">Phone:</span> <span
+                                        class="text-gray-600">+1 (555) 234-5678</span></p>
+                            </div>
+                            <div class="flex justify-center space-x-2 mt-2 ">
+                                <a class="tech-icon text-gray-600  pr-2" href="" title="facebook">
+                                    <i class="bi bi-facebook text-xl"></i>
+                                </a>
+                                <a class="text-gray-600   pr-2" href="" title="instagram">
+                                    <i class="bi bi-instagram text-xl"></i>
+                                </a>
+                                <div class="text-gray-600   pr-2" title="whatsapp">
+                                    <i class="bi bi-whatsapp text-xl"></i>
+                                </div>
+                                <a class="text-gray-600   pr-2" href="" title="tiktok">
+                                    <i class="bi bi-tiktok text-xl"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Culture & Responsibility -->
+<section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="grid md:grid-cols-2 gap-16">
+            <div>
+                <h2 class="text-3xl font-bold text-gray-900 mb-6">Our Culture</h2>
+                <p class="text-gray-600 mb-4">We believe that great products come from great teams. Our culture
+                    celebrates diversity, encourages creativity, and empowers every team member to make an impact.</p>
+                <ul class="space-y-3">
+                    <li class="flex items-start">
+                        <svg class="w-6 h-6 text-blue-600 mr-2 flex-shrink-0" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7">
+                            </path>
+                        </svg>
+                        <span class="text-gray-600">Remote-first workplace with global opportunities</span>
+                    </li>
+                    <li class="flex items-start">
+                        <svg class="w-6 h-6 text-blue-600 mr-2 flex-shrink-0" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7">
+                            </path>
+                        </svg>
+                        <span class="text-gray-600">Continuous learning and development programs</span>
+                    </li>
+                    <li class="flex items-start">
+                        <svg class="w-6 h-6 text-blue-600 mr-2 flex-shrink-0" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7">
+                            </path>
+                        </svg>
+                        <span class="text-gray-600">Inclusive environment that values every voice</span>
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <h2 class="text-3xl font-bold text-gray-900 mb-6">Corporate Responsibility</h2>
+                <p class="text-gray-600 mb-4">We're committed to making a positive impact on society and the
+                    environment. Sustainability and social responsibility are woven into our business operations.</p>
+                <ul class="space-y-3">
+                    <li class="flex items-start">
+                        <svg class="w-6 h-6 text-green-600 mr-2 flex-shrink-0" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7">
+                            </path>
+                        </svg>
+                        <span class="text-gray-600">Carbon-neutral operations by 2030</span>
+                    </li>
+                    <li class="flex items-start">
+                        <svg class="w-6 h-6 text-green-600 mr-2 flex-shrink-0" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7">
+                            </path>
+                        </svg>
+                        <span class="text-gray-600">Supporting local communities through education initiatives</span>
+                    </li>
+                    <li class="flex items-start">
+                        <svg class="w-6 h-6 text-green-600 mr-2 flex-shrink-0" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7">
+                            </path>
+                        </svg>
+                        <span class="text-gray-600">Ethical AI and data privacy as core principles</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+{% endblock %}
+
+{% block extra_js %}
+{% endblock %}

@@ -1,0 +1,183 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Home{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
+<script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+<style>
+
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="py-8 sm:py-10 md:py-12 lg:py-14 px-3 sm:px-4 md:px-6 bg-gradient-to-br from-blue-50 to-white">
+    <div class="max-w-7xl mx-auto">
+        <div class="grid md:grid-cols-2 gap-6 sm:gap-8 md:gap-10 lg:gap-12 items-center">
+
+            <div>
+                <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-900  mb-4 sm:mb-5 md:mb-6">
+                   File confidently, with experts by your side
+                </h1>
+                <p class="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 mb-6 sm:mb-7 md:mb-8 ">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum nobis ut voluptate, esse suscipit
+                    saepe itaque cum totam possimus ab neque nemo praesentium corrupti non unde quia quo rerum quas.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-3 md:gap-3.5 lg:gap-4">
+                    <button class="bg-gray-800 hover:bg-gray-500 text-white font-semibold py-2 sm:py-2.5 md:py-2.5 lg:py-3 px-4 sm:px-5 md:px-5 lg:px-6 rounded-lg text-sm">
+                        Get started
+                    </button>
+                    <button
+                        class="border-2 border-gray-800 py-2 sm:py-2.5 md:py-2.5 lg:py-3 px-4 sm:px-5 md:px-5 lg:px-6 rounded-lg text-sm  font-semibold text-gray-900 hover:bg-gray-800 hover:text-white">
+                        Learn More
+                    </button>
+                </div>
+            </div>
+
+            <div class="flex justify-center md:justify-end mt-6 ">
+                <img src="{% static 'image/bg1.jpg' %}" 
+                    class="w-full sm:w-5/6 md:w-full max-w-sm sm:max-w-md md:max-w-lg h-64 sm:h-80 md:h-96 lg:h-[448 px] object-cover rounded-lg  shadow-xl "
+                    alt="Registered Agent Service">
+            </div>
+        </div>
+    </div>
+</section>
+<section class="bg-green-100">
+    <div class="max-w-6xl mx-auto px-4 py-12">
+    <h1 class="text-4xl font-bold text-gray-900 mb-4 text-center">3 Simple Steps To Launch Your Company</h1>
+    <p class="text-gray-600 text-center mb-10 max-w-3xl mx-auto">
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+    </p>
+
+    <div class="max-w-7xl mx-auto space-y-8">
+
+        <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg ">
+            <div class="flex flex-col md:flex-row">
+
+                <div class="md:w-5/12">
+                    <img src="{% static 'image/team member1.jpg' %}"
+                        alt="" class="w-full h-40 md:h-110 object-contain">
+                </div>
+
+                <div class="md:w-7/12 p-8 md:p-10">
+                    <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
+                        Financial Strategy & Planning
+                    </h2>
+                    <p class="text-lg text-green-600 font-semibold mb-6">
+                        Dr. Amelia Kinsley, Chief Strategist
+                    </p>
+
+                    <p class="text-gray-700  mb-6">
+                        Dr. Kinsley specializes in comprehensive financial modeling and long-term capital allocation.
+                        She helps organizations navigate complex market dynamics to ensure sustainable growth and
+                        profitability.
+                    </p>
+
+                    <div class="space-y-3 mb-6">
+                        <div class="flex items-center text-gray-600">
+                            <i class="bi bi-check-circle-fill text-green-500"></i>&nbsp;
+                            <span>15+ Years in Finance</span>
+                        </div>
+                        <div class="flex items-center text-gray-600">
+                            <i class="bi bi-check-circle-fill text-green-500"></i>&nbsp;
+                            <span>Ph.D. in Econometrics</span>
+                        </div>
+                    </div>
+                    <button
+                        class="border-2 border-gray-800 px-8 py-2 rounded-lg text-lg font-semibold text-gray-900 hover:bg-gray-800 hover:text-white">
+                        See Pricing 
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+            <div class="flex flex-col md:flex-row-reverse">
+
+                <!-- Image Section -->
+                <div class="md:w-5/12">
+                    <img src="{% static 'image/team member2.jpg' %}" alt="Benjamin Cho"
+                        class="w-full h-64 md:h-110 object-contain">
+                </div>
+
+                <div class="md:w-7/12 p-8 md:p-10">
+                    <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
+                        Compliance and Regulatory Reporting
+                    </h2>
+                    <p class="text-lg text-green-600 font-semibold mb-6">
+                        Benjamin Cho, Lead Compliance Officer
+                    </p>
+
+                    <p class="text-gray-700  mb-6">
+                        Benjamin ensures all operations adhere to global regulatory standards. He provides proactive
+                        auditing and risk assessment services, protecting clients from compliance penalties and legal
+                        exposure.
+                    </p>
+
+                    <div class="space-y-3 mb-6">
+                        <div class="flex items-center text-gray-600">
+                            <i class="bi bi-check-circle-fill text-green-500"></i>&nbsp;
+                            <span>Certified Public Accountant (CPA)</span>
+                        </div>
+                        <div class="flex items-center text-gray-600">
+                           <i class="bi bi-check-circle-fill text-green-500"></i>&nbsp;
+                            <span>Global Compliance Expertise</span>
+                        </div>
+                    </div>
+                    <button
+                        class="border-2 border-gray-800 px-8 py-2 rounded-lg text-lg font-semibold text-gray-900 hover:bg-gray-800 hover:text-white">
+                        See Pricing 
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+            <div class="flex flex-col md:flex-row">
+
+                <div class="md:w-5/12">
+                    <img src="{% static 'image/team member3.jpg' %}" alt="Sarah Martinez"
+                        class="w-full h-64 md:h-110 object-contain">
+                </div>
+
+                <div class="md:w-7/12 p-8 md:p-10">
+                    <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
+                        Tax Planning & Optimization
+                    </h2>
+                    <p class="text-lg text-green-600 font-semibold mb-6">
+                        Sarah Martinez, Senior Tax Advisor
+                    </p>
+
+                    <p class="text-gray-700  mb-6">
+                        Sarah specializes in creating innovative tax strategies that maximize savings while maintaining
+                        full compliance. Her expertise helps businesses optimize their tax position across multiple
+                        jurisdictions.
+                    </p>
+
+                    <div class="space-y-3 mb-6">
+                        <div class="flex items-center text-gray-600">
+                            <i class="bi bi-check-circle-fill text-green-500"></i>&nbsp;
+                            <span>Master's in Taxation Law</span>
+                        </div>
+                        <div class="flex items-center text-gray-600">
+                            <i class="bi bi-check-circle-fill text-green-500"></i>&nbsp;
+                            <span>International Tax Specialist</span>
+                        </div>
+                    </div>
+                    <button
+                        class="border-2 border-gray-800 px-8 py-2 rounded-lg text-lg font-semibold text-gray-900 hover:bg-gray-800 hover:text-white">
+                        See Pricing 
+                    </button>
+                </div>
+            </div>
+        </div>
+</div>  
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+
+<script>
+</script>{% endblock %}
