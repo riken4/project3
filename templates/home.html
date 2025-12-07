@@ -4,9 +4,7 @@
 {% block title %}Home{% endblock %}
 
 {% block extra_css %}
-
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
-<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 {% endblock %}
 
 {% block content %}
@@ -17,7 +15,7 @@
             <div>
                 <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-950  mb-3 sm:mb-4 md:mb-5 lg:mb-6">
                     Lorem <br />
-                    <span class="text-green-500">Nepali Business</span><br />
+                    <span class="text-green-500">Nepali Business</span><br/>
                     All in One Platform
                 </h1>
                 <p class="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 mb-4 sm:mb-5 md:mb-6 lg:mb-8 ">
@@ -106,7 +104,7 @@
         </div>
 
         <!-- Features Grid -->
-        <div class="grid grid-cols-2 md:grid-cols-3 gap-8 ">
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-2">
             {% for i in "123"|make_list %}
             <div
                 class="text-center p-6 shadow-md bg-white rounded-md border border-gray-300 hover:shadow-lg ">
@@ -205,7 +203,6 @@
         </div>
     </div>
 </section>
-
 <!-- CTA Section -->
 <section class="py-20 px-4 bg-green-100">
     <div class="max-w-4xl mx-auto text-center">
@@ -221,10 +218,7 @@
 {% endblock %}
 
 {% block extra_js %}
-<script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
-<script
-    src="https://cdn.jsdelivr.net/npm/@splidejs/splide-extension-auto-scroll@0.5.3/dist/js/splide-extension-auto-scroll.min.js"></script>
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@splidejs/splide-extension-auto-scroll@0.5.3/dist/js/splide-extension-auto-scroll.min.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         // Logo slider (auto scroll)
@@ -244,25 +238,6 @@
                 640: { perPage: 2 },
             },
         }).mount(window.splide.Extensions);
-
-        new Splide('#testimonial-slider', {
-            type: 'loop',
-            perPage: 3,
-            gap: '1.5rem',
-            padding: '1rem',
-            breakpoints: {
-                1024: { perPage: 2 },
-                640: { perPage: 1, padding: '0.5rem' },
-            },
-            pagination: true,
-            arrows: true,
-            autoplay: true,
-            interval: 5000,
-            pauseOnHover: true,
-        }).mount();
-    });
-
-      AOS.init();
-      
+    });     
 </script>
 {% endblock %}
