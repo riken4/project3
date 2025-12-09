@@ -62,3 +62,14 @@ def privacy_policy(request):
 def term_of_services(request):
     return render(request, 'nav info/term_of_services.html') 
 
+def company_formation_info(request):
+    return render(request, 'company_formation_info.html')
+
+def order_summary(request):
+    return render(request, 'order_summary.html')
+
+def services(request):
+    return render(request, 'services.html')
+
+def annual_report_cart(request):
+    return render(request, 'annual_report_cart.html')

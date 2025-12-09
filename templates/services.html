@@ -1,0 +1,215 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Home{% endblock %}
+{% block extra_css %}
+<style>
+
+</style>
+{% endblock %}
+
+{% block content %}
+<section>
+    <div class="max-w-7xl mx-auto pt-6">
+        <!-- Header -->
+        <div class="text-center mb-12">
+            <h1 class="text-4xl font-bold text-gray-900 mb-4">Choose Your Filing Service</h1>
+            <p class="text-gray-600 max-w-2xl mx-auto">
+                Select the perfect service for your business needs. All services include professional support, 
+                secure filing, and expert guidance throughout the process.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+            <!-- Sidebar -->
+            <div class="lg:col-span-1">
+                <div class="bg-white rounded-lg shadow-sm p-4">
+                    <h2 class="font-semibold text-gray-900 mb-4">Packages & Services</h2>
+                    <nav class="space-y-1">
+                        <button class="w-full flex items-center gap-3 px-4 py-3 bg-blue-600 text-white rounded-lg font-medium">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <circle cx="12" cy="12" r="10" stroke-width="2"/>
+                            </svg>
+                            All Services
+                        </button>
+                        <button class="w-full flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-gray-50 rounded-lg">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <circle cx="12" cy="12" r="10" stroke-width="2"/>
+                            </svg>
+                            Registered Agent
+                        </button>
+                        <button class="w-full flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-gray-50 rounded-lg">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <circle cx="12" cy="12" r="10" stroke-width="2"/>
+                            </svg>
+                            Dissolution
+                        </button>
+                        <button class="w-full flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-gray-50 rounded-lg">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <circle cx="12" cy="12" r="10" stroke-width="2"/>
+                            </svg>
+                            ITIN
+                        </button>
+                        <button class="w-full flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-gray-50 rounded-lg">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <circle cx="12" cy="12" r="10" stroke-width="2"/>
+                            </svg>
+                            Easy Docs
+                        </button>
+                        <button class="w-full flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-gray-50 rounded-lg">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <circle cx="12" cy="12" r="10" stroke-width="2"/>
+                            </svg>
+                            Mailroom
+                        </button>
+                        <button class="w-full flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-gray-50 rounded-lg">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <circle cx="12" cy="12" r="10" stroke-width="2"/>
+                            </svg>
+                            Business 360°
+                        </button>
+                        <button class="w-full flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-gray-50 rounded-lg">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <circle cx="12" cy="12" r="10" stroke-width="2"/>
+                            </svg>
+                            Trademark
+                        </button>
+                        <button class="w-full flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-gray-50 rounded-lg">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <circle cx="12" cy="12" r="10" stroke-width="2"/>
+                            </svg>
+                            Bookkeeping
+                        </button>
+                        <button class="w-full flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-gray-50 rounded-lg">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <circle cx="12" cy="12" r="10" stroke-width="2"/>
+                            </svg>
+                            Annual Report
+                        </button>
+                    </nav>
+                </div>
+            </div>
+
+            <!-- Service Cards -->
+            <div class="lg:col-span-3 grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Annual Report Filing Card -->
+                <div class="bg-white rounded-lg shadow-sm p-8 border border-gray-200">
+                    <div class="flex items-center gap-2 mb-2">
+                        <h3 class="text-2xl font-bold text-gray-900">Annual Report Filing</h3>
+                    </div>
+                    <p class="text-gray-600 mb-6">Annual Report plan tailored to your filing needs.</p>
+                    
+                    <div class="mb-6">
+                        <div class="flex items-baseline gap-1">
+                            <span class="text-4xl font-bold text-gray-900">$100</span>
+                            <span class="text-gray-600">100 /year</span>
+                        </div>
+                    </div>
+
+                    <button class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg mb-6 transition">
+                        Get Started
+                    </button>
+
+                    <ul class="space-y-3">
+                        <li class="flex items-start gap-2">
+                            <svg class="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            <span class="text-gray-700">Business Formation & Filing</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg class="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            <span class="text-gray-700">Legal Document Preparation</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg class="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            <span class="text-gray-700">EIN Application</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg class="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            <span class="text-gray-700">Compliance Monitoring</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg class="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            <span class="text-gray-700">Expert Support</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg class="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            <span class="text-gray-700">Secure Processing</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Bookkeeping Pro Card -->
+                <div class="bg-white rounded-lg shadow-sm p-8 border border-gray-200">
+                    <div class="flex items-center gap-2 mb-2">
+                       
+                        <h3 class="text-2xl font-bold text-gray-900">Bookkeeping Pro</h3>
+                    </div>
+                    <p class="text-gray-600 mb-6">Bookkeeping plan tailored to your filing needs.</p>
+                    
+                    <div class="mb-6">
+                        <div class="flex items-baseline gap-1">
+                            <span class="text-4xl font-bold text-gray-900">$249</span>
+                            <span class="text-gray-600">249 /month • 2490 /year</span>
+                        </div>
+                    </div>
+
+                    <button class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg mb-6 transition">
+                        Get Started
+                    </button>
+
+                    <ul class="space-y-3">
+                        <li class="flex items-start gap-2">
+                            <svg class="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            <span class="text-gray-700">Tracking income and expenses</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg class="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            <span class="text-gray-700">Reconcile bank & credit card accounts</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg class="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            <span class="text-gray-700">Monthly / quarterly financial statements</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg class="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            <span class="text-gray-700">Multi-currency & international founder support</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg class="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            <span class="text-gray-700">Cloud-based secure data storage</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg class="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            <span class="text-gray-700">Integration with tax filing readiness</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
