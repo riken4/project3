@@ -73,3 +73,9 @@ def services(request):
 
 def annual_report_cart(request):
     return render(request, 'annual_report_cart.html')
+
+def ein_payment(request):
+    return render(request, 'ein_payment.html')
+
+def irs_tax_filling(request):
+    return render(request, 'irs_tax_filling.html')

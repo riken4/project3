@@ -27,7 +27,8 @@ urlpatterns = [
     path('order_summary/', views.order_summary, name='order_summary'),
     path('services/', views.services, name='services'),
     path('annual_report_cart/', views.annual_report_cart, name='annual_report_cart'),
-
+    path('ein_payment/', views.ein_payment, name='ein_payment'),
+    path('irs_tax_filling/', views.irs_tax_filling, name='irs_tax_filling'),
 
 
 ]
