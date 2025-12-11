@@ -1,0 +1,325 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Home{% endblock %}
+{% block extra_css %}
+    <style>
+
+</style>
+{% endblock %}
+
+{% block content %}
+
+<section class="bg-gray-50">
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+        <header class="text-center mb-12">
+            <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 mb-2 leading-tight">
+                Launch Your Business in <span class="text-blue-600">Nepal</span>
+            </h1>
+            <p class="text-gray-600 max-w-2xl mx-auto">
+                Effortlessly form your LLC or Corporation, get a tax ID, and set up a bank account in minutes with our
+                all-in-one platform.
+            </p>
+        </header>
+
+        <div class="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-8 mb-16">
+
+            <div class="flex items-center space-x-2">
+                <div>
+                    <label for="entity-type" class="text-gray-500 text-sm block mb-1">Entity Type</label>
+                    <div class="relative">
+                        <select id="entity-type"
+                            class="appearance-none block w-64 md:w-80 border border-gray-300 text-gray-900 py-2 pl-4 pr-10 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500 cursor-pointer">
+                            <option>Limited Liability Company (LLC)</option>
+                        </select>
+                        <div
+                            class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                            <i class="bi bi-caret-down-fill"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex items-center space-x-2">
+                <div>
+                    <label for="state" class="text-gray-500 text-sm block mb-1">State</label>
+                    <div class="relative">
+                        <select id="state"
+                            class="appearance-none block w-64 md:w-80 border border-gray-300 text-gray-900 py-2 pl-4 pr-10 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500 cursor-pointer">
+                            <option>Missouri</option>
+                        </select>
+                        <div
+                            class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                           <i class="bi bi-caret-down-fill"></i>    
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <main class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 items-stretch">
+
+            <div class="bg-white rounded-xl border border-gray-200 p-6 shadow-custom flex flex-col">
+                <h2 class="text-2xl font-bold text-gray-900 mb-3">Basic</h2>
+                <p class="text-gray-600 text-sm mb-6">Solo founders, consultants, and new LLCs.</p>
+
+                <div class="mb-6">
+                    <span class="text-3xl font-bold text-gray-900">Rs149</span>
+                    <span class="text-gray-600 ml-2">per month</span>
+                </div>
+
+                <div class="space-y-3 mb-6">
+                    <div class="flex items-start text-green-600">
+                        <i class="bi bi-check-circle-fill text-lg mr-2 flex-shrink-0"></i>
+                        <span class="text-sm font-medium">30-days money-back guarantee</span>
+                    </div>
+                    <div class="flex items-start text-green-600">
+                        <i class="bi bi-check-circle-fill text-lg mr-2 flex-shrink-0"></i>
+                        <span class="text-sm font-medium">Monthly Expenses: Under Rs10K</span>
+                    </div>
+                </div>
+
+                <div class="border-t border-gray-200 pt-6 mt-auto">
+                    <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-4">SERVICES:</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start text-gray-700">
+                            <i class="bi bi-check-lg text-green-500 mr-2 flex-shrink-0 mt-1"></i>
+                            <span class="text-sm">Automated Bookkeeping Software</span>
+                        </li>
+                        <li class="flex items-start text-gray-700">
+                            <i class="bi bi-check-lg text-green-500 mr-2 flex-shrink-0 mt-1"></i>
+                            <span class="text-sm">Transaction Categorization</span>
+                        </li>
+                        <li class="flex items-start text-gray-700">
+                            <i class="bi bi-check-lg text-green-500 mr-2 flex-shrink-0 mt-1"></i>
+                            <span class="text-sm">Bank Account Syncing</span>
+                        </li>
+                        <li class="flex items-start text-gray-700">
+                            <i class="bi bi-check-lg text-green-500 mr-2 flex-shrink-0 mt-1"></i>
+                            <span class="text-sm">Monthly P&L, Balance Sheet</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl border-2 border-blue-600 p-6 shadow-lg relative flex flex-col">
+                <div class="absolute top-0 right-6 transform -translate-y-1/2">
+                    <span class="bg-blue-600 text-white text-xs font-bold px-4 py-1 rounded-full">Popular</span>
+                </div>
+
+                <h2 class="text-2xl font-bold text-gray-900 mb-3">Pro</h2>
+                <p class="text-gray-600 text-sm mb-6">Small Biz & Startups: Ecommerce, Agencies, Remote Teams</p>
+
+                <div class="mb-6">
+                    <span class="text-3xl font-bold text-gray-900">Rs249</span>
+                    <span class="text-gray-600 ml-2">per month</span>
+                </div>
+
+                <div class="space-y-3 mb-6">
+                    <div class="flex items-start text-green-600">
+                        <i class="bi bi-check-circle-fill text-lg mr-2 flex-shrink-0"></i>
+                        <span class="text-sm font-medium">30-days money-back guarantee</span>
+                    </div>
+                    <div class="flex items-start text-green-600">
+                        <i class="bi bi-check-circle-fill text-lg mr-2 flex-shrink-0"></i>
+                        <span class="text-sm font-medium">Monthly Expenses: Rs10K-Rs30k</span>
+                    </div>
+                </div>
+
+                <div class="border-t border-gray-200 pt-6 mt-auto">
+                    <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-4">SERVICES:</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start text-gray-700">
+                            <i class="bi bi-check-lg text-green-500 mr-2 flex-shrink-0 mt-1"></i>
+                            <span class="text-sm">Everything in Basic Plan</span>
+                        </li>
+                        <li class="flex items-start text-gray-700">
+                            <i class="bi bi-check-lg text-green-500 mr-2 flex-shrink-0 mt-1"></i>
+                            <span class="text-sm">Dedicated Bookkeeper</span>
+                        </li>
+                        <li class="flex items-start text-gray-700">
+                            <i class="bi bi-check-lg text-green-500 mr-2 flex-shrink-0 mt-1"></i>
+                            <span class="text-sm">Monthly Book Reconciliation</span>
+                        </li>
+                        <li class="flex items-start text-gray-700">
+                            <i class="bi bi-check-lg text-green-500 mr-2 flex-shrink-0 mt-1"></i>
+                            <span class="text-sm">Tax-ready Reports</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl border border-gray-200 p-6 shadow-custom flex flex-col">
+                <h2 class="text-2xl font-bold text-gray-900 mb-3">Premium</h2>
+                <p class="text-gray-600 text-sm mb-6">Growing businesses manage complex operations, inventory, and
+                    payroll.</p>
+
+                <div class="mb-6 ">
+                    <span class="text-3xl font-bold text-gray-900">Custom Price</span>
+                </div>
+
+                <div class="space-y-3 mb-6">
+                    <div class="flex items-start text-green-600">
+                        <i class="bi bi-check-circle-fill text-lg mr-2 flex-shrink-0"></i>
+                        <span class="text-sm font-medium">30-days money-back guarantee</span>
+                    </div>
+                    <div class="flex items-start text-green-600">
+                        <i class="bi bi-check-circle-fill text-lg mr-2 flex-shrink-0"></i>
+                        <span class="text-sm font-medium">Monthly expenses: Rs30k+</span>
+                    </div>
+                </div>
+
+                <div class="border-t border-gray-200 pt-6 mt-auto">
+                    <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-4">SERVICES:</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start text-gray-700">
+                            <i class="bi bi-check-lg text-green-500 mr-2 flex-shrink-0 mt-1"></i>
+                            <span class="text-sm">Everything in Standard Plan</span>
+                        </li>
+                        <li class="flex items-start text-gray-700">
+                            <i class="bi bi-check-lg text-green-500 mr-2 flex-shrink-0 mt-1"></i>
+                            <span class="text-sm">Custom Chart of Accounts</span>
+                        </li>
+                        <li class="flex items-start text-gray-700">
+                            <i class="bi bi-check-lg text-green-500 mr-2 flex-shrink-0 mt-1"></i>
+                            <span class="text-sm">COGS & Inventory Tracking</span>
+                        </li>
+                        <li class="flex items-start text-gray-700">
+                            <i class="bi bi-check-lg text-green-500 mr-2 flex-shrink-0 mt-1"></i>
+                            <span class="text-sm">A/R & A/P Management</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="p-6 border border-gray-200 rounded-xl shadow-custom bg-gray-50 flex flex-col">
+                <h2 class="text-2xl font-bold text-gray-900 mb-6">Order Summary</h2>
+
+                <div class="mb-6">
+                    <label for="formation-state-summary" class="text-gray-500 text-sm block mb-1">Formation
+                        State</label>
+                    <div class="relative">
+                        <select id="state"
+                            class="appearance-none block w-10 md:w-60 border border-gray-300 text-gray-900 py-2 pl-4 pr-10 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500 cursor-pointer">
+                            <option>Missouri</option>
+                        </select>
+                        <div
+                            class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                           <i class="bi bi-caret-down-fill"></i>    
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-3 mb-6">
+                    <div class="flex justify-between text-gray-700">
+                        <span>Starter Package:</span>
+                        <span class="font-semibold text-gray-900">$249</span>
+                    </div>
+                    <div class="flex justify-between text-gray-700">
+                        <span>Missouri State Fee:</span>
+                        <span class="font-semibold text-gray-900">$205</span>
+                    </div>
+                </div>
+
+                <hr class="border-gray-200 mb-6">
+
+                <div class="flex justify-between text-xl font-bold text-gray-900 mb-6">
+                    <span>Total:</span>
+                    <span class="text-blue-600">$454</span>
+                </div>
+
+                <a href="{% url 'main:order_summary' %}" class="bg-gray-800 hover:bg-gray-500 text-white font-semibold py-2 sm:py-2.5 md:py-2.5 lg:py-3 px-4 sm:px-5 md:px-5 lg:px-6 rounded-lg text-sm text-center">
+                        Get Started
+                    </a>
+
+                <div class="mt-4 text-center text-xs text-gray-500">
+                    <svg class="w-4 h-4 inline-block align-text-bottom mr-1" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    <span>One-time fee</span>
+                    <p class="mt-1">Unlike companies that charge annual fees, our formation fee is a one-time.</p>
+                </div>
+            </div>
+
+        </main>
+
+    </div>
+</section>
+<section class="mt-6 py-12 px-4">
+    <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-12">
+            <h1 class="text-4xl md:text-4xl font-bold text-gray-900 mb-4">Frequently Asked Questions</h1>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-sm">
+            <div class="accordion-item border-b border-gray-200">
+                <button class="accordion-header w-full flex justify-between items-center p-6 text-left hover:bg-gray-50 transition-colors">
+                    <span class="text-lg font-semibold text-gray-900">question?</span>
+                    <span class="plus-icon text-2xl text-blue-600 font-light">+</span>
+                </button>
+                <div class="accordion-content px-6">
+                    <p class="text-gray-600 pb-6">answer.</p>
+                </div>
+            </div>
+
+            <div class="accordion-item border-b border-gray-200">
+                <button class="accordion-header w-full flex justify-between items-center p-6 text-left hover:bg-gray-50 transition-colors">
+                    <span class="text-lg font-semibold text-gray-900">question?</span>
+                    <span class="plus-icon text-2xl text-blue-600 font-light">+</span>
+                </button>
+                <div class="accordion-content px-6">
+                    <p class="text-gray-600 pb-6">answer.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="bg-green-100 py-8 px-4 ">
+    <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-10">
+            <h2 class="text-3xl font-bold text-gray-800 mb-2">What Our Customers Say</h2>
+            <p class="text-gray-600">Don't just take our word for it - hear from our satisfied clients</p>
+        </div>
+        <div id="testimonial-slider" class="splide">
+            <div class="splide__track">
+                <ul class="splide__list">
+
+                    {% for review in "1234"|make_list %}
+                    <li class="splide__slide">
+
+                        <div class="bg-white rounded-lg shadow-md p-6 h-full flex flex-col">
+                            <div class="flex items-center mb-4">
+                                <div class="text-yellow-400 flex gap-1">
+                                    {% for star in "12345"|make_list %}
+                                    <i class="bi bi-star-fill"></i>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <p class="text-gray-700 mb-4 flex-grow">"EasyFiling made the process of forming my LLC
+                                incredibly simple. As an international entrepreneur, I was worried about the complexity,
+                                but their team guided me through every step. The entire process was completed faster
+                                than I expected!"</p>
+                            <div class="flex items-center">
+                                <img src="{% static 'image/team member3.jpg' %}" alt="Mark Johnson"
+                                    class="w-12 h-12 rounded-full mr-3 object-cover">
+                                <div>
+                                    <h4 class="font-semibold text-gray-800">Mark Johnson</h4>
+                                    <p class="text-sm text-gray-600">CEO, Geruda Academy</p>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+{% endblock %}

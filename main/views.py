@@ -193,3 +193,20 @@ def term_of_services(request):
     return render(request, 'nav info/term_of_services.html', context)
 
 
+def company_formation_info(request):
+    return render(request, 'company_formation_info.html')
+
+def order_summary(request):
+    return render(request, 'order_summary.html')
+
+def services(request):
+    return render(request, 'services.html')
+
+def annual_report_cart(request):
+    return render(request, 'annual_report_cart.html')
+
+def ein_payment(request):
+    return render(request, 'ein_payment.html')
+
+def irs_tax_filling(request):
+    return render(request, 'irs_tax_filling.html')

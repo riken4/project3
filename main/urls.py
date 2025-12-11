@@ -23,7 +23,12 @@ urlpatterns = [
     path('faq/', views.faq, name='faq'),
     path('privacy_policy/', views.privacy_policy, name='privacy_policy'),
     path('term_of_services/', views.term_of_services, name='term_of_services'),
-
+    path('company_formation_info/', views.company_formation_info, name='company_formation_info'),
+    path('order_summary/', views.order_summary, name='order_summary'),
+    path('services/', views.services, name='services'),
+    path('annual_report_cart/', views.annual_report_cart, name='annual_report_cart'),
+    path('ein_payment/', views.ein_payment, name='ein_payment'),
+    path('irs_tax_filling/', views.irs_tax_filling, name='irs_tax_filling'),
 
 
 ]
