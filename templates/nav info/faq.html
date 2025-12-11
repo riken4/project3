@@ -1,48 +1,105 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}faq{% endblock %}
+{% block title %}FAQ{% endblock %}
 
 {% block content %}
-<div class="min-h-screen flex items-center justify-center px-4 py-10">
-    <div class="w-full max-w-3xl bg-white dark:bg-gray-900 rounded-lg shadow ">
-        <div>
-            <button class="w-full flex justify-between p-5 text-white font-semibold text-gray-800 text-gray-200 accordion-btn">
-                Question
-                <span class="">&#9660;</span>
-            </button>
-            <div class="max-h-0 overflow-hidden accordion-content bg-gray-200">
-                <p class="p-5 text-gray-900">Answer</p>
-            </div>
+<!-- Header Section -->
+{% if faq_page %}
+<section class="relative h-screen w-full overflow-hidden">
+    {% if faq_page.image %}
+    <div class="absolute inset-0 bg-cover bg-center bg-no-repeat" 
+         style="background-image: url('{{ faq_page.image.url }}');">
+    </div>
+    <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/70"></div>
+    {% else %}
+    <div class="absolute inset-0 bg-gradient-to-br from-gray-800 to-gray-900"></div>
+    {% endif %}
+
+    <div class="relative h-full flex items-center justify-center px-4 sm:px-6 lg:px-8 z-10">
+        <div class="max-w-4xl text-center text-white">
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold mb-4 drop-shadow-lg">
+                {{ faq_page.title }}
+            </h1>
+            <p class="text-lg sm:text-xl md:text-2xl text-gray-100 drop-shadow-md">
+                {{ faq_page.description }}
+            </p>
         </div>
-         <div>
-            <button class="w-full flex justify-between p-5 text-white font-semibold text-gray-800 text-gray-200 accordion-btn">
-                Question
-                <span class="">&#9660;</span>
-            </button>
-            <div class="max-h-0 overflow-hidden accordion-content bg-gray-200">
-                <p class="p-5 text-gray-900">Answer</p>
-            </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- FAQ Section -->
+<div class="min-h-screen bg-gray-50 py-16 px-4">
+    <div class="max-w-4xl mx-auto">
+        {% if not faq_page %}
+        <div class="text-center mb-12">
+            <h1 class="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">
+                Frequently Asked Questions
+            </h1>
+            <p class="text-lg text-gray-600">
+                Find answers to common questions about our services
+            </p>
+        </div>
+        {% endif %}
+
+        <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+            {% if faqs %}
+                {% for faq in faqs %}
+                <div class="border-b border-gray-200 last:border-b-0">
+                    <button class="w-full flex justify-between items-center p-6 text-left font-semibold text-gray-900 hover:bg-gray-50 transition-colors duration-200 accordion-btn group">
+                        <span class="text-base md:text-lg pr-8">{{ faq.question }}</span>
+                        <span class="accordion-arrow text-green-600 text-2xl transition-transform duration-300 flex-shrink-0">&#9660;</span>
+                    </button>
+                    <div class="max-h-0 overflow-hidden accordion-content transition-all duration-300 ease-in-out">
+                        <div class="p-6 pt-0 bg-gray-50">
+                            <p class="text-gray-700 leading-relaxed whitespace-pre-line">{{ faq.answer }}</p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <div class="p-12 text-center">
+                    <svg class="w-16 h-16 mx-auto mb-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    <p class="text-gray-500 text-lg">No FAQs available yet.</p>
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- Contact Section -->
+        <div class="mt-12 text-center bg-gradient-to-r from-green-600 to-green-700 rounded-2xl p-8 md:p-12 text-white shadow-xl">
+            <h2 class="text-2xl md:text-3xl font-bold mb-4">Still have questions?</h2>
+            <p class="text-lg mb-6 text-green-50">Can't find the answer you're looking for? Please reach out to our friendly team.</p>
+            <a href="{% url 'main:account' %}" class="inline-block bg-white text-green-700 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+                Contact Support
+            </a>
         </div>
     </div>
 </div>
 {% endblock %}
 
 {% block extra_js %}
-
 <script>
     const items = document.querySelectorAll(".accordion-btn");
 
     items.forEach((btn) => {
         btn.addEventListener("click", () => {
             const content = btn.nextElementSibling;
-            const arrow = btn.querySelector("span");
+            const arrow = btn.querySelector(".accordion-arrow");
 
             const isOpen = content.style.maxHeight && content.style.maxHeight !== "0px";
 
-            document.querySelectorAll(".accordion-content").forEach((c) => c.style.maxHeight = "0px");
-            document.querySelectorAll(".accordion-btn span").forEach((a) => a.style.transform = "rotate(0deg)");
+            // Close all accordions
+            document.querySelectorAll(".accordion-content").forEach((c) => {
+                c.style.maxHeight = "0px";
+            });
+            document.querySelectorAll(".accordion-arrow").forEach((a) => {
+                a.style.transform = "rotate(0deg)";
+            });
 
+            // Open clicked accordion if it was closed
             if (!isOpen) {
                 content.style.maxHeight = content.scrollHeight + "px";
                 arrow.style.transform = "rotate(180deg)";

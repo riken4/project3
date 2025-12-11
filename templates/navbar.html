@@ -1,154 +1,265 @@
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Navigation</title>
-</head>
+<style>
+    /* Glassmorphism navbar */
+    .glass-nav {
+        background: rgba(17, 24, 39, 0.85);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        transition: all 0.3s ease;
+    }
 
-<body class="bg-gray-100">
-    <nav class="bg-gray-800 shadow-lg fixed top-0 w-full z-10 mb-3">
+        /* Hover effects for desktop links */
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #10b981, #059669);
+            transform: translateX(-50%);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 80%;
+        }
+
+        /* Dropdown animations */
+        .dropdown-menu {
+            transform: translateY(-10px);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .group:hover .dropdown-menu {
+            transform: translateY(0);
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Dropdown item hover effect */
+        .dropdown-item {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 3px;
+            height: 0;
+            background: linear-gradient(180deg, #10b981, #059669);
+            transition: height 0.3s ease;
+            border-radius: 0 2px 2px 0;
+        }
+
+        .dropdown-item:hover::before {
+            height: 70%;
+        }
+
+        .dropdown-item:hover {
+            padding-left: 1rem;
+            color: #10b981;
+        }
+
+        /* Mobile menu animation */
+        #mobile-menu {
+            animation: slideDown 0.3s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Logo glow effect */
+        .logo-glow {
+            text-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+            transition: text-shadow 0.3s ease;
+        }
+
+        .logo-glow:hover {
+            text-shadow: 0 0 30px rgba(16, 185, 129, 0.6);
+        }
+
+        /* Dropdown heading style */
+        .dropdown-heading {
+            color: #10b981;
+            font-weight: 600;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.75rem;
+        }
+
+        /* Mobile dropdown icon rotation */
+        .dropdown-arrow {
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown-arrow.rotate-180 {
+            transform: rotate(180deg);
+        }
+    </style>
+
+<nav class="glass-nav shadow-lg fixed top-0 w-full z-50">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div class="flex h-16 justify-between items-center">
-                <!-- Mobile menu button -->
-                <div class="sm:hidden flex items-center">
-                    <button id="mobile-menu-btn" class="text-gray-400 hover:text-white hover:bg-gray-700 p-2 rounded-md"
-                        aria-label="Toggle menu" aria-expanded="false">
-                        <i id="menu-icon" class="bi bi-list text-3xl"></i>
-                        <i id="close-icon" class="bi bi-x hidden text-3xl"></i>
-                    </button>
+                <!-- Logo (Left) -->
+                <div class="text-white font-bold text-lg sm:text-xl flex-shrink-0">
+                    <a href="{% url 'main:home' %}" class="logo-glow hover:text-green-400 transition-colors duration-300">LOGO</a>
                 </div>
 
-                <!-- Logo -->
-                <div class="text-white font-bold text-lg sm:text-xl">
-                    <a href="{% url 'main:home' %}" class="hover:text-gray-300 transition-colors">LOGO</a>
-                </div>
+                <!-- Desktop Navigation (Center) -->
+                <div class="hidden sm:flex sm:items-center sm:space-x-1">
+                    <!-- Home -->
+                    <a href="/" class="nav-link px-3 py-2 text-gray-300 hover:text-white font-medium text-sm">
+                        Home
+                    </a>
 
-                <!-- Desktop Navigation -->
-                <div class="hidden sm:flex sm:items-center sm:space-x-4">
-                    <!-- File your taxes dropdown -->
+                    <!-- Service Dropdown -->
                     <div class="relative group">
-                        <button class="px-4 py-2 text-gray-300 hover:text-white font-medium flex items-center space-x-1"
+                        <button class="nav-link px-3 py-2 text-gray-300 hover:text-white font-medium flex items-center space-x-1 text-sm"
                             aria-expanded="false" aria-haspopup="true">
                             <span>Service</span>
-                            <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none"
+                            <svg class="w-3 h-3 transition-transform group-hover:rotate-180 duration-300" fill="none"
                                 stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M19 9l-7 7-7-7" />
                             </svg>
                         </button>
 
-                        <div
-                            class="absolute left-0 mt-2 w-100 bg-white shadow-lg rounded-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
-                            <div class="p-6">
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="dropdown-menu absolute left-0 mt-2 w-96 bg-white/95 backdrop-blur-md shadow-2xl rounded-xl border border-gray-200/50 z-50">
+                            <div class="p-5">
+                                <div class="grid grid-cols-2 gap-6">
                                     <!-- Column 1 -->
                                     <div>
-                                        <h3 class="text-sm font-bold text-gray-900 mb-3">Start Your Business</h3>
+                                        <h3 class="dropdown-heading">Start Your Business</h3>
                                         <a href="{% url 'main:register_agent' %}"
-                                            class="block py-2 text-gray-800 hover:text-blue-600 transition-colors">
+                                            class="dropdown-item block py-2 text-gray-700 text-sm">
                                             Register Agent
                                         </a>
                                         <a href="{% url 'main:company_formation' %}"
-                                            class="block py-2 text-gray-800 hover:text-blue-600 transition-colors">
+                                            class="dropdown-item block py-2 text-gray-700 text-sm">
                                             Company Formation
                                         </a>
                                         <a href="{% url 'main:ein_registration' %}"
-                                            class="block py-2 text-gray-800 hover:text-blue-600 transition-colors">
+                                            class="dropdown-item block py-2 text-gray-700 text-sm">
                                             EIN Registration
                                         </a>
                                     </div>
 
                                     <!-- Column 2 -->
                                     <div>
-                                        <h3 class="text-sm font-bold text-gray-900 mb-3">Manage Your Business</h3>
+                                        <h3 class="dropdown-heading">Manage Your Business</h3>
                                         <a href="{% url 'main:annual_report_filing' %}"
-                                            class="block py-2 text-gray-800 hover:text-blue-600 transition-colors">
+                                            class="dropdown-item block py-2 text-gray-700 text-sm">
                                             Annual Report Filing
                                         </a>
                                         <a href="{% url 'main:expert_taxes' %}"
-                                            class="block py-2 text-gray-800 hover:text-blue-600 transition-colors">
+                                            class="dropdown-item block py-2 text-gray-700 text-sm">
                                             Expert Taxes
                                         </a>
                                         <a href="{% url 'main:file_your_own_taxes' %}"
-                                            class="block py-2 text-gray-800 hover:text-blue-600 transition-colors">
+                                            class="dropdown-item block py-2 text-gray-700 text-sm">
                                             File Your Own Taxes
                                         </a>
                                     </div>
                                 </div>
-
-
                             </div>
                         </div>
                     </div>
 
-
-
                     <!-- Refunds & loans dropdown -->
                     <div class="relative group">
-                        <button class="px-4 py-2 text-gray-300 hover:text-white font-medium flex items-center space-x-1"
+                        <button class="nav-link px-3 py-2 text-gray-300 hover:text-white font-medium flex items-center space-x-1 text-sm"
                             aria-expanded="false" aria-haspopup="true">
                             <span>Refunds & loans</span>
-                            <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none"
+                            <svg class="w-3 h-3 transition-transform group-hover:rotate-180 duration-300" fill="none"
                                 stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M19 9l-7 7-7-7" />
                             </svg>
                         </button>
 
-                        <div
-                            class="absolute left-0 mt-2 w-64 bg-white shadow-lg rounded-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
-                            <div class="p-6">
+                        <div class="dropdown-menu absolute left-0 mt-2 w-56 bg-white/95 backdrop-blur-md shadow-2xl rounded-xl border border-gray-200/50 z-50">
+                            <div class="p-5">
                                 <a href="{% url 'main:refund_advance' %}"
-                                    class="block py-2 text-gray-800 hover:text-blue-600 transition-colors">Refund
-                                    Advance</a>
+                                    class="dropdown-item block py-2 text-gray-700 text-sm">Refund Advance</a>
                                 <a href="{% url 'main:flex_advance' %}"
-                                    class="block py-2 text-gray-800 hover:text-blue-600 transition-colors">Tax
-                                    Flex Advance</a>
-
+                                    class="dropdown-item block py-2 text-gray-700 text-sm">Tax Flex Advance</a>
                             </div>
                         </div>
                     </div>
 
-
                     <!-- Regular links -->
                     <a href="{% url 'main:price' %}"
-                        class="px-4 py-2 text-gray-300 hover:text-white font-medium transition-colors">Pricing</a>
-                    <a href="{% url 'main:account' %}" class="px-4 py-2 text-gray-300 hover:text-white font-medium transition-colors">Login</a>
+                        class="nav-link px-3 py-2 text-gray-300 hover:text-white font-medium text-sm">Pricing</a>
+                </div>
 
-                    <!-- Shop button -->
+                <!-- Login Button (Right) -->
+                <div class="hidden sm:block flex-shrink-0">
+                    <a href="{% url 'main:account' %}" 
+                        class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg font-medium text-sm transition-all duration-300 shadow-lg hover:shadow-xl">
+                        Login
+                    </a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="sm:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gray-300 hover:text-white hover:bg-white/10 p-2 rounded-lg transition-all duration-300"
+                        aria-label="Toggle menu" aria-expanded="false">
+                        <i id="menu-icon" class="bi bi-list text-2xl"></i>
+                        <i id="close-icon" class="bi bi-x hidden text-2xl"></i>
+                    </button>
                 </div>
             </div>
         </div>
 
         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="sm:hidden hidden bg-gray-800 px-4 pb-4">
-            <div class="px-4 py-3 space-y-3">
+        <div id="mobile-menu" class="sm:hidden hidden glass-nav border-t border-white/10">
+            <div class="px-4 py-3 space-y-2">
                 <!-- Service mobile dropdown -->
                 <div>
                     <button
-                        class="w-full text-left py-2 text-gray-300 font-medium flex items-center justify-between mobile-dropdown-btn"
+                        class="w-full text-left py-2 text-gray-300 font-medium flex items-center justify-between mobile-dropdown-btn text-sm hover:text-white transition-colors"
                         aria-expanded="false">
                         <span>Service</span>
-                        <svg class="w-4 h-4 transform transition-transform dropdown-arrow" fill="none" stroke="currentColor"
+                        <svg class="w-4 h-4 dropdown-arrow" fill="none" stroke="currentColor"
                             viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                         </svg>
                     </button>
                     <div class="hidden pl-4 mt-2 space-y-2 mobile-dropdown-content">
                         <div class="pb-2">
-                            <p class="text-xs font-bold text-gray-400 uppercase mb-2">Start Your Business</p>
-                            <a href="{% url 'main:register_agent' %}" class="block py-1 text-gray-400 hover:text-white transition-colors">Register Agent</a>
-                            <a href="{% url 'main:company_formation' %}" class="block py-1 text-gray-400 hover:text-white transition-colors">Company Formation</a>
-                            <a href="{% url 'main:ein_registration' %}" class="block py-1 text-gray-400 hover:text-white transition-colors">EIN Registration</a>
+                            <p class="dropdown-heading mb-2">Start Your Business</p>
+                            <a href="{% url 'main:register_agent' %}" class="block py-1.5 text-gray-400 hover:text-green-400 transition-colors text-sm">Register Agent</a>
+                            <a href="{% url 'main:company_formation' %}" class="block py-1.5 text-gray-400 hover:text-green-400 transition-colors text-sm">Company Formation</a>
+                            <a href="{% url 'main:ein_registration' %}" class="block py-1.5 text-gray-400 hover:text-green-400 transition-colors text-sm">EIN Registration</a>
                         </div>
-                        <div class="pt-2 border-t border-gray-700">
-                            <p class="text-xs font-bold text-gray-400 uppercase mb-2">Manage Your Business</p>
-                            <a href="{% url 'main:annual_report_filing' %}" class="block py-1 text-gray-400 hover:text-white transition-colors">Annual Report Filing</a>
-                            <a href="{% url 'main:expert_taxes' %}" class="block py-1 text-gray-400 hover:text-white transition-colors">Expert Taxes</a>
-                            <a href="{% url 'main:file_your_own_taxes' %}" class="block py-1 text-gray-400 hover:text-white transition-colors">File Your Own Taxes</a>
+                        <div class="pt-2 border-t border-white/10">
+                            <p class="dropdown-heading mb-2">Manage Your Business</p>
+                            <a href="{% url 'main:annual_report_filing' %}" class="block py-1.5 text-gray-400 hover:text-green-400 transition-colors text-sm">Annual Report Filing</a>
+                            <a href="{% url 'main:expert_taxes' %}" class="block py-1.5 text-gray-400 hover:text-green-400 transition-colors text-sm">Expert Taxes</a>
+                            <a href="{% url 'main:file_your_own_taxes' %}" class="block py-1.5 text-gray-400 hover:text-green-400 transition-colors text-sm">File Your Own Taxes</a>
                         </div>
                     </div>
                 </div>
@@ -156,30 +267,31 @@
                 <!-- Refunds & loans mobile dropdown -->
                 <div>
                     <button
-                        class="w-full text-left py-2 text-gray-300 font-medium flex items-center justify-between mobile-dropdown-btn"
+                        class="w-full text-left py-2 text-gray-300 font-medium flex items-center justify-between mobile-dropdown-btn text-sm hover:text-white transition-colors"
                         aria-expanded="false">
                         <span>Refunds & loans</span>
-                        <svg class="w-4 h-4 transform transition-transform dropdown-arrow" fill="none" stroke="currentColor"
+                        <svg class="w-4 h-4 dropdown-arrow" fill="none" stroke="currentColor"
                             viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                         </svg>
                     </button>
                     <div class="hidden pl-4 mt-2 space-y-2 mobile-dropdown-content">
-                        <a href="{% url 'main:refund_advance' %}" class="block py-1 text-gray-400 hover:text-white transition-colors">Refund Advance</a>
-                        <a href="{% url 'main:flex_advance' %}" class="block py-1 text-gray-400 hover:text-white transition-colors">Tax Flex Advance</a>
+                        <a href="{% url 'main:refund_advance' %}" class="block py-1.5 text-gray-400 hover:text-green-400 transition-colors text-sm">Refund Advance</a>
+                        <a href="{% url 'main:flex_advance' %}" class="block py-1.5 text-gray-400 hover:text-green-400 transition-colors text-sm">Tax Flex Advance</a>
                     </div>
                 </div>
 
                 <!-- Regular links -->
                 <a href="{% url 'main:price' %}"
-                    class="block py-2 text-gray-300 hover:text-white font-medium transition-colors">Pricing</a>
-                <a href="{% url 'main:account' %}" class="block py-2 text-gray-300 hover:text-white font-medium transition-colors">Login</a>
+                    class="block py-2 text-gray-300 hover:text-green-400 font-medium text-sm transition-colors">Pricing</a>
+                <a href="{% url 'main:account' %}" 
+                    class="block py-2 text-gray-300 hover:text-green-400 font-medium text-sm transition-colors">Login</a>
             </div>
         </div>
     </nav>
 
     <script>
-          const btn = document.getElementById("mobile-menu-btn");
+        const btn = document.getElementById("mobile-menu-btn");
         const menu = document.getElementById("mobile-menu");
         const menuIcon = document.getElementById("menu-icon");
         const closeIcon = document.getElementById("close-icon");
@@ -207,6 +319,7 @@
             });
         });
 
+        // Close mobile menu when clicking outside
         document.addEventListener("click", (e) => {
             if (!btn.contains(e.target) && !menu.contains(e.target)) {
                 menu.classList.add("hidden");
@@ -215,6 +328,7 @@
             }
         });
 
+        // Close mobile menu on window resize
         window.addEventListener("resize", () => {
             if (window.innerWidth >= 640) {
                 menu.classList.add("hidden");
@@ -222,8 +336,4 @@
                 closeIcon.classList.add("hidden");
             }
         });
-
     </script>
-</body>
-
-</html>

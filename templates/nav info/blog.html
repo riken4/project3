@@ -4,64 +4,124 @@
 {% block title %}Blog{% endblock %}
 
 {% block content %}
-<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-    <h1 class="text-4xl font-bold text-gray-900 mb-8">Latest Blogs</h1>
 
+<!-- Full Screen Header Section -->
+{% if blog_page %}
+<section class="relative h-screen w-full overflow-hidden">
+    {% if blog_page.image %}
+    <!-- Background Image with inline style -->
+    <div class="absolute inset-0 bg-cover bg-center bg-no-repeat" 
+         style="background-image: url('{{ blog_page.image.url }}');">
+    </div>
+    <!-- Overlay -->
+    <div class="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black/60"></div>
+    {% else %}
+    <div class="absolute inset-0 bg-gradient-to-br from-gray-800 to-gray-900"></div>
+    {% endif %}
+
+    <!-- Header Content -->
+    <div class="relative h-full flex items-center justify-center px-4 sm:px-6 lg:px-8 z-10">
+        <div class="max-w-4xl text-center text-white">
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 drop-shadow-lg">
+                {{ blog_page.title }}
+            </h1>
+            <p class="text-lg sm:text-xl md:text-2xl text-gray-100 drop-shadow-md">
+                {{ blog_page.description }}
+            </p>
+        </div>
+    </div>
+
+    <!-- Scroll Indicator -->
+    <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce z-10">
+        <svg class="w-6 h-6 text-white drop-shadow-lg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+        </svg>
+    </div>
+</section>
+{% endif %}
+
+<!-- Blog Listings Section -->
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <h2 class="text-3xl font-bold text-gray-900 mb-8">Latest Blogs</h2>
+
+    {% if blog %}
     <div class="grid gap-8">
-        <a href="{% url 'main:blog_detail' %}">
-            <div class="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md flex flex-col md:flex-row">
-                <img src="{% static 'image/bg1.jpg' %}" alt="Credit card"
-                    class="w-full h-[200px] md:h-[350px] md:w-1/2 object-cover">
+        <!-- Featured Blog (First Blog) -->
+        {% with blog.first as featured %}
+        {% if featured %}
+        <a href="{% url 'main:blog_detail' featured.id %}" class="group">
+            <div class="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col md:flex-row">
+                {% if featured.image %}
+                <img src="{{ featured.image.url }}" alt="{{ featured.title }}"
+                    class="w-full h-[200px] md:h-[350px] md:w-1/2 object-cover group-hover:scale-105 transition-transform duration-300">
+                {% else %}
+                <div class="w-full h-[200px] md:h-[350px] md:w-1/2 bg-gradient-to-br from-gray-200 to-gray-300"></div>
+                {% endif %}
 
                 <div class="p-4 md:p-6 flex flex-col md:w-1/2">
                     <span class="text-xs font-semibold text-gray-500 uppercase">
-                        Lorem
+                        {{ featured.author }}
                     </span>
 
-                    <h2 class="text-lg md:text-xl font-bold text-gray-900 mt-2 mb-3">
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                    <h2 class="text-lg md:text-xl font-bold text-gray-900 mt-2 mb-3 group-hover:text-blue-600 transition-colors">
+                        {{ featured.title }}
                     </h2>
 
                     <p class="text-sm text-gray-600 mb-3 line-clamp-3">
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
-                        has
-                        been the industry's standard dummy text ever since the 1500s, when an unknown printer
-                        took a
-                        galley of type and scrambled it to make a type specimen book. It has survived not only
-                        five
-                        centuries, but also the leap into electronic typesetting, remaining essentially
-                        unchanged.
+                        {{ featured.description }}
                     </p>
 
-                    <p class="text-xs md:text-sm text-gray-600">
-                        lomre • 25 Jan 2022
+                    <p class="text-xs md:text-sm text-gray-600 mt-auto">
+                        {{ featured.author }} • {{ featured.created_at|date:"d M Y" }}
                     </p>
                 </div>
             </div>
         </a>
+        {% endif %}
+        {% endwith %}
 
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            {% for i in "123"|make_list %}
-            <a href="{% url 'main:blog_detail' %}">
-                <div class="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md">
-                    <img src="{% static 'image/bg4.jpg' %}" alt="Mobile banking"
-                        class="w-full h-32 object-cover">
-                    <div class="p-4 ">
-                        <span class="text-xs font-semibold text-gray-500 uppercase">Lorem</span>
-                        <h3 class="text-sm font-bold text-gray-900 mt-2 mb-2 line-clamp-2">Lorem Ipsum is simply
-                            dummy text of the printing and typesetting industry....</h3>
-                        <div class="flex items-center gap-2 ">
-                            <p class="text-xs text-gray-600">Lorem</p>
-                            <p class="text-xs text-gray-600">• 25 Jan 2022</p>
+        <!-- Other Blogs Grid -->
+        {% if blog|length > 1 %}
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {% for post in blog|slice:"1:" %}
+            <a href="{% url 'main:blog_detail' post.id %}" class="group">
+                <div class="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300">
+                    {% if post.image %}
+                    <img src="{{ post.image.url }}" alt="{{ post.title }}"
+                        class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300">
+                    {% else %}
+                    <div class="w-full h-48 bg-gradient-to-br from-gray-200 to-gray-300"></div>
+                    {% endif %}
+                    
+                    <div class="p-4">
+                        <span class="text-xs font-semibold text-gray-500 uppercase">
+                            {{ post.author }}
+                        </span>
+                        
+                        <h3 class="text-sm font-bold text-gray-900 mt-2 mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors">
+                            {{ post.title }}
+                        </h3>
+                        
+                        <p class="text-xs text-gray-600 mb-2 line-clamp-2">
+                            {{ post.description }}
+                        </p>
+                        
+                        <div class="flex items-center gap-2">
+                            <p class="text-xs text-gray-600">{{ post.author }}</p>
+                            <p class="text-xs text-gray-600">• {{ post.created_at|date:"d M Y" }}</p>
                         </div>
-
                     </div>
                 </div>
             </a>
-            {%endfor%}
-                    </div>
+            {% endfor %}
+        </div>
+        {% endif %}
     </div>
-
+    {% else %}
+    <div class="text-center py-12">
+        <p class="text-gray-500 text-lg">No blogs available yet.</p>
+    </div>
+    {% endif %}
 </section>
 
 {% endblock %}

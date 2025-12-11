@@ -1,0 +1,728 @@
+{% extends 'dashboard/admin_base/admin_base.html' %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f8f9fa;
+        }
+
+        .dashboard-container {
+            padding: 0;
+        }
+
+        .header {
+            background: white;
+            padding: 25px 30px;
+            border-radius: 16px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            color: #2d3748;
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .notification-btn, .profile-btn {
+            width: 45px;
+            height: 45px;
+            border-radius: 12px;
+            border: none;
+            background: #f7fafc;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .notification-btn:hover, .profile-btn:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            width: 8px;
+            height: 8px;
+            background: #f56565;
+            border-radius: 50%;
+        }
+
+        .org-details {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 25px;
+            border-radius: 16px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .org-details h3 {
+            margin-bottom: 15px;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .org-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .org-info-item {
+            background: rgba(255,255,255,0.1);
+            padding: 15px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+
+        .org-info-item label {
+            font-size: 12px;
+            opacity: 0.8;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .org-info-item p {
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 16px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+        }
+
+        .stat-card:nth-child(1)::before { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .stat-card:nth-child(2)::before { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+        .stat-card:nth-child(3)::before { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+        .stat-card:nth-child(4)::before { background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); }
+        .stat-card:nth-child(5)::before { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); }
+        .stat-card:nth-child(6)::before { background: linear-gradient(135deg, #30cfd0 0%, #330867 100%); }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .stat-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        .stat-card:nth-child(1) .stat-icon {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .stat-card:nth-child(2) .stat-icon {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+
+        .stat-card:nth-child(3) .stat-icon {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+        }
+
+        .stat-card:nth-child(4) .stat-icon {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            color: white;
+        }
+
+        .stat-card:nth-child(5) .stat-icon {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            color: white;
+        }
+
+        .stat-card:nth-child(6) .stat-icon {
+            background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);
+            color: white;
+        }
+
+        .stat-value {
+            font-size: 32px;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            color: #718096;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .stat-change {
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .stat-change.positive {
+            color: #48bb78;
+        }
+
+        .stat-change.negative {
+            color: #f56565;
+        }
+
+        .charts-section {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .chart-card {
+            background: white;
+            padding: 25px;
+            border-radius: 16px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .chart-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #2d3748;
+        }
+
+        .chart-filter {
+            padding: 8px 16px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 14px;
+        }
+
+        .chart-filter:hover {
+            border-color: #667eea;
+        }
+
+        .chart-placeholder {
+            height: 300px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #718096;
+            font-size: 14px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .service-card {
+            background: white;
+            padding: 20px;
+            border-radius: 16px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .service-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .service-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #2d3748;
+        }
+
+        .service-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        .service-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+        }
+
+        .service-stat {
+            text-align: center;
+        }
+
+        .service-stat-value {
+            font-size: 20px;
+            font-weight: 700;
+            color: #2d3748;
+        }
+
+        .service-stat-label {
+            font-size: 11px;
+            color: #718096;
+            margin-top: 3px;
+        }
+
+        .recent-activity {
+            background: white;
+            padding: 25px;
+            border-radius: 16px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .activity-item {
+            display: flex;
+            gap: 15px;
+            padding: 15px 0;
+            border-bottom: 1px solid #f7fafc;
+        }
+
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+
+        .activity-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .activity-icon.success { background: #c6f6d5; color: #22543d; }
+        .activity-icon.warning { background: #fef5e7; color: #975a16; }
+        .activity-icon.info { background: #bee3f8; color: #2c5282; }
+        .activity-icon.danger { background: #fed7d7; color: #742a2a; }
+
+        .activity-details h4 {
+            color: #2d3748;
+            font-size: 14px;
+            margin-bottom: 3px;
+        }
+
+        .activity-details p {
+            color: #718096;
+            font-size: 12px;
+        }
+
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .action-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        @media (max-width: 1200px) {
+            .charts-section {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Organization Details -->
+        <div class="org-details">
+            <h3><i class="fas fa-building"></i> Organization Details</h3>
+            <div class="org-info">
+                <div class="org-info-item">
+                    <label>Company Name</label>
+                    <p>TaxPro Solutions LLC</p>
+                </div>
+                <div class="org-info-item">
+                    <label>EIN Number</label>
+                    <p>XX-XXXXXXX</p>
+                </div>
+                <div class="org-info-item">
+                    <label>Registration Date</label>
+                    <p>January 15, 2020</p>
+                </div>
+                <div class="org-info-item">
+                    <label>Status</label>
+                    <p>Active & Verified</p>
+                </div>
+                <div class="org-info-item">
+                    <label>Business Type</label>
+                    <p>Tax & Financial Services</p>
+                </div>
+                <div class="org-info-item">
+                    <label>Location</label>
+                    <p>New York, USA</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Key Insights - Stats Grid -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="stat-value">2,847</div>
+                <div class="stat-label">Total Clients</div>
+                <div class="stat-change positive">
+                    <i class="fas fa-arrow-up"></i> 12.5% from last month
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-building"></i>
+                </div>
+                <div class="stat-value">456</div>
+                <div class="stat-label">Companies Registered</div>
+                <div class="stat-change positive">
+                    <i class="fas fa-arrow-up"></i> 8.3% from last month
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-file-invoice-dollar"></i>
+                </div>
+                <div class="stat-value">1,234</div>
+                <div class="stat-label">Tax Returns Filed</div>
+                <div class="stat-change positive">
+                    <i class="fas fa-arrow-up"></i> 15.7% from last month
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-money-bill-wave"></i>
+                </div>
+                <div class="stat-value">$428K</div>
+                <div class="stat-label">Refunds Processed</div>
+                <div class="stat-change positive">
+                    <i class="fas fa-arrow-up"></i> 22.1% from last month
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-blog"></i>
+                </div>
+                <div class="stat-value">89</div>
+                <div class="stat-label">Blog Posts Published</div>
+                <div class="stat-change positive">
+                    <i class="fas fa-arrow-up"></i> 5 new this month
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-question-circle"></i>
+                </div>
+                <div class="stat-value">156</div>
+                <div class="stat-label">FAQ Articles</div>
+                <div class="stat-change positive">
+                    <i class="fas fa-arrow-up"></i> 12 updated recently
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts Section -->
+        <div class="charts-section">
+            <div class="chart-card">
+                <div class="chart-header">
+                    <h3 class="chart-title">Monthly Revenue Trend</h3>
+                    <select class="chart-filter">
+                        <option>Last 6 Months</option>
+                        <option>Last 12 Months</option>
+                        <option>Year to Date</option>
+                    </select>
+                </div>
+                <div class="chart-placeholder">
+                    📈 Revenue Chart - Integration Point
+                </div>
+            </div>
+
+            <div class="chart-card">
+                <div class="chart-header">
+                    <h3 class="chart-title">Service Distribution</h3>
+                </div>
+                <div class="chart-placeholder" style="height: 300px;">
+                    🎯 Services Pie Chart - Integration Point
+                </div>
+            </div>
+        </div>
+
+        <!-- Service Performance Cards -->
+        <h3 class="chart-title" style="margin-bottom: 20px;">Service Performance</h3>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-header">
+                    <h4 class="service-title">Business Formation</h4>
+                    <div class="service-icon" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                </div>
+                <div class="service-stats">
+                    <div class="service-stat">
+                        <div class="service-stat-value">234</div>
+                        <div class="service-stat-label">FORMATIONS</div>
+                    </div>
+                    <div class="service-stat">
+                        <div class="service-stat-value">156</div>
+                        <div class="service-stat-label">AGENTS</div>
+                    </div>
+                    <div class="service-stat">
+                        <div class="service-stat-value">89</div>
+                        <div class="service-stat-label">EIN FILED</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-header">
+                    <h4 class="service-title">Tax Services</h4>
+                    <div class="service-icon" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white;">
+                        <i class="fas fa-calculator"></i>
+                    </div>
+                </div>
+                <div class="service-stats">
+                    <div class="service-stat">
+                        <div class="service-stat-value">567</div>
+                        <div class="service-stat-label">EXPERT FILING</div>
+                    </div>
+                    <div class="service-stat">
+                        <div class="service-stat-value">345</div>
+                        <div class="service-stat-label">SELF FILING</div>
+                    </div>
+                    <div class="service-stat">
+                        <div class="service-stat-value">123</div>
+                        <div class="service-stat-label">ANNUAL REPORTS</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-header">
+                    <h4 class="service-title">Refund & Loans</h4>
+                    <div class="service-icon" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: white;">
+                        <i class="fas fa-hand-holding-usd"></i>
+                    </div>
+                </div>
+                <div class="service-stats">
+                    <div class="service-stat">
+                        <div class="service-stat-value">289</div>
+                        <div class="service-stat-label">REFUND ADV</div>
+                    </div>
+                    <div class="service-stat">
+                        <div class="service-stat-value">178</div>
+                        <div class="service-stat-label">TAX FLEX</div>
+                    </div>
+                    <div class="service-stat">
+                        <div class="service-stat-value">$1.2M</div>
+                        <div class="service-stat-label">TOTAL VALUE</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Activity -->
+        <div class="recent-activity">
+            <h3 class="chart-title" style="margin-bottom: 20px;">Recent Activity</h3>
+            
+            <div class="activity-item">
+                <div class="activity-icon success">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <div class="activity-details">
+                    <h4>New Company Registration Completed</h4>
+                    <p>ABC Corp LLC registered successfully - 2 hours ago</p>
+                </div>
+            </div>
+
+            <div class="activity-item">
+                <div class="activity-icon info">
+                    <i class="fas fa-file-alt"></i>
+                </div>
+                <div class="activity-details">
+                    <h4>Tax Return Filed - Expert Service</h4>
+                    <p>Johnson & Associates completed filing - 3 hours ago</p>
+                </div>
+            </div>
+
+            <div class="activity-item">
+                <div class="activity-icon success">
+                    <i class="fas fa-dollar-sign"></i>
+                </div>
+                <div class="activity-details">
+                    <h4>Refund Advance Approved</h4>
+                    <p>$15,000 advance approved for Smith Enterprises - 5 hours ago</p>
+                </div>
+            </div>
+
+            <div class="activity-item">
+                <div class="activity-icon warning">
+                    <i class="fas fa-exclamation-triangle"></i>
+                </div>
+                <div class="activity-details">
+                    <h4>Annual Report Due Soon</h4>
+                    <p>XYZ Industries - Due in 5 days</p>
+                </div>
+            </div>
+
+            <div class="activity-item">
+                <div class="activity-icon info">
+                    <i class="fas fa-blog"></i>
+                </div>
+                <div class="activity-details">
+                    <h4>New Blog Post Published</h4>
+                    <p>"Tax Planning Strategies for 2024" - 1 day ago</p>
+                </div>
+            </div>
+
+            <div class="activity-item">
+                <div class="activity-icon success">
+                    <i class="fas fa-user-plus"></i>
+                </div>
+                <div class="activity-details">
+                    <h4>New Team Member Added</h4>
+                    <p>Sarah Johnson joined as Senior Tax Consultant - 2 days ago</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div style="margin-top: 30px;">
+            <h3 class="chart-title" style="margin-bottom: 20px;">Quick Actions</h3>
+            <div class="quick-actions">
+                <button class="action-btn">
+                    <i class="fas fa-plus-circle"></i>
+                    Add New Client
+                </button>
+                <button class="action-btn">
+                    <i class="fas fa-building"></i>
+                    Register Company
+                </button>
+                <button class="action-btn">
+                    <i class="fas fa-file-invoice"></i>
+                    File Tax Return
+                </button>
+                <button class="action-btn">
+                    <i class="fas fa-edit"></i>
+                    Create Blog Post
+                </button>
+                <button class="action-btn">
+                    <i class="fas fa-question"></i>
+                    Add FAQ
+                </button>
+                <button class="action-btn">
+                    <i class="fas fa-chart-bar"></i>
+                    Generate Report
+                </button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+{% endblock %}

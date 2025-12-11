@@ -1,35 +1,67 @@
 <footer class="bg-gray-900 text-gray-300 py-10 px-6 ">
   <div class="max-w-7xl mx-auto flex flex-col md:flex-row md:justify-between gap-10 md:gap-50">
+
     <div class="md:w-1/4 mb-6">
-    <div class="flex text-2xl items-center mb-4">
+      <div class="flex text-2xl items-center mb-4">
         <i class="bi bi-telephone mr-2"></i>
         <h4 class="font-bold mb-3 text-gray-300">Have Question? Reach us</h4>
-    </div>
-    <p class="text-lg mb-1">+977 984125489</p>
-    <p class="mb-1">Email: <a href=""
-            class="text-gray-500 hover:text-orange-700 ">tandukarsamaj@gmail.com</a></p>
-    <p class="mb-1"><a href="#" class="text-gray-500 hover:text-orange-700 ">Chat on WhatsApp</a></p>
-    <div>
+      </div>
+
+      <p class="text-lg mb-1">+977 {{ org.whatsapp_number }}</p>
+
+      <p class="mb-1">
+        Email:
+        <a href="mailto:{{ org.contact_email }}"
+           class="text-gray-500 hover:text-orange-700 ">
+          {{ org.contact_email }}
+        </a>
+      </p>
+
+      <p class="mb-1">
+        <a href="https://wa.me/{{ org.whatsapp_number }}"
+           class="text-gray-500 hover:text-orange-700 ">
+          Chat on WhatsApp
+        </a>
+      </p>
+
+      <div>
         <span class="mr-2">Follow Us:</span>
         <div class="flex space-x-2 mt-1 ">
-            <a class="tech-icon text-gray-600 hover:text-white  pr-2" href="" title="facebook">
-                <i class="bi bi-facebook text-xl"></i>
-            </a>
-            <a class="text-gray-600 hover:text-white  pr-2" href="" title="instagram">
-                <i class="bi bi-instagram text-xl"></i>
-            </a>
-            <div class="text-gray-600 hover:text-white  pr-2" title="whatsapp">
-                <i class="bi bi-whatsapp text-xl"></i>
-            </div>
-            <a class="text-gray-600 hover:text-white  pr-2" href="" title="tiktok">
-                <i class="bi bi-tiktok text-xl"></i>
-            </a>
+
+          {% if org.facebook_link %}
+          <a class="tech-icon text-gray-600 hover:text-white pr-2"
+             href="{{ org.facebook_link }}" target="_blank" title="facebook">
+            <i class="bi bi-facebook text-xl"></i>
+          </a>
+          {% endif %}
+
+          {% if org.instagram_link %}
+          <a class="text-gray-600 hover:text-white pr-2"
+             href="{{ org.instagram_link }}" target="_blank" title="instagram">
+            <i class="bi bi-instagram text-xl"></i>
+          </a>
+          {% endif %}
+
+          {% if org.twitter_link %}
+          <div class="text-gray-600 hover:text-white pr-2" title="whatsapp">
+            <i class="bi bi-whatsapp text-xl"></i>
+          </div>
+          {% endif %}
+
+          {% if org.linkedin_link %}
+          <a class="text-gray-600 hover:text-white pr-2"
+             href="{{ org.linkedin_link }}" target="_blank" title="tiktok">
+            <i class="bi bi-tiktok text-xl"></i>
+          </a>
+          {% endif %}
+
         </div>
+      </div>
     </div>
-</div>
+
     <div class="flex-1 grid grid-cols-2 md:grid-cols-3 gap-8 ">
      
-            <div>
+      <div>
         <h3 class="font-semibold mb-3 text-gray-300">Company</h3>
         <ul class="space-y-2 text-gray-500">
           <li><a href="{% url 'main:about' %}" class="hover:text-orange-700">About</a></li>
@@ -37,6 +69,7 @@
           <li><a href="{% url 'main:team' %}" class="hover:text-orange-700">Team</a></li>
         </ul>
       </div>
+
       <div>
         <h3 class="font-semibold mb-3 text-gray-300">Legal</h3>
         <ul class="space-y-2 text-gray-500">
@@ -45,8 +78,13 @@
           <li><a href="{% url 'main:privacy_policy' %}" class="hover:text-orange-700">Privacy policy</a></li>
         </ul>
       </div>
+
     </div>
   </div>
+
   <hr class="my-8 border-gray-700" />
-  <div class="text-center text-sm text-gray-500">© 2024 Your Company, Inc. All rights reserved.</div>
+
+  <div class="text-center text-sm text-gray-500">
+    © {% now "Y" %} {{ org.organization_name }}. All rights reserved.
+  </div>
 </footer>

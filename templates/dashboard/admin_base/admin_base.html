@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Base</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f8f9fa;
+            overflow-x: hidden;
+        }
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            height: 100vh;
+            width: 280px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px 0;
+            overflow-y: auto;
+            box-shadow: 4px 0 20px rgba(0,0,0,0.1);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .sidebar::-webkit-scrollbar-thumb {
+            background: rgba(255,255,255,0.3);
+            border-radius: 10px;
+        }
+
+        .logo {
+            padding: 0 25px 30px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 20px;
+        }
+
+        .logo h2 {
+            color: white;
+            font-size: 24px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i {
+            background: rgba(255,255,255,0.2);
+            padding: 10px;
+            border-radius: 12px;
+        }
+
+        .menu-section {
+            margin-bottom: 25px;
+        }
+
+        .section-header {
+            padding: 15px 25px 10px;
+            color: rgba(255,255,255,0.5);
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-indicator {
+            width: 3px;
+            height: 12px;
+            border-radius: 2px;
+            background: rgba(255,255,255,0.5);
+        }
+
+        .menu-item {
+            padding: 12px 25px;
+            color: rgba(255,255,255,0.8);
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 15px;
+        }
+
+        .menu-item:hover {
+            background: rgba(255,255,255,0.1);
+            color: white;
+        }
+
+        .menu-item.active {
+            background: rgba(255,255,255,0.15);
+            color: white;
+            border-left: 4px solid white;
+        }
+
+        .menu-item i {
+            width: 20px;
+            text-align: center;
+        }
+
+        .submenu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background: rgba(0,0,0,0.1);
+        }
+
+        .submenu.open {
+            max-height: 500px;
+        }
+
+        .submenu-item {
+            padding: 10px 25px 10px 60px;
+            color: rgba(255,255,255,0.7);
+            transition: all 0.3s;
+            font-size: 14px;
+        }
+
+        .submenu-item:hover {
+            background: rgba(255,255,255,0.1);
+            color: white;
+        }
+
+        .arrow {
+            margin-left: auto;
+            transition: transform 0.3s;
+            font-size: 12px;
+        }
+
+        .arrow.rotate {
+            transform: rotate(90deg);
+        }
+
+        .main-content {
+            margin-left: 280px;
+            padding: 30px;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: white;
+            padding: 25px 30px;
+            border-radius: 16px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            color: #2d3748;
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .notification-btn, .profile-btn {
+            width: 45px;
+            height: 45px;
+            border-radius: 12px;
+            border: none;
+            background: #f7fafc;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .notification-btn:hover, .profile-btn:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            width: 8px;
+            height: 8px;
+            background: #f56565;
+            border-radius: 50%;
+        }
+
+        .profile-dropdown {
+            position: relative;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 55px;
+            right: 0;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            min-width: 220px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .dropdown-menu.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-header {
+            padding: 20px;
+            border-bottom: 1px solid #f7fafc;
+        }
+
+        .dropdown-user-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .dropdown-avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 18px;
+        }
+
+        .dropdown-user-details h4 {
+            color: #2d3748;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .dropdown-user-details p {
+            color: #718096;
+            font-size: 12px;
+        }
+
+        .dropdown-item {
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #4a5568;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .dropdown-item:hover {
+            background: #f7fafc;
+            color: #667eea;
+        }
+
+        .dropdown-item i {
+            width: 20px;
+            text-align: center;
+            font-size: 16px;
+        }
+
+        .dropdown-divider {
+            height: 1px;
+            background: #f7fafc;
+            margin: 5px 0;
+        }
+
+        .dropdown-item.logout {
+            color: #f56565;
+        }
+
+        .dropdown-item.logout:hover {
+            background: #fff5f5;
+            color: #c53030;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 70px;
+            }
+
+            .sidebar .menu-text,
+            .sidebar .arrow,
+            .logo h2 span,
+            .section-header span {
+                display: none;
+            }
+
+            .main-content {
+                margin-left: 70px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="logo">
+            <h2><i class="fas fa-building"></i> <span>TaxPro Admin</span></h2>
+        </div>
+        
+        <!-- MAIN SECTION -->
+        <div class="menu-section">
+            <div class="section-header">
+                <div class="section-indicator"></div>
+                <span>Main</span>
+            </div>
+            <div class="menu-item active">
+                <i class="fas fa-chart-line"></i>
+                <span class="menu-text">Dashboard</span>
+            </div>
+        </div>
+
+        <!-- BUSINESS SERVICES SECTION -->
+        <div class="menu-section">
+            <div class="section-header">
+                <div class="section-indicator" style="background: #43e97b;"></div>
+                <span>Business Services</span>
+            </div>
+            
+            <div class="menu-item" onclick="toggleSubmenu('start-business')">
+                <i class="fas fa-rocket"></i>
+                <span class="menu-text">Start Your Business</span>
+                <i class="fas fa-chevron-right arrow" id="start-business-arrow"></i>
+            </div>
+            <div class="submenu" id="start-business-submenu">
+                <div class="submenu-item">Register Agent</div>
+                <div class="submenu-item">Company Formation</div>
+                <div class="submenu-item">EIN Registration</div>
+            </div>
+
+            <div class="menu-item" onclick="toggleSubmenu('manage-business')">
+                <i class="fas fa-cogs"></i>
+                <span class="menu-text">Manage Your Business</span>
+                <i class="fas fa-chevron-right arrow" id="manage-business-arrow"></i>
+            </div>
+            <div class="submenu" id="manage-business-submenu">
+                <div class="submenu-item">Annual Report Filing</div>
+                <div class="submenu-item">Expert Taxes</div>
+                <div class="submenu-item">File Your Own Taxes</div>
+            </div>
+        </div>
+
+        <!-- FINANCIAL SERVICES SECTION -->
+        <div class="menu-section">
+            <div class="section-header">
+                <div class="section-indicator" style="background: #4facfe;"></div>
+                <span>Financial Services</span>
+            </div>
+            
+            <div class="menu-item" onclick="toggleSubmenu('refund-loans')">
+                <i class="fas fa-money-bill-wave"></i>
+                <span class="menu-text">Refund & Loans</span>
+                <i class="fas fa-chevron-right arrow" id="refund-loans-arrow"></i>
+            </div>
+            <div class="submenu" id="refund-loans-submenu">
+                <div class="submenu-item">Refund Advance</div>
+                <div class="submenu-item">Tax Flex Advance</div>
+            </div>
+        </div>
+<!-- CONTENT MANAGEMENT SECTION -->
+<div class="menu-section">
+    <div class="section-header">
+        <div class="section-indicator" style="background: #f093fb;"></div>
+        <span>Content Management</span>
+    </div>
+
+    <!-- Home -->
+    <a href="{% url 'dashboard:admin_dashboard'%}" class="menu-item">
+        <i class="fas fa-home"></i>
+        <span class="menu-text">Home</span>
+    </a>
+
+    <!-- Blog -->
+    <div class="menu-item">
+        <i class="fas fa-blog"></i>
+        <span class="menu-text">Blog</span>
+    </div>
+
+    <!-- FAQs -->
+    <div class="menu-item">
+        <i class="fas fa-question-circle"></i>
+        <span class="menu-text">FAQs</span>
+    </div>
+
+    <!-- Team -->
+    <div class="menu-item">
+        <i class="fas fa-users"></i>
+        <span class="menu-text">Team</span>
+    </div>
+</div>
+
+
+        <!-- LEGAL & COMPLIANCE SECTION -->
+        <div class="menu-section">
+            <div class="section-header">
+                <div class="section-indicator" style="background: #feca57;"></div>
+                <span>Legal & Compliance</span>
+            </div>
+            
+            <div class="menu-item">
+                <i class="fas fa-file-contract"></i>
+                <span class="menu-text">Terms & Conditions</span>
+            </div>
+            
+            <div class="menu-item">
+                <i class="fas fa-shield-alt"></i>
+                <span class="menu-text">Privacy Policy</span>
+            </div>
+        </div>
+
+        <!-- SETTINGS SECTION -->
+        <div class="menu-section">
+            <div class="section-header">
+                <div class="section-indicator" style="background: #ff6b6b;"></div>
+                <span>Settings</span>
+            </div>
+            
+            <div class="menu-item">
+                <i class="fas fa-building-circle-check"></i>
+                <span class="menu-text">Organization Settings</span>
+            </div>
+            
+            <div class="menu-item">
+                <i class="fas fa-tags"></i>
+                <span class="menu-text">Pricing</span>
+            </div>
+            
+            <div class="menu-item">
+                <i class="fas fa-info-circle"></i>
+                <span class="menu-text">About</span>
+            </div>
+        </div>
+    </div>
+<!-- Main Content Area -->
+<div class="main-content">
+    <!-- Header -->
+    <div class="header">
+        <h1 id="page-title">Dashboard</h1>
+        <div class="header-actions">
+            <button class="notification-btn">
+                <i class="fas fa-bell"></i>
+                <span class="notification-badge"></span>
+            </button>
+            <div class="profile-dropdown">
+                <button class="profile-btn" onclick="toggleDropdown()">
+                    <i class="fas fa-user"></i>
+                </button>
+                <div class="dropdown-menu" id="profileDropdown">
+                    <div class="dropdown-header">
+                        <div class="dropdown-user-info">
+                            <div class="dropdown-avatar">AD</div>
+                            <div class="dropdown-user-details">
+                                <h4>Admin User</h4>
+                                <p>admin@taxpro.com</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="#" class="dropdown-item">
+                        <i class="fas fa-user-circle"></i>
+                        <span>My Profile</span>
+                    </a>
+                    <a href="#" class="dropdown-item">
+                        <i class="fas fa-key"></i>
+                        <span>Change Password</span>
+                    </a>
+                    <a href="#" class="dropdown-item">
+                        <i class="fas fa-cog"></i>
+                        <span>Settings</span>
+                    </a>
+                    <div class="dropdown-divider"></div>
+
+                    <!-- Fixed Logout -->
+                    <a href="{% url 'dashboard:logout' %}" class="dropdown-item btn btn-danger d-flex align-items-center gap-2">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Logout</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        </div>
+
+        {% block content %}
+        <!-- Content will be extended here -->
+        {% endblock %}
+
+    </div>
+
+    <script>
+        function toggleSubmenu(id) {
+            const submenu = document.getElementById(id + '-submenu');
+            const arrow = document.getElementById(id + '-arrow');
+            
+            submenu.classList.toggle('open');
+            arrow.classList.toggle('rotate');
+        }
+
+        function toggleDropdown() {
+            const dropdown = document.getElementById('profileDropdown');
+            dropdown.classList.toggle('show');
+        }
+
+        // Close dropdown when clicking outside
+        window.addEventListener('click', function(e) {
+            const dropdown = document.getElementById('profileDropdown');
+            const profileBtn = document.querySelector('.profile-btn');
+            
+            if (!profileBtn.contains(e.target) && !dropdown.contains(e.target)) {
+                dropdown.classList.remove('show');
+            }
+        });
+    </script>
+</body>
+</html>
