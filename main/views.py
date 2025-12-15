@@ -210,3 +210,6 @@ def ein_payment(request):
 
 def irs_tax_filling(request):
     return render(request, 'irs_tax_filling.html')
+
+def personal_tax(request):
+    return render(request, 'personal_tax.html')

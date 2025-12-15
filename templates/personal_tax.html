@@ -1,0 +1,390 @@
+ {% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Home{% endblock %}
+{% block extra_css %}
+<style>
+
+</style>
+{% endblock %}
+
+{% block content %}
+<body class="bg-gray-50 py-8 sm:py-10 md:py-12 lg:py-14 px-3 sm:px-4 md:px-6 ">
+  <div class="max-w-7xl mx-auto">
+        <!-- Header Section -->
+        <div class="bg-white rounded-lg shadow-sm p-8 mb-8 flex items-center gap-8">
+            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=300&h=300&fit=crop" alt="Tax professional" class="w-64 h-64 rounded-lg object-cover">
+            <div class="flex-1">
+                <h2 class="text-3xl font-semibold mb-4">Get a personalized recommendation</h2>
+                <p class="text-gray-700 mb-4">How do you feel about filing your taxes this year? (1 of 3)</p>
+                <div class="flex flex-wrap gap-3 mb-6">
+                    <button class="px-4 py-2 border-2 border-gray-300 rounded-full hover:border-blue-600 hover:bg-blue-50 transition">I want to do it myself</button>
+                    <button class="px-4 py-2 border-2 border-gray-300 rounded-full hover:border-blue-600 hover:bg-blue-50 transition">I want an expert to help and review</button>
+                    <button class="px-4 py-2 border-2 border-gray-300 rounded-full hover:border-blue-600 hover:bg-blue-50 transition">I want someone to do taxes for me</button>
+                    <button class="px-4 py-2 border-2 border-gray-300 rounded-full hover:border-blue-600 hover:bg-blue-50 transition">I'm not sure</button>
+                </div>
+                <button class="bg-blue-600 text-white px-8 py-3 rounded font-semibold hover:bg-blue-700 transition">Continue</button>
+            </div>
+        </div>
+
+        <!-- Pricing Options Header -->
+        <div class="flex justify-between items-center mb-6">
+            <h3 class="text-2xl font-semibold">Explore TurboTax filing options</h3>
+            <button class="px-6 py-2 border-2 border-blue-600 text-blue-600 rounded font-semibold hover:bg-blue-50 transition">Find my price</button>
+        </div>
+
+        <!-- Pricing Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Do It Yourself Card -->
+            <div class="bg-white rounded-lg shadow-md p-6 flex flex-col">
+                <div class="flex items-center gap-2 mb-4">
+                    <span class="text-red-600 text-xl">⊗</span>
+                    <h4 class="font-bold text-lg">Do It Yourself</h4>
+                </div>
+                <p class="text-center text-gray-700 mb-4">File yourself with clear, step-by-step tools</p>
+                
+                <div class="text-center mb-4">
+                    <p class="text-gray-500 line-through text-sm">Rs0*-Rs139</p>
+                    <p class="text-4xl font-bold">Rs0*-Rs99</p>
+                    <a href="#" class="text-sm text-blue-600 underline">State additional for paid products</a>
+                </div>
+
+                <p class="text-xs text-center text-gray-600 mb-6">*~17% off liens qualify. <a href="#" class="text-blue-600 underline">Simple Form 1040 returns only</a> (no schedules, except for EITC, CTC, student loan interest, and Schedule 1 A).</p>
+
+                <button class="w-full bg-blue-600 text-white py-3 rounded font-semibold hover:bg-blue-700 transition mb-2">Start for free</button>
+                <p class="text-center text-sm text-gray-600 mb-4">Pay only when you file</p>
+
+                <div class="flex items-center justify-center gap-1 mb-4">
+                    <span class="text-yellow-400">★★★★½</span>
+                    <span class="text-sm text-gray-600">(4.5 | 159,235 reviews)</span>
+                </div>
+
+                <button class="text-blue-600 text-sm font-semibold mb-6 flex items-center justify-center gap-2">
+                    <span class="border-2 border-blue-600 rounded-full w-5 h-5 flex items-center justify-center text-xs">i</span>
+                    See how it works
+                </button>
+
+                <div class="space-y-4 text-sm">
+                    <div class="flex gap-3">
+                        <span class="text-xl">✱</span>
+                        <p>As you go, get instant answers to your tax questions with <a href="#" class="text-blue-600 underline">AI-Powered Intuit Assist</a></p>
+                    </div>
+                    <div class="flex gap-3">
+                        <span class="text-xl">👍</span>
+                        <p>CompleteCheck℠ scans your entire return for errors, ensuring <strong>100%</strong> accuracy, <a href="#" class="text-blue-600 underline">guaranteed</a></p>
+                    </div>
+                    <div class="flex gap-3">
+                        <span class="text-xl">⬆</span>
+                        <p>Import, upload, or snap a photo of your docs and we'll auto fill your info.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Expert Assist Card -->
+            <div class="bg-white rounded-lg shadow-md p-6 flex flex-col">
+                <div class="flex items-center gap-2 mb-4">
+                    <span class="text-red-600 text-xl">⊗</span>
+                    <h4 class="font-bold text-lg">Expert Assist</h4>
+                </div>
+                <p class="text-center text-gray-700 mb-4">File yourself with on-demand expert help</p>
+                
+                <div class="text-center mb-4">
+                    <p class="text-gray-500 line-through text-sm">Rs79-Rs209</p>
+                    <p class="text-4xl font-bold">Rs39-Rs159</p>
+                    <a href="#" class="text-sm text-blue-600 underline">State additional</a>
+                </div>
+
+                <div class="h-16 mb-6"></div>
+
+                <button class="w-full bg-blue-600 text-white py-3 rounded font-semibold hover:bg-blue-700 transition mb-2">Start for free</button>
+                <p class="text-center text-sm text-gray-600 mb-4">Pay only when you file</p>
+
+                <div class="flex items-center justify-center gap-1 mb-4">
+                    <span class="text-yellow-400">★★★★½</span>
+                    <span class="text-sm text-gray-600">(4.5 | 94,249 reviews)</span>
+                </div>
+
+                <button class="text-blue-600 text-sm font-semibold mb-6 flex items-center justify-center gap-2">
+                    <span class="border-2 border-blue-600 rounded-full w-5 h-5 flex items-center justify-center text-xs">i</span>
+                    See how it works
+                </button>
+
+                <div class="space-y-4 text-sm">
+                    <div class="flex gap-3">
+                        <span class="text-xl">💬</span>
+                        <p>As you go, get unlimited, on-demand advice from Intuit tax experts with an average of 12 years' experience.</p>
+                    </div>
+                    <div class="flex gap-3">
+                        <span class="text-xl">⊙</span>
+                        <p>A tax expert performs a final, <strong>100%</strong> accurate <a href="#" class="text-blue-600 underline">guaranteed review</a> of your entire return before you file.</p>
+                    </div>
+                    <div class="flex gap-3">
+                        <span class="text-xl">⊙</span>
+                        <p>Import, upload, or snap a photo of your docs and we'll auto fill your info.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Expert Full Service Card -->
+            <div class="bg-white rounded-lg shadow-md p-6 flex flex-col">
+                <div class="flex items-center gap-2 mb-4">
+                    <span class="text-red-600 text-xl">⊗</span>
+                    <h4 class="font-bold text-lg">Expert Full Service</h4>
+                </div>
+                <p class="text-center text-gray-700 mb-4">Hand off your taxes for one clear price</p>
+                
+                <div class="text-center mb-4">
+                    <p class="text-red-600 text-sm font-semibold">Limited time offer</p>
+                    <p class="text-4xl font-bold">Rs150</p>
+                    <p class="text-sm text-gray-600">Federal and state included</p>
+                </div>
+
+                <div class="h-16 mb-6"></div>
+
+                <button class="w-full bg-blue-600 text-white py-3 rounded font-semibold hover:bg-blue-700 transition mb-2">Start for free</button>
+                <p class="text-center text-sm text-gray-600 mb-4">Pay only when you file</p>
+
+                <div class="flex items-center justify-center gap-1 mb-4">
+                    <span class="text-yellow-400">★★★★★</span>
+                    <span class="text-sm text-gray-600">(4.8 | 70,386 reviews)</span>
+                </div>
+
+                <button class="text-blue-600 text-sm font-semibold mb-6 flex items-center justify-center gap-2">
+                    <span class="border-2 border-blue-600 rounded-full w-5 h-5 flex items-center justify-center text-xs">i</span>
+                    See how it works
+                </button>
+
+                <div class="space-y-4 text-sm">
+                    <div class="flex gap-3">
+                        <span class="text-xl">👤</span>
+                        <p>An Intuit tax expert matched to your situation will fully handle your taxes for you, from start to finish, and deliver on one person.</p>
+                    </div>
+                    <div class="flex gap-3">
+                        <span class="text-xl">📄</span>
+                        <p>Your tax expert will sign and file your return on your behalf only when it's <strong>100%</strong> accurate, <a href="#" class="text-blue-600 underline">guaranteed</a>.</p>
+                    </div>
+                    <div class="flex gap-3">
+                        <span class="text-xl">⊙</span>
+                        <p>From a simple W-2 to investments and self employment income, your price is just Rs150, no matter your situation.</p>
+                    </div>
+                </div>
+
+                <div class="mt-4 pt-4 border-t text-xs text-gray-600">
+                    <p>Offer applies if a TurboTax expert didn't file for you last year. Otherwise, price starts at Rs89-Rs179+, and final price varies based on the complexity of your return and the forms you have (state additional). <a href="#" class="text-blue-600 underline">Offer details</a></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Compare Filing Options Table -->
+        <div class="mt-16 mb-16">
+            <h3 class="text-3xl font-semibold text-center mb-8">Compare filing options</h3>
+            
+            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                <table class="w-full">
+                    <thead>
+                        <tr class="border-b">
+                            <th class="text-left p-4 font-semibold">What's Included:</th>
+                            <th class="p-4 text-center">
+                                <div class="text-sm text-gray-500 mb-1">Do It Yourself</div>
+                                <div class="font-semibold text-sm">File yourself with guided software</div>
+                            </th>
+                            <th class="p-4 text-center bg-blue-50">
+                                <div class="text-sm text-gray-500 mb-1">Expert Assist</div>
+                                <div class="font-semibold text-sm">File yourself with on-demand expert help</div>
+                            </th>
+                            <th class="p-4 text-center">
+                                <div class="text-sm text-gray-500 mb-1">Expert Full Service</div>
+                                <div class="font-semibold text-sm">A dedicated expert files for you, from start to finish</div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="border-b">
+                            <td class="p-4">Expert does your taxes</td>
+                            <td class="p-4 text-center"></td>
+                            <td class="p-4 text-center bg-blue-50"></td>
+                            <td class="p-4 text-center">
+                                <span class="inline-flex items-center justify-center w-6 h-6 border-2 border-blue-600 rounded-full text-blue-600">✓</span>
+                            </td>
+                        </tr>
+                        <tr class="border-b">
+                            <td class="p-4">Expert signs and files return for you</td>
+                            <td class="p-4 text-center"></td>
+                            <td class="p-4 text-center bg-blue-50"></td>
+                            <td class="p-4 text-center">
+                                <span class="inline-flex items-center justify-center w-6 h-6 border-2 border-blue-600 rounded-full text-blue-600">✓</span>
+                            </td>
+                        </tr>
+                        <tr class="border-b">
+                            <td class="p-4">Unlimited expert help</td>
+                            <td class="p-4 text-center"></td>
+                            <td class="p-4 text-center bg-blue-50">
+                                <span class="inline-flex items-center justify-center w-6 h-6 border-2 border-blue-600 rounded-full text-blue-600">✓</span>
+                            </td>
+                            <td class="p-4 text-center">
+                                <span class="inline-flex items-center justify-center w-6 h-6 border-2 border-blue-600 rounded-full text-blue-600">✓</span>
+                            </td>
+                        </tr>
+                        <tr class="border-b">
+                            <td class="p-4">Final expert review</td>
+                            <td class="p-4 text-center"></td>
+                            <td class="p-4 text-center bg-blue-50">
+                                <span class="inline-flex items-center justify-center w-6 h-6 border-2 border-blue-600 rounded-full text-blue-600">✓</span>
+                            </td>
+                            <td class="p-4 text-center">
+                                <span class="inline-flex items-center justify-center w-6 h-6 border-2 border-blue-600 rounded-full text-blue-600">✓</span>
+                            </td>
+                        </tr>
+                        <tr class="border-b">
+                            <td class="p-4">Year round expert support</td>
+                            <td class="p-4 text-center"></td>
+                            <td class="p-4 text-center bg-blue-50">
+                                <span class="inline-flex items-center justify-center w-6 h-6 border-2 border-blue-600 rounded-full text-blue-600">✓</span>
+                            </td>
+                            <td class="p-4 text-center">
+                                <span class="inline-flex items-center justify-center w-6 h-6 border-2 border-blue-600 rounded-full text-blue-600">✓</span>
+                            </td>
+                        </tr>
+                        <tr class="border-b">
+                            <td class="p-4">Guaranteed accuracy</td>
+                            <td class="p-4 text-center">
+                                <span class="inline-flex items-center justify-center w-6 h-6 border-2 border-blue-600 rounded-full text-blue-600">✓</span>
+                            </td>
+                            <td class="p-4 text-center bg-blue-50">
+                                <span class="inline-flex items-center justify-center w-6 h-6 border-2 border-blue-600 rounded-full text-blue-600">✓</span>
+                            </td>
+                            <td class="p-4 text-center">
+                                <span class="inline-flex items-center justify-center w-6 h-6 border-2 border-blue-600 rounded-full text-blue-600">✓</span>
+                            </td>
+                        </tr>
+                        <tr class="border-b">
+                            <td class="p-4">Snap & import docs</td>
+                            <td class="p-4 text-center">
+                                <span class="inline-flex items-center justify-center w-6 h-6 border-2 border-blue-600 rounded-full text-blue-600">✓</span>
+                            </td>
+                            <td class="p-4 text-center bg-blue-50">
+                                <span class="inline-flex items-center justify-center w-6 h-6 border-2 border-blue-600 rounded-full text-blue-600">✓</span>
+                            </td>
+                            <td class="p-4 text-center">
+                                <span class="inline-flex items-center justify-center w-6 h-6 border-2 border-blue-600 rounded-full text-blue-600">✓</span>
+                            </td>
+                        </tr>
+                        <tr class="border-b">
+                            <td class="p-4">Audit support</td>
+                            <td class="p-4 text-center">
+                                <span class="inline-flex items-center justify-center w-6 h-6 border-2 border-blue-600 rounded-full text-blue-600">✓</span>
+                            </td>
+                            <td class="p-4 text-center bg-blue-50">
+                                <span class="inline-flex items-center justify-center w-6 h-6 border-2 border-blue-600 rounded-full text-blue-600">✓</span>
+                            </td>
+                            <td class="p-4 text-center">
+                                <span class="inline-flex items-center justify-center w-6 h-6 border-2 border-blue-600 rounded-full text-blue-600">✓</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="p-4">Max refund guarantee</td>
+                            <td class="p-4 text-center">
+                                <span class="inline-flex items-center justify-center w-6 h-6 border-2 border-blue-600 rounded-full text-blue-600">✓</span>
+                            </td>
+                            <td class="p-4 text-center bg-blue-50">
+                                <span class="inline-flex items-center justify-center w-6 h-6 border-2 border-blue-600 rounded-full text-blue-600">✓</span>
+                            </td>
+                            <td class="p-4 text-center">
+                                <span class="inline-flex items-center justify-center w-6 h-6 border-2 border-blue-600 rounded-full text-blue-600">✓</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="p-4"></td>
+                            <td class="p-4 text-center">
+                                <button class="bg-blue-600 text-white px-6 py-2 rounded font-semibold hover:bg-blue-700 transition">Start for free</button>
+                            </td>
+                            <td class="p-4 text-center bg-blue-50">
+                                <button class="bg-blue-600 text-white px-6 py-2 rounded font-semibold hover:bg-blue-700 transition">Start for free</button>
+                            </td>
+                            <td class="p-4 text-center">
+                                <button class="bg-blue-600 text-white px-6 py-2 rounded font-semibold hover:bg-blue-700 transition">Start for free</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- All TurboTax Products Include Section -->
+        <div class="mt-16">
+            <h3 class="text-3xl font-semibold text-center mb-12">All TurboTax products include</h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- 100% Accuracy Card -->
+                <div class="bg-white rounded-lg shadow-md p-8 text-center">
+                    <div class="flex justify-center mb-4">
+                        <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center">
+                            <svg class="w-12 h-12 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <h4 class="text-xl font-bold mb-3">100% accuracy guaranteed</h4>
+                    <p class="text-sm text-gray-600">Our calculations are 100% accurate so your taxes will be done right, <a href="#" class="text-blue-600 underline">guaranteed</a>, or we'll pay you any IRS penalties.</p>
+                </div>
+
+                <!-- Maximum Refund Card -->
+                <div class="bg-white rounded-lg shadow-md p-8 text-center">
+                    <div class="flex justify-center mb-4">
+                        <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center">
+                            <svg class="w-12 h-12 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <h4 class="text-xl font-bold mb-3">Maximum refund guaranteed</h4>
+                    <p class="text-sm text-gray-600">We search hundreds of tax deductions to find every tax break you qualify for to get you the biggest tax refund, guaranteed.</p>
+                </div>
+
+                <!-- Complete Confidence Card -->
+                <div class="bg-white rounded-lg shadow-md p-8 text-center">
+                    <div class="flex justify-center mb-4">
+                        <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center">
+                            <svg class="w-12 h-12 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <h4 class="text-xl font-bold mb-3">File with complete confidence</h4>
+                    <p class="text-sm text-gray-600">CompleteCheck™ scans your return from beginning to end, so you can be confident it's 100% accurate before you file.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+     <section class="mt-6 py-12 px-4">
+    <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-12">
+            <h1 class="text-4xl md:text-4xl font-bold text-gray-900 mb-4">Frequently Asked Questions</h1>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-sm">
+            <div class="accordion-item border-b border-gray-200">
+                <button class="accordion-header w-full flex justify-between items-center p-6 text-left hover:bg-gray-50 transition-colors">
+                    <span class="text-lg font-semibold text-gray-900">question?</span>
+                    <span class="plus-icon text-2xl text-blue-600 font-light">+</span>
+                </button>
+                <div class="accordion-content px-6">
+                    <p class="text-gray-600 pb-6">answer.</p>
+                </div>
+            </div>
+
+            <div class="accordion-item border-b border-gray-200">
+                <button class="accordion-header w-full flex justify-between items-center p-6 text-left hover:bg-gray-50 transition-colors">
+                    <span class="text-lg font-semibold text-gray-900">question?</span>
+                    <span class="plus-icon text-2xl text-blue-600 font-light">+</span>
+                </button>
+                <div class="accordion-content px-6">
+                    <p class="text-gray-600 pb-6">answer.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+
+    {% endblock %}

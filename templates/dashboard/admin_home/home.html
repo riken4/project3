@@ -717,7 +717,7 @@
         
         // Set the form action dynamically
         const form = document.getElementById('updateStepForm');
-        form.action = `/dashboard/admin/update-howitworks-step/${id}/?section=howitworksSteps`;
+        form.action = `/dashboard/admin/update-howitworks-step/Rs{id}/?section=howitworksSteps`;
         
         // Scroll to form
         document.getElementById('editStepForm').scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -731,7 +731,7 @@
         
         // Set the form action dynamically
         const form = document.getElementById('updateTestimonialForm');
-        form.action = `/dashboard/admin/update-testimonial/${id}/?section=testimonialList`;
+        form.action = `/dashboard/admin/update-testimonial/Rs{id}/?section=testimonialList`;
         
         // Scroll to form
         document.getElementById('editTestimonialForm').scrollIntoView({ behavior: 'smooth', block: 'center' });

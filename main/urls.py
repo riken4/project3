@@ -29,6 +29,7 @@ urlpatterns = [
     path('annual_report_cart/', views.annual_report_cart, name='annual_report_cart'),
     path('ein_payment/', views.ein_payment, name='ein_payment'),
     path('irs_tax_filling/', views.irs_tax_filling, name='irs_tax_filling'),
+    path('personal_tax/', views.personal_tax, name='personal_tax'),
 
 
 ]

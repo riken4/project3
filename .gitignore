@@ -12,7 +12,7 @@ venv/
     # Byte-compiled / optimized / DLL files
     __pycache__/
     *.py[cod]
-    *$py.class
+    *Rspy.class
     
     # C extensions
     *.so
