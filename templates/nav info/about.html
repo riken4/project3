@@ -146,31 +146,36 @@
     </div>
 </section>
 
-<!-- Statistics Section -->
-{% if index_webstats %}
-<section class="py-8 lg:py-12 bg-gradient-to-r from-green-50 to-emerald-50">
-    <div class="max-w-7xl mx-auto px-3 sm:px-4 md:px-6">
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 md:gap-4 lg:gap-8 text-center">
-            <div class="p-4 sm:p-6 bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow">
-                <div class="text-3xl sm:text-4xl lg:text-6xl font-bold text-green-600 mb-2">{{index_webstats.happy_customers}}+</div>
-                <div class="text-xs sm:text-sm text-gray-600 font-medium">Happy Customers</div>
+<section class="py-16 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            
+            <!-- Text Content -->
+            <div class="order-2 md:order-1">
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-6">
+                    {% if about_header %}{{ about_header.title }}{% else %}About Our Company{% endif %}
+                </h2>
+                <p class="text-gray-600 text-lg sm:text-xl leading-relaxed">
+                    {% if about_header %}{{ about_header.description }}{% else %}Learn more about our company, mission, and values that drive us every day.{% endif %}
+                </p>
             </div>
-            <div class="p-4 sm:p-6 bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow">
-                <div class="text-3xl sm:text-4xl lg:text-6xl font-bold text-green-600 mb-2">{{index_webstats.reviews}}/10</div>
-                <div class="text-xs sm:text-sm text-gray-600 font-medium">Reviews</div>
+
+            <!-- Image -->
+            <div class="order-1 md:order-2 flex justify-center">
+                {% if about_header and about_header.image %}
+                <img src="{{ about_header.image.url }}" 
+                     alt="{% if about_header %}{{ about_header.title }}{% else %}About Image{% endif %}" 
+                     class="w-full h-auto rounded-2xl shadow-xl object-cover max-w-md md:max-w-full">
+                {% else %}
+                <div class="w-full h-64 md:h-80 bg-gray-200 rounded-2xl flex items-center justify-center">
+                    <span class="text-gray-400 text-xl font-semibold">No Image Available</span>
+                </div>
+                {% endif %}
             </div>
-            <div class="p-4 sm:p-6 bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow">
-                <div class="text-3xl sm:text-4xl lg:text-6xl font-bold text-green-600 mb-2">{{index_webstats.total_partners}}</div>
-                <div class="text-xs sm:text-sm text-gray-600 font-medium">Total Partners</div>
-            </div>
-            <div class="p-4 sm:p-6 bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow">
-                <div class="text-3xl sm:text-4xl lg:text-6xl font-bold text-green-600 mb-2">{{index_webstats.total_services}}</div>
-                <div class="text-xs sm:text-sm text-gray-600 font-medium">Total Services</div>
-            </div>
+
         </div>
     </div>
 </section>
-{% endif %}
 
 <!-- Our Values - Dynamic -->
 <section class="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-white to-gray-50">

@@ -217,10 +217,17 @@
 
                 <!-- Login Button (Right) -->
                 <div class="hidden sm:block flex-shrink-0">
+                    {% if user.is_authenticated %}
+                    <a href="{% url 'main:user_logout' %}" 
+                        class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg font-medium text-sm transition-all duration-300 shadow-lg hover:shadow-xl">
+                        Logout
+                    </a>
+                    {% else %}
                     <a href="{% url 'main:account' %}" 
                         class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg font-medium text-sm transition-all duration-300 shadow-lg hover:shadow-xl">
                         Login
                     </a>
+                    {% endif %}
                 </div>
 
                 <!-- Mobile menu button -->
@@ -284,8 +291,14 @@
                 <!-- Regular links -->
                 <a href="{% url 'main:price' %}"
                     class="block py-2 text-gray-300 hover:text-green-400 font-medium text-sm transition-colors">Pricing</a>
+                {% if user.is_authenticated %}
+                <a href="{% url 'main:user_logout' %}" 
+                    class="block py-2 text-gray-300 hover:text-green-400 font-medium text-sm transition-colors">Logout</a>
+                {% else %}
                 <a href="{% url 'main:account' %}" 
                     class="block py-2 text-gray-300 hover:text-green-400 font-medium text-sm transition-colors">Login</a>
+                {% endif %}
+
             </div>
         </div>
     </nav>

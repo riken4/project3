@@ -6,7 +6,7 @@ app_name = 'main'
 urlpatterns = [
     path('', views.home, name='home'), 
     path('price/', views.price, name='price'),
-    path('price_detail/', views.price_detail, name='price_detail'),
+    path('price_detail/<int:pk>/', views.price_detail, name='price_detail'),
     path('register_agent/', views.register_agent, name='register_agent'),
     path('company_formation/', views.company_formation, name='company_formation'),
     path('ein_registration/', views.ein_registration, name='ein_registration'),
@@ -15,7 +15,12 @@ urlpatterns = [
     path('file_your_own_taxes/', views.file_your_own_taxes, name='file_your_own_taxes'),
     path('refund_advance/', views.refund_advance, name='refund_advance'),
     path('flex_advance/', views.flex_advance, name='flex_advance'),
+    
+    # -- authentiation --
     path('account/', views.account, name='account'),
+    path('user_logout/', views.user_logout, name='user_logout'),
+    # -- authentiation --
+    
     path('about/', views.about, name='about'),
     path('blog/', views.blog, name='blog'),
     path('blog_detail/<int:id>/', views.blog_detail, name='blog_detail'),
@@ -30,5 +35,9 @@ urlpatterns = [
     path('ein_payment/', views.ein_payment, name='ein_payment'),
     path('irs_tax_filling/', views.irs_tax_filling, name='irs_tax_filling'),
 
+    # payment
+    path("checkout/<int:pk>", views.checkout, name="checkout"),
+    path("success/<int:pk>/", views.payment_success, name="payment_success"),
+    path("failed/<int:pk>/", views.payment_failed, name="payment_failed"),
 
 ]

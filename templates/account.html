@@ -6,7 +6,7 @@
     <title>Login & Sign Up</title>
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
-<body class="bg-gray-200 min-h-screen flex items-center justify-center">
+<body class="bg-gray-200 min-h-screen flex items-center justify-center" data-active-tab="{{ active_tab }}">
 
     <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
         <div class="flex mb-6">
@@ -18,44 +18,78 @@
             </button>
         </div>
 
-        <div id="loginForm">
+        <div id="loginForm" class="{% if active_tab == 'signup' %}hidden{% endif %}">
             <h2 class="text-2xl font-bold mb-6 text-center">Welcome Back</h2>
-            <form>
+            <form method="post" action="" novalidate>
+                {% csrf_token %}
+                {% if login_form.non_field_errors %}
+                    <div class="mb-4 text-red-600 font-medium">
+                        {% for error in login_form.non_field_errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
                 <div class="mb-4">
                     <label for="loginEmail" class="block text-gray-700 text-sm font-bold mb-2">Email</label>
-                    <input type="email" id="loginEmail" class="w-full px-3 py-2 border border-gray-300 rounded-md" placeholder="Enter your email" required>
+                    <input name="email" type="email" id="loginEmail" class="w-full px-3 py-2 border border-gray-300 rounded-md" placeholder="Enter your email" required>
+                    {% if login_form.email.errors %}
+                    <p class="text-red-600 text-sm mt-1">{{ login_form.email.errors.0 }}</p>
+                    {% endif %}
                 </div>
                 <div class="mb-6">
                     <label for="loginPassword" class="block text-gray-700 text-sm font-bold mb-2">Password</label>
-                    <input type="password" id="loginPassword" class="w-full px-3 py-2 border border-gray-300 rounded-md" placeholder="Enter your password" required>
+                    <input name="password" type="password" id="loginPassword" class="w-full px-3 py-2 border border-gray-300 rounded-md" placeholder="Enter your password" required>
+                    {% if login_form.password.errors %}
+                    <p class="text-red-600 text-sm mt-1">{{ login_form.password.errors.0 }}</p>
+                    {% endif %}
                 </div>
-                <button type="submit" class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                <button name="login_request" type="submit" class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                     Login
                 </button>
             </form>
         </div>
 
         <!-- Sign Up Form -->
-        <div id="signupForm" class="hidden">
+        <div id="signupForm" class="{% if active_tab != 'signup' %}hidden{% endif %}">
             <h2 class="text-2xl font-bold mb-6 text-center">Create Account</h2>
-            <form>
+            <form method="post" action="" novalidate>
+                {% csrf_token %}
+                {% if signup_form.non_field_errors %}
+                    <div class="mb-4 text-red-600 font-medium">
+                        {% for error in signup_form.non_field_errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
                 <div class="mb-4">
                     <label for="signupName" class="block text-gray-700 text-sm font-bold mb-2">Full Name</label>
-                    <input type="text" id="signupName" class="w-full px-3 py-2 border border-gray-300 rounded-md" placeholder="Enter your full name" required>
+                    <input name="full_name" type="text" id="signupName" class="w-full px-3 py-2 border border-gray-300 rounded-md" placeholder="Enter your full name" required>
+                    {% if signup_form.full_name.errors %}
+                        <p class="text-red-600 text-sm mt-1">{{ signup_form.full_name.errors.0 }}</p>
+                    {% endif %}
                 </div>
                 <div class="mb-4">
                     <label for="signupEmail" class="block text-gray-700 text-sm font-bold mb-2">Email</label>
-                    <input type="email" id="signupEmail" class="w-full px-3 py-2 border border-gray-300 rounded-md" placeholder="Enter your email" required>
+                    <input name="email" type="email" id="signupEmail" class="w-full px-3 py-2 border border-gray-300 rounded-md" placeholder="Enter your email" required>
+                    {% if signup_form.email.errors %}
+                        <p class="text-red-600 text-sm mt-1">{{ signup_form.email.errors.0 }}</p>
+                    {% endif %}
                 </div>
                 <div class="mb-4">
                     <label for="signupPassword" class="block text-gray-700 text-sm font-bold mb-2">Password</label>
-                    <input type="password" id="signupPassword" class="w-full px-3 py-2 border border-gray-300 rounded-md" placeholder="Create a password" required>
+                    <input name="password" type="password" id="signupPassword" class="w-full px-3 py-2 border border-gray-300 rounded-md" placeholder="Create a password" required>
+                    {% if signup_form.password.errors %}
+                        <p class="text-red-600 text-sm mt-1">{{ signup_form.password.errors.0 }}</p>
+                    {% endif %}
                 </div>
                 <div class="mb-6">
                     <label for="signupConfirmPassword" class="block text-gray-700 text-sm font-bold mb-2">Confirm Password</label>
-                    <input type="password" id="signupConfirmPassword" class="w-full px-3 py-2 border border-gray-300 rounded-md" placeholder="Confirm your password" required>
+                    <input name="confirm_password" type="password" id="signupConfirmPassword" class="w-full px-3 py-2 border border-gray-300 rounded-md" placeholder="Confirm your password" required>
+                    {% if signup_form.confirm_password.errors %}
+                        <p class="text-red-600 text-sm mt-1">{{ signup_form.confirm_password.errors.0 }}</p>
+                    {% endif %}
                 </div>
-                <button type="submit" class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                <button name="signup_request" type="submit" class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                     Sign Up
                 </button>
             </form>
@@ -85,6 +119,15 @@
             loginTab.classList.remove('bg-blue-500', 'text-white');
             loginTab.classList.add('bg-gray-200', 'text-gray-700');
         }
+
+        document.addEventListener("DOMContentLoaded", function () {
+        const activeTab = document.body.dataset.activeTab;
+        if (activeTab === "signup") {
+                showSignup();
+            } else {
+                showLogin();
+            }
+        });
     </script>
 
 </body>

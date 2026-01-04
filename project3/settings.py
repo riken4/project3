@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'main',
     'dashboard',
+    'django_extensions',
     
 ]
 
@@ -113,7 +114,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Kathmandu'
 
 USE_I18N = True
 
@@ -133,3 +134,10 @@ STATICFILES_DIRS = [BASE_DIR / 'static']
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+PAYPAL_CLIENT_ID = 'Ae0oOEBZTQcGKVKefMkRQqTvHUpXpGDIz_ahk0mjUpuvIItUbyMX3zM3LsnfkdjiMtM3tTUKG-hTPdX0'
+
+AUTHENTICATION_BACKENDS = [
+    'main.backends.EmailBackend',
+    'django.contrib.auth.backends.ModelBackend',
+]

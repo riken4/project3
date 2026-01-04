@@ -1,13 +1,105 @@
-from django.shortcuts import render
 from .models import IndexPage, IndexPartner, IndexPartnerImages, IndexHowitWorks, IndexHowitWorksObj, IndexWebStats, IndexTestimonials, IndexTestimonialObj,OrganizationSettings
 from .models import WhatOurCustomersSay,WhatOurCustomersSayObj
-from .models import PricingPage, PricingOptionOne, PricingOptionTwo, PricingOptionThree, PricingOptionFour
-from .models import AddonService,AddonServiceOption,WhyChooseUs,WhatCustomersSay,TeamPage,TeamMember,Blog,AboutUs,BlogPage
-from django.shortcuts import render, get_object_or_404
+from .models import PricingPage, CommonPricingModel
+from .models import AddonService,AddonServiceOption,WhyChooseUs,WhatCustomersSay,TeamPage,TeamMember,Blog,AboutUs,BlogPage, \
+    CoreValues
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import FAQPage, FAQ
 from .models import TermsOfService
 
+from .models import CommonPricingModel, SubscriptionPlan, UserSubscription
+from .utils import get_active_subscription
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+from django.contrib import messages
+from .forms import SignupForm, LoginForm
+from django.contrib import messages
 
+from django.conf import settings
+from django.views.decorators.csrf import csrf_exempt
+from django.http import JsonResponse
+from django.utils import timezone
+from datetime import timedelta
+import json
+
+
+#************************************
+# Views for Payment
+#************************************
+def checkout(request, pk):
+    # import ipdb;ipdb.set_trace()
+    if not request.user.is_authenticated:
+        messages.warning(request, "Please login first to continue.")
+        return redirect(f"/price_detail/{pk}/")
+
+    pricing = get_object_or_404(CommonPricingModel, pk=pk)
+    plan = get_object_or_404(SubscriptionPlan, pricing=pricing, is_active=True)
+    
+    existing_subscription = get_active_subscription(request.user, plan)
+
+    if existing_subscription and existing_subscription.is_valid():
+        messages.info(
+            request,
+            "You have already paid for this service. No need to pay again."
+        )
+        return redirect(f"/price_detail/{pk}/")
+
+    context = {
+        "option": pricing,
+        "paypal_client_id": settings.PAYPAL_CLIENT_ID,
+    }
+
+    return render(request, "checkout.html", context)
+
+@csrf_exempt
+def payment_success(request, pk):
+    pricing = get_object_or_404(CommonPricingModel, pk=pk)
+    plan = get_object_or_404(SubscriptionPlan, pricing=pricing)
+    if request.method == "POST":
+        data = json.loads(request.body)
+        paypal_id = data.get("id")
+
+        # Prevent duplicate activation
+        if UserSubscription.objects.filter(
+            payment_id=paypal_id
+        ).exists():
+            return redirect(f"/price_detail/{pk}/")
+
+        # Calculate end date
+        end_date = None
+        if plan.plan_type != "one_time":
+            end_date = timezone.now() + timedelta(days=plan.duration_days)
+
+        # Deactivate old subscriptions of same plan
+        UserSubscription.objects.filter(
+            user=request.user,
+            plan=plan,
+            is_active=True
+        ).update(is_active=False)
+
+        # Create new subscription
+        UserSubscription.objects.create(
+            user=request.user,
+            plan=plan,
+            start_date=timezone.now(),
+            end_date=end_date,
+            is_active=True,
+            payment_id=paypal_id
+        )
+        return redirect("main:payment_success", pk=pk)
+    ctx = {
+        "option": pricing,
+    }
+    return render(request, "payment_success.html", ctx)
+
+
+def payment_failed(request, pk):
+    option = get_object_or_404(CommonPricingModel, pk=pk)
+    context = {
+        "option": option,
+    }
+    return render(request, "payment_failed.html", context)
 
 
 #************************************
@@ -46,20 +138,14 @@ def home(request):
 
 def price(request):
     header=PricingPage.objects.last()
-    one=PricingOptionOne.objects.last()
-    two=PricingOptionTwo.objects.last()
-    three=PricingOptionThree.objects.last()
-    four=PricingOptionFour.objects.last()
+    pricing_options = CommonPricingModel.objects.all()
     servive_header=AddonService.objects.last
     service_option=AddonServiceOption.objects.all()
     why_choose_us=WhyChooseUs.objects.all()
     our_customers_say=WhatCustomersSay.objects.all()
     context ={
         'header': header,
-        'one': one,
-        'two': two,
-        'three': three, 
-        'four': four,
+        'pricing_option': pricing_options,
         'servive_header': servive_header,
         'service_option':service_option,
         'why_choose_us':why_choose_us,
@@ -70,8 +156,12 @@ def price(request):
 
 
 
-def price_detail(request):
-    return render(request, 'price_detail.html') 
+def price_detail(request, pk):
+    option = get_object_or_404(CommonPricingModel, pk=pk)
+    context = {
+        'option': option,
+    }
+    return render(request, 'price_detail.html', context) 
 
 def register_agent(request):
     return render(request, 'register_agent.html') 
@@ -98,14 +188,49 @@ def flex_advance(request):
     return render(request, 'flex_advance.html') 
 
 def account(request):
-    return render(request, 'account.html') 
+    active_tab = "login"
+    signup_form = SignupForm()
+    login_form = LoginForm()
+
+    if request.method == "POST":
+        if "signup_request" in request.POST:
+            active_tab = "signup"
+            signup_form = SignupForm(request.POST)
+            if signup_form.is_valid():
+                user = User.objects.create_user(
+                    email=signup_form.cleaned_data["email"],
+                    password=signup_form.cleaned_data["password"],
+                    username=signup_form.cleaned_data["full_name"]
+                )
+                return redirect("/")
+        elif "login_request" in request.POST:
+            login_form = LoginForm(request.POST)
+            if login_form.is_valid():
+                email = login_form.data.get("email")
+                password = login_form.cleaned_data["password"]
+                user = authenticate(email=email, password=password)
+                if user:
+                    login(request, user)
+                    return redirect("/")
+                return redirect("/")
+
+    return render(request, "account.html", {
+        "active_tab": active_tab,
+        "signup_form": signup_form,
+        "login_form": login_form,
+    })
+
+def user_logout(request):
+    logout(request)
+    return redirect("/")
+
 #************************************
 # Views for About
 #************************************
 
 def about(request):
     about_header=AboutUs.objects.last()
-    about_content=AboutUs.objects.all()
+    about_content=CoreValues.objects.all()
     index_webstats=IndexWebStats.objects.last()
     members=TeamMember.objects.all()
   

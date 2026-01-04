@@ -1,8 +1,9 @@
 from django.contrib import admin
 from .models import IndexPage, IndexPartner, IndexPartnerImages, IndexHowitWorks, IndexHowitWorksObj, IndexWebStats, IndexTestimonials, IndexTestimonialObj,PricingPage
 from .models import OrganizationSettings, WhatOurCustomersSay,WhatOurCustomersSayObj,BlogPage,Blog
-from .models import PricingOptionOne,PricingOptionTwo,PricingOptionThree,PricingOptionFour,AddonService,AddonServiceOption,WhyChooseUs,WhatCustomersSay, TeamPage, TeamMember,AboutUs
+from .models import CommonPricingModel,AddonService,AddonServiceOption,WhyChooseUs,WhatCustomersSay, TeamPage, TeamMember,AboutUs, CoreValues
 from .models import FAQPage, FAQ
+from .models import SubscriptionPlan, UserSubscription
 # Register your models here.
 admin.site.register(IndexPage)
 admin.site.register(IndexPartner)
@@ -16,11 +17,8 @@ admin.site.register(OrganizationSettings)
 admin.site.register(WhatOurCustomersSay)
 admin.site.register(WhatOurCustomersSayObj)
 
+admin.site.register(CommonPricingModel)
 admin.site.register(PricingPage)
-admin.site.register(PricingOptionOne)
-admin.site.register(PricingOptionTwo)
-admin.site.register(PricingOptionThree)
-admin.site.register(PricingOptionFour)
 
 admin.site.register(AddonService)
 admin.site.register(AddonServiceOption)
@@ -34,11 +32,14 @@ admin.site.register(BlogPage)
 
 admin.site.register(Blog)
 admin.site.register(AboutUs)
+admin.site.register(CoreValues)
 
 
 admin.site.register(FAQPage)
 admin.site.register(FAQ)
 
+admin.site.register(UserSubscription)
+admin.site.register(SubscriptionPlan)
 
 
 

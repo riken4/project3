@@ -1,0 +1,605 @@
+{% extends 'dashboard/admin_base/admin_base.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+    .content-section {
+        display: none;
+    }
+
+    .content-section.active {
+        display: block;
+    }
+
+    .card {
+        background: white;
+        padding: 25px;
+        border-radius: 12px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    .card h3 {
+        margin-bottom: 20px;
+        color: #2c3e50;
+        padding-bottom: 15px;
+        border-bottom: 2px solid #667eea;
+        font-size: 20px;
+        font-weight: 600;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+        color: #4a5568;
+        font-size: 14px;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        width: 100%;
+        padding: 12px;
+        border: 2px solid #e2e8f0;
+        border-radius: 8px;
+        font-size: 14px;
+        transition: all 0.3s;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+        outline: none;
+        border-color: #667eea;
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+
+    .form-group textarea {
+        min-height: 100px;
+        resize: vertical;
+    }
+
+    .btn {
+        padding: 12px 24px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 600;
+        transition: all 0.3s;
+        margin-right: 10px;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .btn-primary {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+    }
+
+    .btn-success {
+        background: #48bb78;
+        color: white;
+    }
+
+    .btn-success:hover {
+        background: #38a169;
+    }
+
+    .btn-danger {
+        background: #f56565;
+        color: white;
+    }
+
+    .btn-danger:hover {
+        background: #e53e3e;
+    }
+
+    .btn-secondary {
+        background: #a0aec0;
+        color: white;
+    }
+
+    .btn-secondary:hover {
+        background: #718096;
+    }
+
+    .table-container {
+        overflow-x: auto;
+        margin-top: 20px;
+    }
+
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .table th,
+    .table td {
+        padding: 14px;
+        text-align: left;
+        border-bottom: 1px solid #e2e8f0;
+    }
+
+    .table th {
+        background: #f7fafc;
+        font-weight: 600;
+        color: #2d3748;
+        font-size: 13px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .table tr:hover {
+        background: #f7fafc;
+    }
+
+    .action-buttons {
+        display: flex;
+        gap: 8px;
+    }
+
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 15px;
+        margin-bottom: 20px;
+    }
+
+    .stat-item {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .image-preview {
+        max-width: 200px;
+        max-height: 200px;
+        margin-top: 10px;
+        border-radius: 8px;
+        border: 2px solid #e2e8f0;
+    }
+
+    .add-btn-container {
+        margin-bottom: 20px;
+    }
+
+    .form-overlay {
+        display: none;
+        margin-bottom: 20px;
+        padding: 25px;
+        background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+        border-radius: 12px;
+        border: 2px solid #e2e8f0;
+    }
+
+    .form-overlay h4 {
+        color: #2d3748;
+        margin-bottom: 20px;
+        font-size: 18px;
+    }
+
+    .tabs {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 25px;
+        flex-wrap: wrap;
+    }
+
+    .tab {
+        padding: 12px 20px;
+        background: white;
+        border: 2px solid #e2e8f0;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s;
+        font-weight: 600;
+        font-size: 14px;
+        color: #4a5568;
+    }
+
+    .tab:hover {
+        border-color: #667eea;
+        color: #667eea;
+    }
+
+    .tab.active {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border-color: #667eea;
+    }
+
+    .thumbnail-image {
+        max-width: 80px;
+        max-height: 60px;
+        border-radius: 6px;
+        border: 2px solid #e2e8f0;
+    }
+
+    .avatar-image {
+        max-width: 50px;
+        max-height: 50px;
+        border-radius: 50%;
+        border: 2px solid #e2e8f0;
+    }
+
+    .placeholder-avatar {
+        width: 50px;
+        height: 50px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: 600;
+    }
+
+    .table-image {
+        max-width: 100px;
+        max-height: 60px;
+        width: auto;
+        height: auto;
+        border-radius: 6px;
+        object-fit: cover;
+    }
+
+    .form-errors {
+        margin-bottom: 1rem;
+        padding: 12px;
+        border-radius: 8px;
+        background-color: #fed7d7; /* light red */
+        color: #9b2c2c; /* dark red text */
+        font-size: 0.875rem;
+    }
+
+    .form-errors p {
+        margin: 0;
+    }
+
+    .error-msg {
+        color: #9b2c2c;      /* dark red text */
+        background-color: #fed7d7; /* light red background */
+        border: 1px solid #f56565;
+        padding: 10px;
+        border-radius: 6px;
+        margin-bottom: 12px;
+        font-size: 14px;
+    }
+</style>
+
+<!-- Navigation Tabs -->
+<div class="tabs">
+    <div class="tab active" onclick="showSection('aboutheader')">About Header</div>
+    <div class="tab" onclick="showSection('corevalues')">Core Values</div>     
+</div>
+
+<!-- About Us Header Section -->
+<div class="content-section active" id="aboutheader">
+    <div class="card">
+        <h3><i class="fas fa-image"></i> About Page Header</h3>
+        {% if about_header_form.non_field_errors %}
+            <div class="form-errors">
+                {% for error in about_header_form.non_field_errors %}
+                    <p>{{ error }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <!-- Form -->
+        <form method="POST"
+              enctype="multipart/form-data"
+              action="{% url 'dashboard:about_header' %}{% if edit_id %}?edit_id={{ edit_id }}{% endif %}"
+              novalidate>
+            {% csrf_token %}
+
+            <!-- TITLE -->
+            <div class="form-group mb-4">
+                <label class="font-medium text-gray-700 block mb-1">Title</label>
+                <input type="text"
+                       name="title"
+                       value="{{ about_header_form.title.value|default:'' }}"
+                       class="form-input w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                       required>
+                {% if about_header_form.title.errors %}
+                <div class="error-msg">
+                    <p class="text-red-600 text-sm mt-1">{{ about_header_form.title.errors.0 }}</p>
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- DESCRIPTION -->
+            <div class="form-group mb-4">
+                <label class="font-medium text-gray-700 block mb-1">Description</label>
+                <textarea name="description"
+                          class="form-input w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                          rows="4">{{ about_header_form.description.value|default:'' }}</textarea>
+                {% if about_header_form.description.errors %}
+                <div class="error-msg">
+                    <p class="text-red-600 text-sm mt-1">{{ about_header_form.description.errors.0 }}</p>
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- IMAGE -->
+            <div class="form-group mb-4">
+                <label class="font-medium text-gray-700 block mb-1">Header Image</label>
+                <input type="file" name="image" class="form-input w-full border border-gray-300 rounded-md px-3 py-2">
+                {% if about_header_form.image.errors %}
+                <div class="error-msg">
+                    <p class="text-red-600 text-sm mt-1">{{ about_header_form.image.errors.0 }}</p>
+                </div>
+                {% endif %}
+                {% if edit_id and about_header_form.instance.image %}
+                    <img src="{{ about_header_form.instance.image.url }}"
+                         class="image-preview mt-2 rounded-md border border-gray-200 shadow-sm">
+                {% endif %}
+            </div>
+
+            <!-- DISPLAY IN HERO / BANNER -->
+            <div class="flex items-center mb-4">
+                <input type="checkbox" name="display_in_banner" id="display_in_banner"
+                       class="form-checkbox mr-2"
+                       {% if about_header_form.display_in_banner.value %}checked{% endif %}>
+                <label for="display_in_banner" class="font-medium text-gray-700">
+                    Show in Hero Banner / Top Section
+                </label>
+                {% if about_header_form.display_in_banner.errors %}
+                <div class="error-msg">
+                    <p class="text-red-600 text-sm mt-1">{{ about_header_form.display_in_banner.errors.0 }}</p>
+                </div>
+                {% endif %}
+            </div>
+
+            <div style="margin-top: 1rem;">
+                <button type="submit" class="btn btn-success mt-2">
+                    <i class="fas fa-save"></i> {% if edit_id %}Update{% else %}Save{% endif %} Header
+                </button>
+                {% if edit_id %}
+                    <a href="{% url 'dashboard:about_header' %}" class="btn btn-secondary mt-2">
+                        <i class="fas fa-times"></i> Cancel
+                    </a>
+                {% endif %}
+            </div>
+        </form>
+    </div>
+
+    <!-- Table -->
+    <div class="card mt-6">
+        <h3><i class="fas fa-list"></i> About Us(Only 1 Hero About and 1 Regular About Allowed)</h3>
+        <div class="table-container mt-4">
+            <table class="table w-full">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Image</th>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Hero</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for about in about_us_list %}
+                        <tr>
+                            <td>{{ about.id }}</td>
+                            <td>
+                                {% if about.image %}
+                                    <img src="{{ about.image.url }}" class="table-image">
+                                {% else %}
+                                    <span style="color:#a0aec0;">No image</span>
+                                {% endif %}
+                            </td>
+                            <td>{{ about.title }}</td>
+                            <td>{{ about.description|truncatewords:15 }}</td>
+                            <td>{% if about.display_in_banner %}Yes{% else %}No{% endif %}</td>
+                            <td class="flex gap-2">
+                                <a href="{% url 'dashboard:about_header' %}?edit_id={{ about.id }}" class="btn btn-primary">
+                                    <i class="fas fa-edit"></i> Edit
+                                </a>
+                                <form method="POST" action="{% url 'dashboard:delete_about_us' about.id %}" style="display:inline;">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-danger" onclick="return confirm('Delete this About Us entry?')">
+                                        <i class="fas fa-trash"></i> Delete
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="5" class="text-center">No About Us entries yet.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Core Values Section -->
+<div class="content-section" id="corevalues">
+    <div class="card">
+        <h3><i class="fas fa-shield-alt"></i> Core Values Section</h3>
+
+        <!-- Add Button -->
+        <div class="add-btn-container">
+            <button class="btn btn-success" onclick="document.getElementById('corevaluesform').style.display='block'">
+                <i class="fas fa-plus"></i> Add Core Value
+            </button>
+        </div>
+
+        <!-- Add Form -->
+        <div class="form-overlay" id="corevaluesform" style="display:{% if show_corevalues_addform %}block{% else %}none{% endif %};">
+            <h4><i class="fas fa-plus-circle"></i> Add Core Value</h4>
+            <form method="POST" action="{% url 'dashboard:add_core_values' %}?section=corevalues" novalidate>
+                {% csrf_token %}
+
+                <div class="form-group">
+                    <label><i class="fas fa-heading"></i> Title</label>
+                    <input type="text" name="core_values_title" value="{{ core_values_add_form.core_values_title.value|default:'' }}" required>
+                    {% if core_values_add_form.core_values_title.errors %}
+                    <div class="error-msg">
+                        <p class="text-red-600 text-sm mt-1">{{ core_values_add_form.core_values_title.errors.0 }}</p>
+                    </div>
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-align-left"></i> Description</label>
+                    <textarea name="core_values_description" required>{{ core_values_add_form.core_values_description.value|default:'' }}</textarea>
+                    {% if core_values_add_form.core_values_description.errors %}
+                    <div class="error-msg">
+                        <p class="text-red-600 text-sm mt-1">{{ core_values_add_form.core_values_description.errors.0 }}</p>
+                    </div>
+                    {% endif %}
+                </div>
+
+                <button type="submit" class="btn btn-success">
+                    <i class="fas fa-check"></i> Add Core Value
+                </button>
+                <button type="button" class="btn btn-secondary" onclick="closeForm('corevaluesform')">
+                    <i class="fas fa-times"></i> Cancel
+                </button>
+            </form>
+        </div>
+
+        <!-- Table -->
+        <div class="table-container">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in core_values %}
+                        <tr>
+                            <td>#{{ item.id }}</td>
+                            <td>{{ item.core_values_title }}</td>
+                            <td>{{ item.core_values_description|truncatewords:15 }}</td>
+                            <td>
+                                <div class="action-buttons">
+                                    <a href="{% url 'dashboard:update_core_values' item.id %}?section=corevalues" class="btn btn-primary">
+                                        <i class="fas fa-edit"></i> Edit
+                                    </a>
+                                    <form method="POST" action="{% url 'dashboard:delete_core_values' item.id %}?section=corevalues" style="display:inline;">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-danger" onclick="return confirm('Delete this core value?')">
+                                            <i class="fas fa-trash"></i> Delete
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="4" style="text-align:center;">No core values added yet.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Edit Form -->
+        <div class="form-overlay" id="editcorevaluesform" style="display:{% if show_corevalues_editform %}block{% else %}none{% endif %};">
+            <h4><i class="fas fa-edit"></i> Edit Core Value</h4>
+            <form method="POST" novalidate>
+                {% csrf_token %}
+
+                <div class="form-group">
+                    <label><i class="fas fa-heading"></i> Title</label>
+                    <input type="text" name="core_values_title" value="{{ core_values_edit_form.core_values_title.value|default:'' }}" required>
+                    {% if core_values_edit_form.core_values_title.errors %}
+                    <div class="error-msg">
+                        <p class="text-red-600 text-sm mt-1">{{ core_values_edit_form.core_values_title.errors.0 }}</p>
+                    </div>
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-align-left"></i> Description</label>
+                    <textarea name="core_values_description" required>{{ core_values_edit_form.core_values_description.value }}</textarea>
+                    {% if core_values_edit_form.core_values_description.errors %}
+                    <div class="error-msg">
+                        <p class="text-red-600 text-sm mt-1">{{ core_values_edit_form.core_values_description.errors.0 }}</p>
+                    </div>
+                    {% endif %}
+                </div>
+
+                <button type="submit" class="btn btn-success">
+                    <i class="fas fa-check"></i> Update Core Value
+                </button>
+                <button type="button" class="btn btn-secondary" onclick="document.getElementById('editcorevaluesform').style.display='none'">
+                    <i class="fas fa-times"></i> Cancel
+                </button>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    // Check URL hash on page load and show correct section
+    window.addEventListener('DOMContentLoaded', function () {
+        const section = getUrlParameter('section');
+        if (section) {
+            showSectionById(section);
+        }
+    });
+
+    // Helper function to get URL parameters
+    function getUrlParameter(name) {
+        name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+        var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+        var results = regex.exec(location.search);
+        return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+    }
+
+    function showSection(sectionId) {
+        showSectionById(sectionId);
+    }
+
+    function showSectionById(sectionId) {
+        // Hide all sections
+        const sections = document.querySelectorAll('.content-section');
+        sections.forEach(section => section.classList.remove('active'));
+
+        // Remove active class from all tabs
+        const tabs = document.querySelectorAll('.tab');
+        tabs.forEach(tab => tab.classList.remove('active'));
+
+        // Show selected section
+        const targetSection = document.getElementById(sectionId);
+        if (targetSection) {
+            targetSection.classList.add('active');
+        }
+
+        // Add active class to corresponding tab
+        const allTabs = document.querySelectorAll('.tab');
+        allTabs.forEach(tab => {
+            if (tab.textContent.toLowerCase().includes(sectionId.toLowerCase()) ||
+                (sectionId === 'aboutheader' && tab.textContent.includes('About Header')) ||
+                (sectionId === 'corevalues' && tab.textContent === 'Core Values')) {
+                tab.classList.add('active');
+            }
+        });
+    }
+
+    function closeForm(formId) {
+        document.getElementById(formId).style.display = 'none';
+    }
+</script>
+{% endblock %}

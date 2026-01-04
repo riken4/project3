@@ -355,6 +355,25 @@
                 display: none;
             }
         }
+        .messages-container {
+            display: flex;
+            justify-content: center; /* horizontal center */
+            margin-bottom: 20px;
+        }
+
+        .alert {
+            padding: 12px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            max-width: 400px;
+            text-align: center; /* center text */
+        }
+
+        .alert-error {
+            background-color: #f8d7da; /* light red */
+            color: #721c24; /* dark red text */
+            border: 1px solid #f5c6cb;
+        }
     </style>
 </head>
 <body>
@@ -411,6 +430,15 @@
 
             <form method="POST">
                 {% csrf_token %}
+                {% if messages %}
+                <div class="messages-container">
+                    {% for message in messages %}
+                        <div class="alert alert-error">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
                 <div class="form-group">
                     <label class="form-label">Email Address</label>
                     <div class="form-input-wrapper">

@@ -411,10 +411,10 @@
     </div>
 
     <!-- Team -->
-    <div class="menu-item">
+    <a href="{% url 'dashboard:team_page'%}" class="menu-item">
         <i class="fas fa-users"></i>
         <span class="menu-text">Team</span>
-    </div>
+    </a>
 </div>
 
 
@@ -447,16 +447,16 @@
                 <i class="fas fa-building-circle-check"></i>
                 <span class="menu-text">Organization Settings</span>
             </div>
-            
-            <div class="menu-item">
+
+            <a href="{% url 'dashboard:price_info'%}" class="menu-item">
                 <i class="fas fa-tags"></i>
                 <span class="menu-text">Pricing</span>
-            </div>
-            
-            <div class="menu-item">
-                <i class="fas fa-info-circle"></i>
+            </a>
+
+            <a href="{% url 'dashboard:about_header'%}" class="menu-item">
+                <i class="fas fa-tags"></i>
                 <span class="menu-text">About</span>
-            </div>
+            </a>
         </div>
     </div>
 <!-- Main Content Area -->

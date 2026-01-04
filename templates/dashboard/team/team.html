@@ -1,0 +1,724 @@
+{% extends 'dashboard/admin_base/admin_base.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+    .content-section {
+        display: none;
+    }
+
+    .content-section.active {
+        display: block;
+    }
+
+    .card {
+        background: white;
+        padding: 25px;
+        border-radius: 12px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    .card h3 {
+        margin-bottom: 20px;
+        color: #2c3e50;
+        padding-bottom: 15px;
+        border-bottom: 2px solid #667eea;
+        font-size: 20px;
+        font-weight: 600;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+        color: #4a5568;
+        font-size: 14px;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        width: 100%;
+        padding: 12px;
+        border: 2px solid #e2e8f0;
+        border-radius: 8px;
+        font-size: 14px;
+        transition: all 0.3s;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+        outline: none;
+        border-color: #667eea;
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+
+    .form-group textarea {
+        min-height: 100px;
+        resize: vertical;
+    }
+
+    .btn {
+        padding: 12px 24px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 600;
+        transition: all 0.3s;
+        margin-right: 10px;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .btn-primary {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+    }
+
+    .btn-success {
+        background: #48bb78;
+        color: white;
+    }
+
+    .btn-success:hover {
+        background: #38a169;
+    }
+
+    .btn-danger {
+        background: #f56565;
+        color: white;
+    }
+
+    .btn-danger:hover {
+        background: #e53e3e;
+    }
+
+    .btn-secondary {
+        background: #a0aec0;
+        color: white;
+    }
+
+    .btn-secondary:hover {
+        background: #718096;
+    }
+
+    .table-container {
+        overflow-x: auto;
+        margin-top: 20px;
+    }
+
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .table th,
+    .table td {
+        padding: 14px;
+        text-align: left;
+        border-bottom: 1px solid #e2e8f0;
+    }
+
+    .table th {
+        background: #f7fafc;
+        font-weight: 600;
+        color: #2d3748;
+        font-size: 13px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .table tr:hover {
+        background: #f7fafc;
+    }
+
+    .action-buttons {
+        display: flex;
+        gap: 8px;
+    }
+
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 15px;
+        margin-bottom: 20px;
+    }
+
+    .stat-item {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .image-preview {
+        max-width: 200px;
+        max-height: 200px;
+        margin-top: 10px;
+        border-radius: 8px;
+        border: 2px solid #e2e8f0;
+    }
+
+    .add-btn-container {
+        margin-bottom: 20px;
+    }
+
+    .form-overlay {
+        display: none;
+        margin-bottom: 20px;
+        padding: 25px;
+        background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+        border-radius: 12px;
+        border: 2px solid #e2e8f0;
+    }
+
+    .form-overlay h4 {
+        color: #2d3748;
+        margin-bottom: 20px;
+        font-size: 18px;
+    }
+
+    .tabs {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 25px;
+        flex-wrap: wrap;
+    }
+
+    .tab {
+        padding: 12px 20px;
+        background: white;
+        border: 2px solid #e2e8f0;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s;
+        font-weight: 600;
+        font-size: 14px;
+        color: #4a5568;
+    }
+
+    .tab:hover {
+        border-color: #667eea;
+        color: #667eea;
+    }
+
+    .tab.active {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border-color: #667eea;
+    }
+
+    .thumbnail-image {
+        max-width: 80px;
+        max-height: 60px;
+        border-radius: 6px;
+        border: 2px solid #e2e8f0;
+    }
+
+    .avatar-image {
+        max-width: 50px;
+        max-height: 50px;
+        border-radius: 50%;
+        border: 2px solid #e2e8f0;
+    }
+
+    .placeholder-avatar {
+        width: 50px;
+        height: 50px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: 600;
+    }
+
+    .table-image {
+        max-width: 100px;
+        max-height: 60px;
+        width: auto;
+        height: auto;
+        border-radius: 6px;
+        object-fit: cover;
+    }
+
+    .form-errors {
+        margin-bottom: 1rem;
+        padding: 12px;
+        border-radius: 8px;
+        background-color: #fed7d7; /* light red */
+        color: #9b2c2c; /* dark red text */
+        font-size: 0.875rem;
+    }
+
+    .form-errors p {
+        margin: 0;
+    }
+
+    .error-msg {
+        color: #9b2c2c;      /* dark red text */
+        background-color: #fed7d7; /* light red background */
+        border: 1px solid #f56565;
+        padding: 10px;
+        border-radius: 6px;
+        margin-bottom: 12px;
+        font-size: 14px;
+    }
+</style>
+
+<!-- Navigation Tabs -->
+<div class="tabs">
+    <div class="tab active" onclick="showSection('teamheader')">Our Team Header</div>     
+    <div class="tab" onclick="showSection('ourteam')">Team Member</div>
+</div>
+
+<!-- Team Header Section -->
+<div class="content-section active" id="teamheader">
+    <div class="card">
+        <h3><i class="fas fa-heading"></i> Our Team Header</h3>
+
+        {% if team_header_form.non_field_errors %}
+            <div class="form-errors">
+                {% for error in team_header_form.non_field_errors %}
+                    <p>{{ error }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <form method="POST" enctype="multipart/form-data" novalidate action="{% url 'dashboard:manage_team_header' %}">
+            {% csrf_token %}
+            <input type="hidden" name="team_header_submit" value="1">
+
+            <div class="form-group">
+                <label>Title</label>
+                <input type="text" name="title"
+                       value="{{ team_header_form.title.value|default:'' }}" required>
+                {% if team_header_form.title.errors %}
+                    <div class="error-msg">{{ team_header_form.title.errors.0 }}</div>
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                <label>Description</label>
+                <textarea name="description" rows="4" required>{{ team_header_form.description.value|default:'' }}</textarea>
+                {% if team_header_form.description.errors %}
+                    <div class="error-msg">{{ team_header_form.description.errors.0 }}</div>
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                <label>Header Image</label>
+                <input type="file" name="image">
+
+                {% if team_header and team_header.image %}
+                    <img src="{{ team_header.image.url }}"
+                         class="image-preview">
+                {% endif %}
+            </div>
+
+            <button class="btn btn-success">
+                <i class="fas fa-save"></i> Save Header
+            </button>
+        </form>
+    </div>
+</div>
+
+
+<!-- Our Team Section -->
+<div class="content-section" id="ourteam">
+    <div class="card">
+        <h3><i class="fas fa-users"></i> Our Team</h3>
+
+        <!-- Add Button -->
+        <div class="add-btn-container">
+            <button class="btn btn-success"
+                    onclick="document.getElementById('teamform').style.display='block'">
+                <i class="fas fa-plus"></i> Add Team Member
+            </button>
+        </div>
+
+        <!-- Add Form -->
+        <div class="form-overlay" id="teamform"
+            style="display:{% if show_team_addform %}block{% else %}none{% endif %};">
+            <h4><i class="fas fa-user-plus"></i> Add Team Member</h4>
+
+            <form method="POST" enctype="multipart/form-data"
+                action="{% url 'dashboard:add_team_member' %}?section=ourteam"
+                novalidate>
+                {% csrf_token %}
+
+                <!-- FULL NAME -->
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" name="title"
+                        value="{{ team_add_form.title.value|default:'' }}" required>
+                    {% if team_add_form.title.errors %}
+                        <div class="error-msg">{{ team_add_form.title.errors.0 }}</div>
+                    {% endif %}
+                </div>
+
+                <!-- POSITION -->
+                <div class="form-group">
+                    <label>Position</label>
+                    <input type="text" name="position"
+                        value="{{ team_add_form.position.value|default:'' }}" required>
+                    {% if team_add_form.position.errors %}
+                        <div class="error-msg">{{ team_add_form.position.errors.0 }}</div>
+                    {% endif %}
+                </div>
+
+                <!-- DESCRIPTION -->
+                <div class="form-group">
+                    <label>Short Bio</label>
+                    <textarea name="description" rows="3">{{ team_add_form.description.value|default:'' }}</textarea>
+                    {% if team_add_form.description.errors %}
+                        <div class="error-msg">{{ team_add_form.description.errors.0 }}</div>
+                    {% endif %}
+                </div>
+
+                <!-- IMAGE -->
+                <div class="form-group">
+                    <label>Profile Image</label>
+                    <input type="file" name="image">
+                    {% if team_add_form.image.errors %}
+                        <div class="error-msg">{{ team_add_form.image.errors.0 }}</div>
+                    {% endif %}
+                </div>
+
+                <hr>
+
+                <!-- SOCIAL LINKS -->
+                <div class="form-group">
+                    <label>Facebook</label>
+                    <input type="url" name="facebook_link"
+                        value="{{ team_add_form.facebook_link.value|default:'' }}">
+                </div>
+
+                <div class="form-group">
+                    <label>Twitter</label>
+                    <input type="url" name="twitter_link"
+                        value="{{ team_add_form.twitter_link.value|default:'' }}">
+                </div>
+
+                <div class="form-group">
+                    <label>LinkedIn</label>
+                    <input type="url" name="linkedin_link"
+                        value="{{ team_add_form.linkedin_link.value|default:'' }}">
+                </div>
+
+                <div class="form-group">
+                    <label>Instagram</label>
+                    <input type="url" name="instagram_link"
+                        value="{{ team_add_form.instagram_link.value|default:'' }}">
+                </div>
+
+                <hr>
+
+                <!-- CONTACT -->
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" name="gmail"
+                        value="{{ team_add_form.gmail.value|default:'' }}">
+                </div>
+
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="text" name="phone_number"
+                        value="{{ team_add_form.phone_number.value|default:'' }}">
+                </div>
+
+                <div class="form-group">
+                    <label>Location</label>
+                    <input type="text" name="location"
+                        value="{{ team_add_form.location.value|default:'' }}">
+                </div>
+
+                <button class="btn btn-success">
+                    <i class="fas fa-save"></i> Save Member
+                </button>
+
+                <button type="button" class="btn btn-secondary"
+                        onclick="closeForm('teamform')">
+                    Cancel
+                </button>
+            </form>
+        </div>
+
+        <!-- Table -->
+        <div class="card mt-6">
+            <h3><i class="fas fa-users"></i> Team Members</h3>
+        
+            <div class="table-container">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>Name</th>
+                            <th>Position</th>
+                            <th>Description</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Location</th>
+                            <th>Facebook</th>
+                            <th>Twitter</th>
+                            <th>LinkedIn</th>
+                            <th>Instagram</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+        
+                    <tbody>
+                        {% for member in team_members %}
+                        <tr>
+                            <!-- IMAGE -->
+                            <td>
+                                {% if member.image %}
+                                    <img src="{{ member.image.url }}" class="avatar-image">
+                                {% else %}
+                                    <div class="placeholder-avatar">
+                                        {{ member.title|first }}
+                                    </div>
+                                {% endif %}
+                            </td>
+        
+                            <!-- NAME -->
+                            <td><strong>{{ member.title }}</strong></td>
+        
+                            <!-- POSITION -->
+                            <td>{{ member.position }}</td>
+        
+                            <!-- DESCRIPTION -->
+                            <td style="max-width:260px;">
+                                {{ member.description|truncatewords:5 }}
+                            </td>
+        
+                            <!-- EMAIL -->
+                            <td>
+                                {% if member.gmail %}
+                                    <a href="mailto:{{ member.gmail }}">{{ member.gmail }}</a>
+                                {% else %}-{% endif %}
+                            </td>
+        
+                            <!-- PHONE -->
+                            <td>
+                                {% if member.phone_number %}
+                                    {{ member.phone_number }}
+                                {% else %}-{% endif %}
+                            </td>
+        
+                            <!-- LOCATION -->
+                            <td>
+                                {% if member.location %}
+                                    {{ member.location }}
+                                {% else %}-{% endif %}
+                            </td>
+        
+                            <!-- FACEBOOK -->
+                            <td>
+                                {% if member.facebook_link %}
+                                    <a href="{{ member.facebook_link }}" target="_blank">Facebook</a>
+                                {% else %}-{% endif %}
+                            </td>
+        
+                            <!-- TWITTER -->
+                            <td>
+                                {% if member.twitter_link %}
+                                    <a href="{{ member.twitter_link }}" target="_blank">Twitter</a>
+                                {% else %}-{% endif %}
+                            </td>
+        
+                            <!-- LINKEDIN -->
+                            <td>
+                                {% if member.linkedin_link %}
+                                    <a href="{{ member.linkedin_link }}" target="_blank">LinkedIn</a>
+                                {% else %}-{% endif %}
+                            </td>
+        
+                            <!-- INSTAGRAM -->
+                            <td>
+                                {% if member.instagram_link %}
+                                    <a href="{{ member.instagram_link }}" target="_blank">Instagram</a>
+                                {% else %}-{% endif %}
+                            </td>
+        
+                            <!-- ACTIONS -->
+                            <td>
+                                <div class="action-buttons">
+                                    <a href="{% url 'dashboard:update_team_member' member.id %}?section=ourteam"
+                                       class="btn btn-primary">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+        
+                                    <form method="POST"
+                                          action="{% url 'dashboard:delete_team_member' member.id %}?section=ourteam">
+                                        {% csrf_token %}
+                                        <button class="btn btn-danger"
+                                                onclick="return confirm('Delete this member?')">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+        
+                        {% empty %}
+                        <tr>
+                            <td colspan="12" style="text-align:center; color:#a0aec0;">
+                                No team members added yet.
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>              
+
+        <!-- Edit Form -->
+        <div class="form-overlay"
+            style="display:{% if show_team_editform %}block{% else %}none{% endif %};">
+            <h4><i class="fas fa-user-edit"></i> Edit Team Member</h4>
+        
+            <form method="POST" enctype="multipart/form-data" novalidate>
+                {% csrf_token %}
+        
+                <!-- FULL NAME -->
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" name="title"
+                            value="{{ team_edit_form.title.value|default:'' }}" required>
+                </div>
+        
+                <!-- POSITION -->
+                <div class="form-group">
+                    <label>Position</label>
+                    <input type="text" name="position"
+                            value="{{ team_edit_form.position.value|default:'' }}" required>
+                </div>
+        
+                <!-- DESCRIPTION -->
+                <div class="form-group">
+                    <label>Short Bio</label>
+                    <textarea name="description" rows="3">{{ team_edit_form.description.value }}</textarea>
+                </div>
+        
+                <!-- IMAGE -->
+                <div class="form-group">
+                    <label>Profile Image</label>
+                    <input type="file" name="image">
+        
+                    {% if team_edit_form.instance.image %}
+                        <img src="{{ team_edit_form.instance.image.url }}"
+                                class="image-preview mt-2">
+                    {% endif %}
+                </div>
+        
+                <hr>
+        
+                <!-- SOCIAL LINKS -->
+                <div class="form-group"><label>Facebook</label>
+                    <input type="url" name="facebook_link" value="{{ team_edit_form.facebook_link.value|default:'' }}">
+                </div>
+        
+                <div class="form-group"><label>Twitter</label>
+                    <input type="url" name="twitter_link" value="{{ team_edit_form.twitter_link.value|default:'' }}">
+                </div>
+        
+                <div class="form-group"><label>LinkedIn</label>
+                    <input type="url" name="linkedin_link" value="{{ team_edit_form.linkedin_link.value|default:'' }}">
+                </div>
+        
+                <div class="form-group"><label>Instagram</label>
+                    <input type="url" name="instagram_link" value="{{ team_edit_form.instagram_link.value|default:'' }}">
+                </div>
+        
+                <hr>
+        
+                <!-- CONTACT -->
+                <div class="form-group"><label>Email</label>
+                    <input type="email" name="gmail" value="{{ team_edit_form.gmail.value|default:'' }}">
+                </div>
+        
+                <div class="form-group"><label>Phone Number</label>
+                    <input type="text" name="phone_number" value="{{ team_edit_form.phone_number.value|default:'' }}">
+                </div>
+        
+                <div class="form-group"><label>Location</label>
+                    <input type="text" name="location" value="{{ team_edit_form.location.value|default:'' }}">
+                </div>
+        
+                <button class="btn btn-success">
+                    <i class="fas fa-check"></i> Update Member
+                </button>
+        
+                <a href="{% url 'dashboard:add_team_member' %}?section=ourteam"
+                    class="btn btn-secondary">
+                    Cancel
+                </a>
+            </form>
+        </div>   
+
+    </div>
+</div>
+
+<script>
+    // Check URL hash on page load and show correct section
+    window.addEventListener('DOMContentLoaded', function () {
+        const section = getUrlParameter('section');
+        if (section) {
+            showSectionById(section);
+        }
+    });
+
+    // Helper function to get URL parameters
+    function getUrlParameter(name) {
+        name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+        var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+        var results = regex.exec(location.search);
+        return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+    }
+
+    function showSection(sectionId) {
+        showSectionById(sectionId);
+    }
+
+    function showSectionById(sectionId) {
+        // Hide all sections
+        const sections = document.querySelectorAll('.content-section');
+        sections.forEach(section => section.classList.remove('active'));
+
+        // Remove active class from all tabs
+        const tabs = document.querySelectorAll('.tab');
+        tabs.forEach(tab => tab.classList.remove('active'));
+
+        // Show selected section
+        const targetSection = document.getElementById(sectionId);
+        if (targetSection) {
+            targetSection.classList.add('active');
+        }
+
+        // Add active class to corresponding tab
+        const allTabs = document.querySelectorAll('.tab');
+        allTabs.forEach(tab => {
+            if (tab.textContent.toLowerCase().includes(sectionId.toLowerCase()) ||
+                (sectionId === 'ourteam' && tab.textContent.includes('Team Member')) ||
+                (sectionId === 'teamheader' && tab.textContent === 'Our Team Header')) {
+                tab.classList.add('active');
+            }
+        });
+    }
+
+    function closeForm(formId) {
+        document.getElementById(formId).style.display = 'none';
+    }
+</script>
+{% endblock %}

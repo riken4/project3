@@ -9,6 +9,40 @@
 {% endblock %}
 
 {% block content %}
+{% if messages %}
+    {% for message in messages %}
+    <script>
+        {% if "warning" in message.tags %}
+            swal({
+                title: "Login Required",
+                text: "{{ message|escapejs }}",
+                icon: "warning",
+                buttons: {
+                    cancel: {
+                        text: "Cancel",
+                        visible: true,
+                    },
+                    confirm: {
+                        text: "Login",
+                        value: true,
+                    },
+                },
+            }).then((willLogin) => {
+                if (willLogin) {
+                    window.location.href = "{% url 'main:account' %}";
+                }
+            });
+        {% elif "info" in message.tags %}
+            swal({
+                title: "Information",
+                text: "{{ message|escapejs }}",
+                icon: "info",
+                button: "OK",
+            });
+        {% endif %}
+    </script>
+    {% endfor %}
+{% endif %}
 <section class="p-4 md:p-8 lg:p-12 min-h-screen flex items-start justify-center">
 
     <div class="max-w-5xl w-full flex flex-col lg:flex-row gap-8 mt-6">
@@ -18,17 +52,17 @@
             
             <!-- Plan Header -->
             <div class="flex justify-between items-center mb-6">
-                <h2 class="text-3xl font-extrabold text-gray-900">Business 360°</h2>
+                <h2 class="text-3xl font-extrabold text-gray-900">{{option.title}}</h2>
                 <span class="px-3 py-1 text-sm font-semibold text-primary-blue bg-soft-blue-bg rounded-full border border-primary-blue/30">
                     Most Popular
                 </span>
             </div>
 
-            <p class="text-sm text-gray-500 uppercase tracking-wider mb-2">Business 360°</p>
+            <p class="text-sm text-gray-500 uppercase tracking-wider mb-2">{{option.title}}</p>
 
             <!-- Price -->
             <div class="flex items-end mb-4">
-                <span class="text-5xl font-extrabold text-gray-900 leading-none">Rs999</span>
+                <span class="text-5xl font-extrabold text-gray-900 leading-none">Rs{{option.price}}</span>
                 <span class="ml-2 text-xl text-gray-600 font-medium">/ Yearly</span>
             </div>
 
@@ -120,10 +154,10 @@
             <div class="space-y-4 mb-8">
                 <div class="flex justify-between items-center pb-2 border-b border-gray-100">
                     <div class="flex-1">
-                        <p class="font-semibold text-gray-800">Business 360°</p>
+                        <p class="font-semibold text-gray-800">{{option.title}}</p>
                         <span class="inline-block text-xs font-medium text-gray-500 mt-1">
                             <span class="text-xs text-gray-400 align-middle pr-1">&#9679;</span>
-                            Business 360°
+                            {{option.title}}
                         </span>
                     </div>
                     
@@ -134,16 +168,8 @@
                         </span>
                         
                         <!-- Price -->
-                        <span class="font-bold text-gray-900">Rs999</span>
-                        
-                        <!-- Remove Button -->
-                        <button class="ml-4 px-2 py-0.5 text-xs font-semibold text-red-600 bg-red-50 rounded-lg transition duration-150 hover:bg-red-100 flex items-center">
-                            <!-- 'X' Icon -->
-                            <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                            </svg>
-                            Remove
-                        </button>
+                        <span class="font-bold text-gray-900">Rs{{option.price}}</span>
+                
                     </div>
                 </div>
             </div>
@@ -151,14 +177,16 @@
             <!-- Total Section -->
             <div class="flex justify-between items-center pt-4 border-t border-gray-200">
                 <p class="text-xl font-bold text-gray-900">Total</p>
-                <p class="text-2xl font-extrabold text-primary-blue">Rs999.00</p>
+                <p class="text-2xl font-extrabold text-primary-blue">Rs{{option.price}}</p>
             </div>
 
             <!-- Checkout Button -->
-            <button class="mt-8 w-full py-3 bg-primary-blue text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 transition duration-150 flex items-center justify-center">
-                Continue to Checkout 
-                <span class="ml-2 font-light text-sm">(1 item)</span>
-            </button>
+            <a href="{% url 'main:checkout' option.pk %}" class="block">
+                <button class="mt-8 w-full py-3 bg-primary-blue font-semibold rounded-lg shadow-md hover:bg-blue-700 hover:text-white transition duration-150 flex items-center justify-center">
+                    Continue to Checkout 
+                    <span class="ml-2 font-light text-sm">(1 item)</span>
+                </button>
+            </a>            
 
         </div>
 

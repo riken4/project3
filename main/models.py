@@ -1,5 +1,6 @@
 from django.db import models
-
+from django.utils import timezone
+from django.contrib.auth.models import User
 # Create your models here.
 
 
@@ -110,21 +111,10 @@ class PricingPage(CommonHeaderModel):
 class CommonPricingModel(CommonHeaderModel):
     price=models.FloatField()
     features=models.TextField()
-
-    class Meta:
-        abstract = True
-
-
-class PricingOptionOne(CommonPricingModel):
-    pass
-
-class PricingOptionTwo(CommonPricingModel):
-    pass
-
-class PricingOptionThree(CommonPricingModel):
-    pass
-class PricingOptionFour(CommonPricingModel):
-    pass
+    submit_text=models.CharField(max_length=50,blank=True,null=True)
+    
+    def __str__(self):
+        return self.title
 
 class AddonService(CommonHeaderModel):
     pass
@@ -171,9 +161,21 @@ class Blog(CommonHeaderModel):
 #************************************
 # Models for Blogs Page
 #************************************
+
+#************************************
+# Models for About Us Page
+#************************************
+
 class AboutUs(CommonHeaderModel):
+    display_in_banner = models.BooleanField(
+        default=False,
+        verbose_name="Show in Hero Banner / Top Section?"
+    )
+    
+class CoreValues(models.Model):
     core_values_title=models.CharField(max_length=200)
     core_values_description=models.TextField(blank=True,null=True)
+    image=models.ImageField(upload_to='core_values_images/',null=True,blank=True)
 
 
 #************************************
@@ -285,12 +287,143 @@ class TermsContactInfo(models.Model):
         return f"Contact Info for {self.terms.title}"
     
 
+#************************************
+# Models for Subscription & Billing
+#************************************
+class SubscriptionPlan(models.Model):
+    PLAN_TYPE_CHOICES = (
+        ('one_time', 'One Time'),
+        ('monthly', 'Monthly'),
+        ('yearly', 'Yearly'),
+    )
+
+    pricing = models.OneToOneField(
+        CommonPricingModel,
+        on_delete=models.CASCADE,
+        related_name="subscription_plan"
+    )
+
+    plan_type = models.CharField(
+        max_length=20,
+        choices=PLAN_TYPE_CHOICES,
+        default='one_time'
+    )
+
+    duration_days = models.PositiveIntegerField(
+        help_text="Used for monthly/yearly plans",
+        null=True,
+        blank=True
+    )
+
+    is_active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return f"{self.pricing.title} ({self.plan_type})"
 
 
+class UserSubscription(models.Model):
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name="subscriptions"
+    )
+    plan = models.ForeignKey(
+        SubscriptionPlan,
+        on_delete=models.SET_NULL,
+        null=True
+    )
+
+    start_date = models.DateTimeField(default=timezone.now)
+    end_date = models.DateTimeField(null=True, blank=True)
+
+    is_active = models.BooleanField(default=True)
+    is_cancelled = models.BooleanField(default=False)
+
+    payment_id = models.CharField(
+        max_length=200,
+        blank=True,
+        null=True
+    )
+
+    def is_valid(self):
+        if not self.is_active:
+            return False
+        if self.end_date and self.end_date < timezone.now():
+            return False
+        return True
+
+    def __str__(self):
+        return f"{self.user.email} - {self.plan}"
 
 
+# class Order(models.Model):
+#     ORDER_STATUS = (
+#         ('pending', 'Pending'),
+#         ('paid', 'Paid'),
+#         ('failed', 'Failed'),
+#         ('refunded', 'Refunded'),
+#     )
+
+#     user = models.ForeignKey(User, on_delete=models.CASCADE)
+#     plan = models.ForeignKey(
+#         CommonPricingModel,
+#         on_delete=models.SET_NULL,
+#         null=True,
+#         blank=True
+#     )
+
+#     total_amount = models.FloatField()
+#     status = models.CharField(
+#         max_length=20,
+#         choices=ORDER_STATUS,
+#         default='pending'
+#     )
+
+#     payment_gateway = models.CharField(
+#         max_length=50,
+#         default="paypal"
+#     )
+
+#     gateway_order_id = models.CharField(
+#         max_length=200,
+#         blank=True,
+#         null=True
+#     )
+
+#     created_at = models.DateTimeField(auto_now_add=True)
+
+#     def __str__(self):
+#         return f"Order #{self.id} - {self.user.email}"
 
     
+# class OrderAddon(models.Model):
+#     order = models.ForeignKey(
+#         Order,
+#         on_delete=models.CASCADE,
+#         related_name="addons"
+#     )
+#     addon = models.ForeignKey(
+#         AddonServiceOption,
+#         on_delete=models.SET_NULL,
+#         null=True
+#     )
+#     price = models.FloatField()
+
+#     def __str__(self):
+#         return f"{self.addon.title} - Order {self.order.id}"
 
     
-    
+# class ServiceAccess(models.Model):
+#     plan = models.ForeignKey(
+#         SubscriptionPlan,
+#         on_delete=models.CASCADE,
+#         related_name="allowed_services"
+#     )
+
+#     service_slug = models.CharField(
+#         max_length=100,
+#         help_text="e.g. ein_registration, annual_report"
+#     )
+
+#     def __str__(self):
+#         return f"{self.plan} → {self.service_slug}"
